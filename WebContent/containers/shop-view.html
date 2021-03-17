@@ -1,0 +1,27 @@
+<div class="content">
+	<h1>
+		<i class="fas fa-shopping-bag"></i>
+		Esplora il catalogo
+	</h1>
+						
+	<div id="shop-games" class="games"></div>
+</div>
+
+<script>
+	
+	$(document).ready(
+		() => {
+			console.log("ShopServlet");
+			$.ajax(
+				{
+					method: "POST",
+					url: "shopServlet",
+					success: (data) => {
+						$("#shop-games").html(data);
+					}
+				}			
+			)
+		}
+	);
+
+</script>

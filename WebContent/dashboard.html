@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Shodan</title>
+		
+		<!-- Main Stylesheet -->
+		<link rel="stylesheet" href="style/main.css">
+		
+		<!-- FontAwesome Icons -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+		
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		
+		<!-- 
+			The dashboard can only be accessed if the user is logged in.
+			This little script makes sure that no one, except an actual registered user, can access this page.
+		-->
+		<script>
+			console.log(localStorage.getItem("uid"));
+			if(!localStorage.hasOwnProperty("uid"))
+				window.location.replace('index.html');
+		</script>
+	</head>
+	
+	<body>
+		<div id="dashboard">
+			<div class="sider"></div>
+			<div class="main">
+				<nav></nav>
+				<div id="app" class="content-container"></div>	
+			</div>
+		</div>
+	</body>
+	
+	<script>
+	
+		/*
+			Dynamically load pages within the dashboard using AJAX.
+		*/
+	
+		$(document).ready(
+			() => {
+				$("#app").load("containers/dashboard-view.html");
+				$("nav").load("components/nav-view.html");
+				$(".sider").load("components/sider-view.html");
+			}
+		);
+	
+	</script>
+</html>
