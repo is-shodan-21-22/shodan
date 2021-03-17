@@ -47,7 +47,10 @@ public class GameServlet extends HttpServlet {
 						 + "</div>";		
 				}
 			} else
-				html += "No";
+				html += "<div class=\"empty-collection\">\r\n"
+						+ "<span>Nessun gioco disponibile...</span>\r\n"
+						+ "<i class=\"far fa-folder-open\"></i>\r\n"
+						+ "</div>";
 			
 			con.close();
 		} catch (SQLException e) {

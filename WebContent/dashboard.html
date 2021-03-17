@@ -52,5 +52,9 @@
 			if(!$("#game-page").length)
 				window.history.pushState(null, null, "dashboard.html");
 		
+		if(new URLSearchParams(window.location.search).has("blog"))
+			if(!$("#blog-page").length)
+				window.history.pushState(null, null, "dashboard.html");
+		
 	</script>
 </html>

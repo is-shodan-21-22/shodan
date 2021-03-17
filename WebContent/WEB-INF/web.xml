@@ -40,4 +40,9 @@
 	    <servlet-name>BlogServlet</servlet-name>
 	    <servlet-class>db.BlogServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+	    <servlet-name>ShodanBlogsServlet</servlet-name>
+	    <servlet-class>db.BlogServlet</servlet-class>
+	</servlet>
 </web-app>

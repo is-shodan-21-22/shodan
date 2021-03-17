@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/blogServlet")
-public class BlogServlet extends HttpServlet {
-	protected void doGet(
+@WebServlet("/shodanBlogsServlet")
+public class ShodanBlogsServlet extends HttpServlet {
+	protected void doPost(
 			HttpServletRequest request,
 			HttpServletResponse response
 	) throws ServletException, IOException {
 		String html = "";
 		
-		String query = "SELECT * FROM blog AS B WHERE blog_id = " + request.getParameter("blog");
+		String query = "SELECT * FROM blog AS B ORDER BY blog_title";
 		
 		System.out.println(query);
 		
@@ -32,10 +32,17 @@ public class BlogServlet extends HttpServlet {
 			if(result.next()) {
 				result.previous();
 				while(result.next()) {
-					html += "<h1><i class=\"fas fa-newspaper\"></i>"
-							 + result.getString("blog_title") + "</h1>"
-							 + "<p class='blog-short-title'>" + result.getString("blog_short_title") + "</p>"	
-							 + "<p class='blog-html'>" + result.getString("blog_html") + "</p>";
+					html += "<div class=\"blog-container\">\r\n"
+							+ "            <div class=\"article\">\r\n"
+							+ "                <h1>" + result.getString("blog_title") + "</h1>\r\n"
+							+ "                <div class=\"content\">\r\n"
+							+                      result.getString("blog_short_title")
+							+ "                </div>          \r\n"
+							+ "                <span class='blog-link' data-blog-id='" + result.getInt("blog_id") + "'>"
+							+ "                    <i class=\"fas fa-caret-square-right\"></i> Leggi la notizia\r\n"
+							+ "                </span>"
+							+ "            </div>\r\n"
+							+ "        </div>\r\n";
 				}
 			} else
 				html += "<div class=\"empty-collection\">\r\n"

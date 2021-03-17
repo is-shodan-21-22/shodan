@@ -407,7 +407,7 @@ html, body, #dashboard {
 	box-shadow: 0px 0px 2px black;
 }
 
-#dashboard .main .blog .blog-container .article a {
+#dashboard .main .blog .blog-container .article span {
 	padding-left: 20px;
 	padding-bottom: 20px;
 	display: block;
@@ -477,6 +477,41 @@ html, body, #dashboard {
 	justify-content: center;
 }
 
+#dashboard .main #app .content #all-blogs {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#dashboard .main #app .content #all-blogs .blog-container {
+	padding-right: 20px;
+	padding-bottom: 20px;
+	flex: 0 0 31%
+}
+
+#dashboard .main #app .content #all-blogs .blog-container .article {
+	min-width: 250px;
+    background: #171717;
+    padding: 10px;
+    box-shadow: 0px 0px 2px black;
+}
+
+#dashboard .main #app .content #all-blogs .blog-container .article h1 {
+	text-align: center;
+}
+
+#dashboard .main #app .content #all-blogs .blog-container .article span {
+	cursor: pointer;
+	color: #ff71f7;
+	font-weight: 600;
+	padding-left: 15px;
+	margin-bottom: 15px;
+    display: block;
+}
+
+#dashboard .main #app .content #all-blogs .blog-container .article span i {
+	margin-right: 10px;
+}
+
 /*
 
 	Game Page
@@ -530,4 +565,29 @@ html, body, #dashboard {
 	background-size: cover;
 	box-shadow: 0px 0px 2px black;
 	margin: auto;
+}
+
+/*
+
+	Blog Page
+
+*/
+
+#dashboard .main #app .content #blog-page h1 i {
+	margin-right: 10px;
+}
+
+#dashboard .main #app .content #blog-page .blog-short-title {
+	color: grey;
+	font-size: 13px;
+	margin-left: 10px;
+    margin-bottom: 30px;
+    display: block;
+    margin-top: -10px;
+}
+
+#dashboard .main #app .content #blog-page .blog-html {
+	text-align: justify;
+	margin-left: 10px;
+	font-size: 16px;
 }
