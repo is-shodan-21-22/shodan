@@ -80,7 +80,16 @@
 						$("#latest-blogs").html(data);
 					}
 				}			
-			);
+			).done(
+				() => {
+					$(".blog-link").click(
+						function() {
+							window.history.pushState(null, null, "?blog=" + $(this).attr("data-blog-id"));
+							$("#app").load("containers/blog-view.html");
+						}
+					);
+				}
+			)
 		}
 	);
 

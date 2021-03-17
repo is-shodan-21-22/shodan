@@ -1,5 +1,7 @@
 USE shodan;
 
+SET SQL_SAFE_UPDATES = 0;
+
 DELETE FROM users;
 INSERT INTO users(user_name, user_password) VALUES 
 	('admin', '123');
@@ -19,7 +21,8 @@ INSERT INTO has_game VALUES
 
 DELETE FROM blog;
 INSERT INTO blog(blog_title, blog_short_title, blog_html) VALUES
-	("Il mio articolo", "Una breve descrizione", "Il contenuto dell'articolo");
+	("Il mio articolo", "Una breve descrizione", "Il contenuto dell'articolo"),
+    ("Un altro articolo", "Una lunga lunghissima proprio lunga descrizione", "Un testo");
 
 SELECT * FROM users;
 SELECT * FROM has_game;

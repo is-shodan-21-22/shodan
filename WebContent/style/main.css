@@ -197,6 +197,12 @@ html, body, #dashboard {
 	display: flex;
 }
 
+/*
+	
+	Sider
+
+*/
+
 #dashboard .sider {
 	height: 100%;
 	width: 275px;
@@ -262,6 +268,12 @@ html, body, #dashboard {
 	background: #212121;
 	color: white;
 }
+
+/*
+
+	Main
+
+*/
 
 #dashboard .main {
 	width: 100%;
@@ -394,23 +406,39 @@ html, body, #dashboard {
 	padding-bottom: 35px;
 }
 
-#dashboard .main .blog .blog-container {
-	color: white;
-	padding: 0 15px 15px 15px;
+#dashboard .main #app .content #latest-blogs {
+	display: flex;
+	flex-wrap: wrap;
 }
 
-#dashboard .main .blog .blog-container .article {
-	min-width: 250px;
-	max-width: 350px;
-	background: #171717;
-	padding: 10px;
-	box-shadow: 0px 0px 2px black;
-}
-
-#dashboard .main .blog .blog-container .article span {
-	padding-left: 20px;
+#dashboard .main #app .content #latest-blogs .blog-container {
+	padding-right: 20px;
 	padding-bottom: 20px;
-	display: block;
+	flex: 0 0 31%
+}
+
+#dashboard .main #app .content #latest-blogs .blog-container .article {
+	min-width: 250px;
+    background: #171717;
+    padding: 10px;
+    box-shadow: 0px 0px 2px black;
+}
+
+#dashboard .main #app .content #latest-blogs .blog-container .article h1 {
+	text-align: center;
+}
+
+#dashboard .main #app .content #latest-blogs .blog-container .article span {
+	cursor: pointer;
+	color: #ff71f7;
+	font-weight: 600;
+	padding-left: 15px;
+	margin-bottom: 15px;
+    display: block;
+}
+
+#dashboard .main #app .content #latest-blogs .blog-container .article span i {
+	margin-right: 10px;
 }
 
 /*
@@ -590,4 +618,50 @@ html, body, #dashboard {
 	text-align: justify;
 	margin-left: 10px;
 	font-size: 16px;
+}
+
+/*
+
+	Settings Page
+
+*/
+
+
+
+#dashboard .main #app .content #settings-page .button {
+	padding: 5px;
+}
+
+#dashboard .main #app .content #settings-page input {
+	display: block;
+	margin-bottom: 7.5px;
+	width: 100%;
+	padding: 5px;
+	padding-right: 0;
+	text-align: center;
+	padding-left: 0;
+	border: 0;
+	border-radius: 1px;
+}
+
+#dashboard .main #app .content #settings-page {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#dashboard .main #app .content #settings-page .set-info {
+	min-width: 40%;
+	padding-right: 50px;
+}
+
+#dashboard .main #app .content #settings-page .set-info .psw-form h2 {
+	margin-top: 27px;
+}
+
+#dashboard .main #app .content #settings-page .set-avatar .avatar {
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+	margin: auto;
+	background: white;
 }

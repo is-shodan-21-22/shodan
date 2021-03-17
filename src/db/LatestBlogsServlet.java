@@ -38,9 +38,9 @@ public class LatestBlogsServlet extends HttpServlet {
 							+ "                <div class=\"content\">\r\n"
 							+                      result.getString("blog_short_title")
 							+ "                </div>          \r\n"
-							+ "                <a href=\"/\">\r\n"
-							+ "                    Leggi la notizia...\r\n"
-							+ "                </a>\r\n"
+							+ "                <span class='blog-link' data-blog-id='" + result.getInt("blog_id") + "'>"
+							+ "                    <i class=\"fas fa-caret-square-right\"></i> Leggi la notizia\r\n"
+							+ "                </span>"
 							+ "            </div>\r\n"
 							+ "        </div>\r\n";
 				}
