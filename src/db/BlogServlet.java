@@ -12,16 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/latestGamesServlet")
-public class LatestGamesServlet extends HttpServlet {
-	protected void doPost(
+@WebServlet("/blogServlet")
+public class BlogServlet extends HttpServlet {
+	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response
 	) throws ServletException, IOException {
 		String html = "";
 		
-		String query = "SELECT * FROM games AS G "
-				+ "ORDER BY game_id DESC LIMIT 5";
+		String query = "SELECT * FROM blog AS B ORDER BY blog_id DESC LIMIT 3";
 		
 		System.out.println(query);
 		
@@ -33,14 +32,21 @@ public class LatestGamesServlet extends HttpServlet {
 			if(result.next()) {
 				result.previous();
 				while(result.next()) {
-					html += "<div data-game-id="+ result.getInt("game_id") + " style=\"background-image: url('static/games/" + result.getString("game_image") + "')\" class=\"game-container\">";
-					html += "<div class=\"overlay\">";
-					html += result.getString("game_name");
-					html += "</div></div>";
+					html += "<div class=\"blog-container\">\r\n"
+							+ "            <div class=\"article\">\r\n"
+							+ "                <h1>" + result.getString("blog_title") + "</h1>\r\n"
+							+ "                <div class=\"content\">\r\n"
+							+                      result.getString("blog_short_title")
+							+ "                </div>          \r\n"
+							+ "                <a href=\"/\">\r\n"
+							+ "                    Leggi la notizia...\r\n"
+							+ "                </a>\r\n"
+							+ "            </div>\r\n"
+							+ "        </div>\r\n";
 				}
 			} else
 				html += "<div class=\"empty-collection\">\r\n"
-						+ "<span>Nessun gioco disponibile...</span>\r\n"
+						+ "<span>Nessun articolo disponibile...</span>\r\n"
 						+ "<i class=\"far fa-folder-open\"></i>\r\n"
 						+ "</div>";
 			

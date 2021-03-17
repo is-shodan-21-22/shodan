@@ -12,16 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/latestGamesServlet")
-public class LatestGamesServlet extends HttpServlet {
-	protected void doPost(
+@WebServlet("/gameServlet")
+public class GameServlet extends HttpServlet {
+	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response
 	) throws ServletException, IOException {
 		String html = "";
 		
-		String query = "SELECT * FROM games AS G "
-				+ "ORDER BY game_id DESC LIMIT 5";
+		String query = "SELECT * FROM games WHERE game_id = " + request.getParameter("game");
 		
 		System.out.println(query);
 		
@@ -33,24 +32,18 @@ public class LatestGamesServlet extends HttpServlet {
 			if(result.next()) {
 				result.previous();
 				while(result.next()) {
-					html += "<div data-game-id="+ result.getInt("game_id") + " style=\"background-image: url('static/games/" + result.getString("game_image") + "')\" class=\"game-container\">";
-					html += "<div class=\"overlay\">";
 					html += result.getString("game_name");
-					html += "</div></div>";
 				}
 			} else
-				html += "<div class=\"empty-collection\">\r\n"
-						+ "<span>Nessun gioco disponibile...</span>\r\n"
-						+ "<i class=\"far fa-folder-open\"></i>\r\n"
-						+ "</div>";
+				html += "No";
 			
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		PrintWriter writer = response.getWriter();
-		
-		writer.println(html);
+		response.setContentType("text/plain"); 
+	    response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(html);
 	}
 }

@@ -61,16 +61,26 @@
 						$("#latest-games").html(data);
 					}
 				}			
-			);
-			$.ajax(
-					{
-						method: "POST",
-						url: "latestBlogsServlet",
-						success: (data) => {
-							$("#latest-blogs").html(data);
+			).done(
+				() => {
+					$(".game-container").click(
+						function() {
+							window.history.pushState(null, null, "?game=" + $(this).attr("data-game-id"));
+							$("#app").load("containers/game-view.html");
 						}
-					}			
-				)
+					);
+				}
+			);
+			
+			$.ajax(
+				{
+					method: "POST",
+					url: "latestBlogsServlet",
+					success: (data) => {
+						$("#latest-blogs").html(data);
+					}
+				}			
+			);
 		}
 	);
 

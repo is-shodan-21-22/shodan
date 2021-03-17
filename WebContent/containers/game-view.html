@@ -1,0 +1,24 @@
+<div class="content">
+	<h1>
+		<i class="fas fa-gamepad"></i>
+		Game Title
+	</h1>
+	
+	<div id="game-page"></div>
+</div>
+
+<script>
+
+	$.ajax({
+	    type: "GET",
+	    url: "gameServlet",
+	    data: {
+	    	game: new URLSearchParams(window.location.search).get("game")
+	    },
+	    success: function (data) {                        
+	    	$("#game-page").html(data);
+	    },
+	    error: () => location.replace("dashboard.html")
+	});
+
+</script>

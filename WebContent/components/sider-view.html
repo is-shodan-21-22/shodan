@@ -52,14 +52,17 @@
 		}
 	);
 	
-	$(".links-container>div").click(
+	$(".links-container>div").click(	
 		function() {
+			window.history.pushState(null, null, "dashboard.html");
+			
 			$(".links-container>div").each(
 				function() {
 					if($(this).hasClass("selected"))
 						$(this).toggleClass("selected");
 				}
 			);
+			
 			$(this).addClass("selected");
 			
 			let container = $(this).attr("id").split("-")[0] + "-view.html";

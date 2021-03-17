@@ -30,4 +30,14 @@
 	    <servlet-name>LatestBlogsServlet</servlet-name>
 	    <servlet-class>db.LatestBlogsServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+	    <servlet-name>GameServlet</servlet-name>
+	    <servlet-class>db.GameServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+	    <servlet-name>BlogServlet</servlet-name>
+	    <servlet-class>db.BlogServlet</servlet-class>
+	</servlet>
 </web-app>

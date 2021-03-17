@@ -357,7 +357,7 @@ html, body, #dashboard {
 	color: white;
 }
 
-#dashboard .main .content-container .content .games a .game-container {
+#dashboard .main .content-container .content .games .game-container {
 	height: 300px;
 	width: 200px;
 	box-shadow: 0px 0px 3px black;
@@ -368,7 +368,7 @@ html, body, #dashboard {
 	margin: 0 15px 15px 15px;
 }
 
-#dashboard .main .content-container .content .games a .game-container .overlay {
+#dashboard .main .content-container .content .games .game-container .overlay {
 	background: black;
 	display: block;
 	position: absolute;
@@ -382,16 +382,11 @@ html, body, #dashboard {
 	opacity: 1;
 }
 
-#dashboard .main .content-container .content .games .game-container .overlay a {
-	padding: 2.5px;
+#dashboard .main .content-container .content .games .game-container .overlay {
 	color: white;
 	display: block;
 	text-decoration: none;
 	font-weight: 500;
-}
-
-#dashboard .main .blog-title {
-	margin: 10px;
 }
 
 #dashboard .main .blog {
