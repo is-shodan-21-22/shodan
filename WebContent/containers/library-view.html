@@ -1,12 +1,10 @@
 <div class="content">
 	<h1>
 		<i class="fas fa-gamepad"></i>
-		La mia collezione
+		La mia collezioasdane
 	</h1>
 	
-	<div id="my-collection" class="games">
-		<!-- games -->
-	</div>
+	<div id="my-collection" class="games"></div>
 </div>
 
 <script>
@@ -26,6 +24,16 @@
 					error: (data, status) => {
 						console.log(status);
 					}
+				}
+			).done(
+				() => {
+					console.log("done");
+					$(".game-container").click(
+						function() {
+							window.history.pushState(null, null, "?game=" + $(this).attr("data-game-id"));
+							$("#app").load("containers/game-view.html");
+						}
+					);
 				}
 			);
 		}

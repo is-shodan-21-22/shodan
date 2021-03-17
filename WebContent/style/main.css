@@ -476,3 +476,58 @@ html, body, #dashboard {
 	display: flex;
 	justify-content: center;
 }
+
+/*
+
+	Game Page
+
+*/
+
+#dashboard .main #app .content #game-page h1 i {
+	margin-right: 10px !important;
+}
+
+#dashboard .main #app .content #game-page .game-flex {
+	display: flex;
+}
+
+#dashboard .main #app .content #game-page .game-info-container {
+	width: 50%;
+}
+
+#dashboard .main #app .content #game-page .game-info-container p {
+	padding: 10px;
+	margin: 0;
+}
+
+#dashboard .main #app .content #game-page .game-info-container .game-price {
+	color: #81f966;
+	font-size: 40px;
+	font-weight: 700;
+}
+
+#dashboard .main #app .content #game-page .game-info-container .game-release-date {
+	font-family: 'Monofonto';
+	font-size: 22.5px;
+}
+
+#dashboard .main #app .content #game-page .game-info-container .game-description {
+	font-size: 17.5px;
+	text-align: justify;
+}
+
+#dashboard .main #app .content #game-page .game-info-container .button {
+	margin: 10px 0px 0 10px;
+}
+
+#dashboard .main #app .content #game-page .game-image-container {
+	width: 50%;
+}
+
+#dashboard .main #app .content #game-page .game-image-container .game-image {
+	height: 500px;
+	width: 350px;
+	background-size: cover;
+	box-shadow: 0px 0px 2px black;
+	margin: auto;
+}

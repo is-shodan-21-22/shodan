@@ -32,10 +32,10 @@ public class ShopServlet extends HttpServlet {
 			if(result.next()) {
 				result.previous();
 				while(result.next()) {
-					html += "<a href=\"\"><div style=\"background-image: url('static/games/" + result.getString("game_image") + "')\" class=\"game-container\">";
+					html += "<div data-game-id="+ result.getInt("game_id") + " style=\"background-image: url('static/games/" + result.getString("game_image") + "')\" class=\"game-container\">";
 					html += "<div class=\"overlay\">";
 					html += result.getString("game_name");
-					html += "</div></div></a>";
+					html += "</div></div>";
 				}
 			} else
 				html += "<div class=\"empty-collection\">\r\n"

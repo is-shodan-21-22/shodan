@@ -11,7 +11,6 @@
 	
 	$(document).ready(
 		() => {
-			console.log("ShopServlet");
 			$.ajax(
 				{
 					method: "POST",
@@ -20,7 +19,16 @@
 						$("#shop-games").html(data);
 					}
 				}			
-			)
+			).done(
+				() => {
+					$(".game-container").click(
+						function() {
+							window.history.pushState(null, null, "?game=" + $(this).attr("data-game-id"));
+							$("#app").load("containers/game-view.html");
+						}
+					);
+				}
+			);
 		}
 	);
 
