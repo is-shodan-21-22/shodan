@@ -45,7 +45,7 @@
 		Notizie da Shodan
 	</h1>
 						
-	<div class="blog"></div>
+	<div id="latest-blogs" class="blog"></div>
 	
 </div>
 
@@ -61,7 +61,16 @@
 						$("#latest-games").html(data);
 					}
 				}			
-			)
+			);
+			$.ajax(
+					{
+						method: "POST",
+						url: "latestBlogsServlet",
+						success: (data) => {
+							$("#latest-blogs").html(data);
+						}
+					}			
+				)
 		}
 	);
 

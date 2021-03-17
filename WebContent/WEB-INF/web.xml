@@ -25,5 +25,9 @@
 	    <servlet-name>ShopServlet</servlet-name>
 	    <servlet-class>db.ShopServlet</servlet-class>
 	</servlet>
-   
+	
+	<servlet>
+	    <servlet-name>LatestBlogsServlet</servlet-name>
+	    <servlet-class>db.LatestBlogsServlet</servlet-class>
+	</servlet>
 </web-app>
