@@ -10,8 +10,8 @@ $(document).ready(
 	
 if(new URLSearchParams(window.location.search).has("game"))
 	if(!$("#game-page").length)
-		window.history.pushState(null, null, "dashboard.jsp");
+		window.history.pushState(null, null, "app.jsp");
 		
 if(new URLSearchParams(window.location.search).has("blog"))
 	if(!$("#blog-page").length)
-		window.history.pushState(null, null, "dashboard.jsp");
+		window.history.pushState(null, null, "app.jsp");

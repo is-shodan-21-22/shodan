@@ -1,9 +1,3 @@
-<%@ page 
-	language="java" 
-	contentType="text/html; charset=ISO-8859-1" 
-	pageEncoding="ISO-8859-1" 
-%>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,12 +9,6 @@
 		
 		<!-- jQuery -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		
-		<!-- Login Status -->
-		<script>
-			if(localStorage.hasOwnProperty("uid"))
-				window.location.replace('dashboard.jsp');
-		</script>
 	</head>
 	
 	<body>
@@ -46,7 +34,6 @@
 				}
 			).done(
 				(data) => {
-					console.log(data);
 					if(!data.includes("unknown")){
 						localStorage.setItem("uid", data);
 						location.reload();

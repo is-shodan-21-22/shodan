@@ -1,8 +1,4 @@
-/*
-
-	Default HTML Layout
-	
-*/
+/* Layout HTML Predefinito */
 
 html, body {
 	padding: 0;
@@ -10,9 +6,6 @@ html, body {
 	background: #1c1c1c;
 	color: white;
 	margin: 0;
-}
-
-html, body, body {
 	height: 100%;
 }
 
@@ -20,11 +13,12 @@ body {
 	display: flex;
 }
 
-/*
+body main {
+	width: 100%;
+	margin-left: 274px;
+}
 
-	Links 
-	
-*/
+/* Links */
 
 a {
 	color: #b72cae;
@@ -36,12 +30,7 @@ a:hover {
 	color: #ff71f7;
 }
 
-
-/*
-
-	Buttons
-
-*/
+/* Bottoni */
 
 .button {
 	padding: 7.5px 32.5px 7.5px 32.5px;
@@ -63,11 +52,7 @@ a:hover {
 	background: #ff71f7;
 }
 
-/*
-	
-	Sider
-
-*/
+/* Navbar */
 
 body nav {
 	height: 100%;
@@ -78,12 +63,20 @@ body nav {
 	position: fixed;
 }
 
-body nav .links-container {
+body nav .selected {
+	background: #1c1c1c;
+}
+
+body nav #nav-items {
 	padding: 10px;
 	margin-top: 20px;
 }
 
-body nav .links-container div {
+body nav #nav-items i {
+	margin-right: 5px;
+}
+
+body nav #nav-items div {
 	margin-bottom: 5px;
 	color: white;
 	text-decoration: none;
@@ -95,21 +88,15 @@ body nav .links-container div {
 	border-radius: 3px;
 }
 
-
-body nav nav-items i {
-	margin-right: 5px;
-	
-}
-
-body nav .selected {
+body nav #nav-items div:hover {
 	background: #1c1c1c;
 }
 
-body nav .links-container div:hover {
-	background: #1c1c1c;
+body nav #nav-items div span {
+	margin-left: 5px;
 }
 
-body nav #close-sider {
+body nav #nav-close {
 	position: absolute;
 	transition: 0.2s;
 	top: 50%;
@@ -126,58 +113,39 @@ body nav #close-sider {
 	align-items: center;
 }
 
-body nav span {
-	margin-left: 5px;
-}
-
-body nav #close-sider:hover {
+body nav #nav-close:hover {
 	background: #212121;
 	color: white;
 }
 
-/*
+/* Sezione vuota */
 
-	Main
-
-*/
-
-body main {
+body main #app .content .empty-collection {
+	height: 300px;
 	width: 100%;
-	margin-left: 274px;
-}
-
-body main nav {
-	background: #101010;
-	height: 50px;
-}
-
-body main nav a {
-	float: right;
-	text-decoration: none;
-	color: white;
-	font-weight: 400;
+	align-items: center;
+	justify-content: center;
+	font-size: 27.5px;
+	flex-wrap: wrap;
+	color: grey;
 	display: flex;
+	flex-direction: column;
 }
 
-body main nav a span {
-	padding-right: 12.5px;
-	padding-top: 10px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+body main #app .content .empty-collection span {
+	font-weight: 100;
+	display: flex;
+	align-self: center;
+	margin-bottom: 3px;
+	}
+
+body main #app .content .empty-collection i {
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
 }
 
-body main nav a div {
-	border-radius: 35px;
-	height: 35px;
-	display: inline-block;
-	width: 35px;
-	background: white;
-	margin-right: 40px;
-	margin-top: 7.5px;
-	background-image: url('../static/Avatar.png');
-	background-size: cover;
-}
+/* Dashboard > Gioco in evidenza */
 
 body main #app .featured {
 	background-image: url('../Static/Assets/Featured.jpg');
@@ -186,7 +154,7 @@ body main #app .featured {
 	height: 250px;
 }
 
-body main #app .featured .overlay {
+body main #app .featured .featured-text-outer {
 	background: linear-gradient(to right, transparent 0%, black 50%);
 	height: 100%;
 	width: 50%;
@@ -194,24 +162,16 @@ body main #app .featured .overlay {
 	text-align: right;
 }
 
-body main #app .featured .overlay div {
+body main #app .featured .featured-text-outer .featured-text-inner {
 	padding: 45px;
 	font-size: 15px;
 }
 
-body main #app .featured .overlay div strong  {
+body main #app .featured .featured-text-outer .featured-text-inner strong  {
 	font-size: 17px;
 }
 
-body main #app .featured .overlay div a  {
-	color: #ff71f7;
-	text-decoration: none;
-	font-weight: 600;
-}
-
-body main #app .featured .overlay div a:hover  {
-	text-decoration: underline;
-}
+/* Dashboard > Contenuto principale */
 
 body main #app .content {
 	padding: 10px 25px 25px 25px;
@@ -228,8 +188,10 @@ body main #app .content h1 {
 }
 
 body main #app .content h1 i {
-	margin-right: 5px;
+	margin-right: 10px;
 }
+
+/* Giochi */
 
 body main #app .content .games a {
 	color: white;
@@ -246,7 +208,11 @@ body main #app .content .games .game-container {
 	margin: 0 15px 15px 15px;
 }
 
-body main #app .content .games .game-container .overlay {
+body main #app .content .games .game-container:hover {
+	opacity: 1;
+}
+
+body main #app .content .games .game-container .game-overlay {
 	background: black;
 	display: block;
 	position: absolute;
@@ -254,47 +220,39 @@ body main #app .content .games .game-container .overlay {
 	width: 100%;
 	bottom: 0;
 	text-align: center;
-}
-
-body main #app .content .games .game-container:hover {
-	opacity: 1;
-}
-
-body main #app .content .games .game-container .overlay {
 	color: white;
 	display: block;
 	text-decoration: none;
 	font-weight: 500;
 }
 
-body main .blog {
+/* Notizie  */
+
+body main #app .content .blog {
 	display: flex;
 	padding-bottom: 35px;
-}
-
-body main #app .content #latest-blogs {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-body main #app .content #latest-blogs .blog-container {
+body main #app .content .blog .article-container {
 	padding-right: 20px;
 	padding-bottom: 20px;
 	flex: 0 0 31%
 }
 
-body main #app .content #latest-blogs .blog-container .article {
+body main #app .content .blog .article-container .article {
 	min-width: 250px;
     background: #171717;
     padding: 10px;
     box-shadow: 0px 0px 2px black;
 }
 
-body main #app .content #latest-blogs .blog-container .article h1 {
+body main #app .content .blog .article-container .article h1 {
 	text-align: center;
 }
 
-body main #app .content #latest-blogs .blog-container .article span {
+body main #app .content .blog .article-container .article span {
 	cursor: pointer;
 	color: #ff71f7;
 	font-weight: 600;
@@ -303,106 +261,7 @@ body main #app .content #latest-blogs .blog-container .article span {
     display: block;
 }
 
-body main #app .content #latest-blogs .blog-container .article span i {
-	margin-right: 10px;
-}
-
-/*
-
-	Login Form
-
-*/
-
-#login-form {
-	width: 350px;
-	height: 300px;
-	background: #1c1c1c;
-	box-shadow: 0px 0px 20px #b72cae;
-	position: fixed;
-	top: -155px;
-	left: 50%;
-	margin-left: -175px;
-	display: none;
-	transition: 1s;
-	justify-content: center;
-	align-items: center;
-	color: white;
-	text-align: center;
-	border-radius: 25px;
-}
-
-#login-form form h1 {
-	margin-top: 0;
-}
-
-#login-form form input {
-	padding: 6.5px;
-	margin-bottom: 2px;
-	text-align: center;
-}
-
-#login-form form #login-submit {
-	width: 100%;
-	cursor: pointer;
-}
-
-.empty-collection {
-	height: 300px;
-	width: 100%;
-	align-items: center;
-	justify-content: center;
-	font-size: 27.5px;
-	flex-wrap: wrap;
-	color: grey;
-	display: flex;
-	flex-direction: column;
-}
-
-.empty-collection span {
-	font-weight: 100;
-	display: flex;
-	align-self: center;
-	margin-bottom: 3px;
-}
-
-.empty-collection i {
-	font-size: 30px;
-	display: flex;
-	justify-content: center;
-}
-
-body main #app .content #all-blogs {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-body main #app .content #all-blogs .blog-container {
-	padding-right: 20px;
-	padding-bottom: 20px;
-	flex: 0 0 31%
-}
-
-body main #app .content #all-blogs .blog-container .article {
-	min-width: 250px;
-    background: #171717;
-    padding: 10px;
-    box-shadow: 0px 0px 2px black;
-}
-
-body main #app .content #all-blogs .blog-container .article h1 {
-	text-align: center;
-}
-
-body main #app .content #all-blogs .blog-container .article span {
-	cursor: pointer;
-	color: #ff71f7;
-	font-weight: 600;
-	padding-left: 15px;
-	margin-bottom: 15px;
-    display: block;
-}
-
-body main #app .content #all-blogs .blog-container .article span i {
+body main #app .content .blog .article-container .article span i {
 	margin-right: 10px;
 }
 
@@ -532,20 +391,15 @@ body main #app .content #settings-page .set-avatar .avatar {
 	background: white;
 }
 
-/*
-	
-	Responsive Design
-
-*/
+/* Responsive Design */
 
 @media screen and (max-width: 1350px) {
-	
-	.featured {
-		display: none;
-	}
-	
 	body {
 		overflow-x: hidden;
+	}
+	
+	body main #app .featured {
+		display: none;
 	}
 	
 	.game-flex {
@@ -561,6 +415,5 @@ body main #app .content #settings-page .set-avatar .avatar {
 	    width: 300px !important;
 	    margin-top: 15px !important;
     }
-	
 	
 }

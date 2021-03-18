@@ -1,35 +1,26 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="content">
+
 	<h1>
 		<i class="fas fa-newspaper"></i>
 		Articoli e notizie da Shodan
 	</h1>
 						
-	<div id="all-blogs"></div>
+	<div class="blog">
+		<c:forEach items="${articles}" var="article">
+			<div class="article-container">
+				<div class="article">
+					<h1> ${article.title} </h1>
+					<div class="content"> ${article.shortTitle} </div>
+					<span class='blog-link' data-blog-id="${article.id}">
+						<i class="fas fa-caret-square-right"></i> Leggi la notizia
+					</span>
+				</div>
+			 </div>
+		</c:forEach>
+	</div>
+	
 </div>
 
-<script>
-	
-	$(document).ready(
-		() => {
-			$.ajax(
-				{
-					method: "POST",
-					url: "shodanBlogsServlet",
-					success: (data) => {
-						$("#all-blogs").html(data);
-					}
-				}			
-			).done(
-				() => {
-					$(".blog-link").click(
-						function() {
-							window.history.pushState(null, null, "?blog=" + $(this).attr("data-blog-id"));
-							$("#app").load("View/Article.jsp");
-						}
-					);
-				}
-			);
-		}
-	);
-
-</script>
+<script src="Scripts/BlogRoutines.js"></script>

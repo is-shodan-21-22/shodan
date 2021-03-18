@@ -1,55 +1,45 @@
 package Control;
 
+import Model.Article;
+import Service.ArticleBean;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/blogServlet")
+@WebServlet("/BlogServlet")
 public class BlogServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response
 	) throws ServletException, IOException {
-		String html = "";
-		
-		String query = "SELECT * FROM blog AS B WHERE blog_id = " + request.getParameter("blog");
-		
-		System.out.println(query);
-		
-		try {
-			Connection con = DBConnectionPool.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet result = statement.executeQuery(query);
+		switch(request.getParameter("action")) {
+			case "blog":
+				request.getSession().setAttribute("articles", new ArticleBean().getAllArticles());
+				
+				System.out.println("# BlogServlet > GET > Tutti gli articoli");
+				
+				break;
 			
-			if(result.next()) {
-				result.previous();
-				while(result.next()) {
-					html += "<h1><i class=\"fas fa-newspaper\"></i>"
-							 + result.getString("blog_title") + "</h1>"
-							 + "<p class='blog-short-title'>" + result.getString("blog_short_title") + "</p>"	
-							 + "<p class='blog-html'>" + result.getString("blog_html") + "</p>";
-				}
-			} else
-				html += "<div class=\"empty-collection\">\r\n"
-						+ "<span>Nessun articolo disponibile...</span>\r\n"
-						+ "<i class=\"far fa-folder-open\"></i>\r\n"
-						+ "</div>";
-			
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			case "article":
+				Article article = new ArticleBean().getArticle(2);
+				
+				System.out.println("# BlogServlet > GET > " + article.toString());
+				
+				request.getSession().setAttribute("article", article);
+				
+				break;
+				
+			default:
+				System.out.println("# BlogServlet > GET > Nessuna azione specificata");
+				break;
 		}
-		
-		PrintWriter writer = response.getWriter();
-		
-		writer.println(html);
 	}
+	
 }
