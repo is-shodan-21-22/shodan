@@ -1,0 +1,566 @@
+/*
+
+	Default HTML Layout
+	
+*/
+
+html, body {
+	padding: 0;
+	font-family: 'Open Sans';
+	background: #1c1c1c;
+	color: white;
+	margin: 0;
+}
+
+html, body, body {
+	height: 100%;
+}
+
+body {
+	display: flex;
+}
+
+/*
+
+	Links 
+	
+*/
+
+a {
+	color: #b72cae;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff71f7;
+}
+
+
+/*
+
+	Buttons
+
+*/
+
+.button {
+	padding: 7.5px 32.5px 7.5px 32.5px;
+	color: white;
+	font-weight: 600;
+	display: inline-block;
+	transition: 0.3s;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 2px;
+	box-shadow: 1px 3.5px #171717;
+}
+
+.button--submit {
+	background: #b72cae;
+}
+
+.button--submit:hover {
+	background: #ff71f7;
+}
+
+/*
+	
+	Sider
+
+*/
+
+body nav {
+	height: 100%;
+	width: 275px;
+	left: 0;
+	background: #171717;
+	z-index: 1;
+	position: fixed;
+}
+
+body nav .links-container {
+	padding: 10px;
+	margin-top: 20px;
+}
+
+body nav .links-container div {
+	margin-bottom: 5px;
+	color: white;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 10px;
+	margin-bottom: 4px;
+	cursor: pointer;
+	transition: 0.5s;
+	border-radius: 3px;
+}
+
+
+body nav nav-items i {
+	margin-right: 5px;
+	
+}
+
+body nav .selected {
+	background: #1c1c1c;
+}
+
+body nav .links-container div:hover {
+	background: #1c1c1c;
+}
+
+body nav #close-sider {
+	position: absolute;
+	transition: 0.2s;
+	top: 50%;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	background: #1C1C1C;
+	right: 0;
+	margin-right: -12.5px;
+	display: flex;
+	cursor: pointer;
+	color: #0f0f0f;
+	justify-content: center;
+	align-items: center;
+}
+
+body nav span {
+	margin-left: 5px;
+}
+
+body nav #close-sider:hover {
+	background: #212121;
+	color: white;
+}
+
+/*
+
+	Main
+
+*/
+
+body main {
+	width: 100%;
+	margin-left: 274px;
+}
+
+body main nav {
+	background: #101010;
+	height: 50px;
+}
+
+body main nav a {
+	float: right;
+	text-decoration: none;
+	color: white;
+	font-weight: 400;
+	display: flex;
+}
+
+body main nav a span {
+	padding-right: 12.5px;
+	padding-top: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+body main nav a div {
+	border-radius: 35px;
+	height: 35px;
+	display: inline-block;
+	width: 35px;
+	background: white;
+	margin-right: 40px;
+	margin-top: 7.5px;
+	background-image: url('../static/Avatar.png');
+	background-size: cover;
+}
+
+body main #app .featured {
+	background-image: url('../Static/Assets/Featured.jpg');
+	background-size: cover;
+	background-position: -160px -220px;
+	height: 250px;
+}
+
+body main #app .featured .overlay {
+	background: linear-gradient(to right, transparent 0%, black 50%);
+	height: 100%;
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+
+body main #app .featured .overlay div {
+	padding: 45px;
+	font-size: 15px;
+}
+
+body main #app .featured .overlay div strong  {
+	font-size: 17px;
+}
+
+body main #app .featured .overlay div a  {
+	color: #ff71f7;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+body main #app .featured .overlay div a:hover  {
+	text-decoration: underline;
+}
+
+body main #app .content {
+	padding: 10px 25px 25px 25px;
+}
+
+body main #app .content .games {
+	display: flex;
+	flex-wrap: wrap;
+	padding-bottom: 25px;
+}
+
+body main #app .content h1 {
+	margin-left: 10px;
+}
+
+body main #app .content h1 i {
+	margin-right: 5px;
+}
+
+body main #app .content .games a {
+	color: white;
+}
+
+body main #app .content .games .game-container {
+	height: 300px;
+	width: 200px;
+	box-shadow: 0px 0px 3px black;
+	opacity: 0.9;
+	cursor: pointer;
+	background-size: cover;
+	position: relative;
+	margin: 0 15px 15px 15px;
+}
+
+body main #app .content .games .game-container .overlay {
+	background: black;
+	display: block;
+	position: absolute;
+	opacity: 0.7;
+	width: 100%;
+	bottom: 0;
+	text-align: center;
+}
+
+body main #app .content .games .game-container:hover {
+	opacity: 1;
+}
+
+body main #app .content .games .game-container .overlay {
+	color: white;
+	display: block;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+body main .blog {
+	display: flex;
+	padding-bottom: 35px;
+}
+
+body main #app .content #latest-blogs {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+body main #app .content #latest-blogs .blog-container {
+	padding-right: 20px;
+	padding-bottom: 20px;
+	flex: 0 0 31%
+}
+
+body main #app .content #latest-blogs .blog-container .article {
+	min-width: 250px;
+    background: #171717;
+    padding: 10px;
+    box-shadow: 0px 0px 2px black;
+}
+
+body main #app .content #latest-blogs .blog-container .article h1 {
+	text-align: center;
+}
+
+body main #app .content #latest-blogs .blog-container .article span {
+	cursor: pointer;
+	color: #ff71f7;
+	font-weight: 600;
+	padding-left: 15px;
+	margin-bottom: 15px;
+    display: block;
+}
+
+body main #app .content #latest-blogs .blog-container .article span i {
+	margin-right: 10px;
+}
+
+/*
+
+	Login Form
+
+*/
+
+#login-form {
+	width: 350px;
+	height: 300px;
+	background: #1c1c1c;
+	box-shadow: 0px 0px 20px #b72cae;
+	position: fixed;
+	top: -155px;
+	left: 50%;
+	margin-left: -175px;
+	display: none;
+	transition: 1s;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	text-align: center;
+	border-radius: 25px;
+}
+
+#login-form form h1 {
+	margin-top: 0;
+}
+
+#login-form form input {
+	padding: 6.5px;
+	margin-bottom: 2px;
+	text-align: center;
+}
+
+#login-form form #login-submit {
+	width: 100%;
+	cursor: pointer;
+}
+
+.empty-collection {
+	height: 300px;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	font-size: 27.5px;
+	flex-wrap: wrap;
+	color: grey;
+	display: flex;
+	flex-direction: column;
+}
+
+.empty-collection span {
+	font-weight: 100;
+	display: flex;
+	align-self: center;
+	margin-bottom: 3px;
+}
+
+.empty-collection i {
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+body main #app .content #all-blogs {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+body main #app .content #all-blogs .blog-container {
+	padding-right: 20px;
+	padding-bottom: 20px;
+	flex: 0 0 31%
+}
+
+body main #app .content #all-blogs .blog-container .article {
+	min-width: 250px;
+    background: #171717;
+    padding: 10px;
+    box-shadow: 0px 0px 2px black;
+}
+
+body main #app .content #all-blogs .blog-container .article h1 {
+	text-align: center;
+}
+
+body main #app .content #all-blogs .blog-container .article span {
+	cursor: pointer;
+	color: #ff71f7;
+	font-weight: 600;
+	padding-left: 15px;
+	margin-bottom: 15px;
+    display: block;
+}
+
+body main #app .content #all-blogs .blog-container .article span i {
+	margin-right: 10px;
+}
+
+/*
+
+	Game Page
+
+*/
+
+body main #app .content #game-page h1 i {
+	margin-right: 10px !important;
+}
+
+body main #app .content #game-page .game-flex {
+	display: flex;
+}
+
+body main #app .content #game-page .game-info-container {
+	width: 50%;
+}
+
+body main #app .content #game-page .game-info-container p {
+	padding: 10px;
+	margin: 0;
+}
+
+body main #app .content #game-page .game-info-container .game-price {
+	color: #81f966;
+	font-size: 40px;
+	font-weight: 700;
+}
+
+body main #app .content #game-page .game-info-container .game-release-date {
+	font-family: 'Monofonto';
+	font-size: 22.5px;
+}
+
+body main #app .content #game-page .game-info-container .game-description {
+	font-size: 17.5px;
+	text-align: justify;
+}
+
+body main #app .content #game-page .game-info-container .button {
+	margin: 10px 0px 0 10px;
+}
+
+body main #app .content #game-page .game-image-container {
+	width: 50%;
+}
+
+body main #app .content #game-page .game-image-container .game-image {
+	height: 500px;
+	width: 350px;
+	background-size: cover;
+	box-shadow: 0px 0px 2px black;
+	margin: auto;
+}
+
+/*
+
+	Blog Page
+
+*/
+
+body main #app .content #blog-page h1 i {
+	margin-right: 10px;
+}
+
+body main #app .content #blog-page .blog-short-title {
+	color: grey;
+	font-size: 13px;
+	margin-left: 10px;
+    margin-bottom: 30px;
+    display: block;
+    margin-top: -10px;
+}
+
+body main #app .content #blog-page .blog-html {
+	text-align: justify;
+	margin-left: 10px;
+	font-size: 16px;
+}
+
+/*
+
+	Settings Page
+
+*/
+
+
+
+body main #app .content #settings-page .button {
+	padding: 5px;
+}
+
+body main #app .content #settings-page input {
+	display: block;
+	margin-bottom: 7.5px;
+	width: 100%;
+	padding: 5px;
+	padding-right: 0;
+	text-align: center;
+	padding-left: 0;
+	border: 0;
+	border-radius: 1px;
+}
+
+body main #app .content #settings-page {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+body main #app .content #settings-page .set-info {
+	min-width: 40%;
+	padding-right: 50px;
+}
+
+body main #app .content #settings-page .set-info .psw-form h2 {
+	margin-top: 27px;
+}
+
+body main #app .content #settings-page .set-avatar .avatar {
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+	margin: auto;
+	background: white;
+}
+
+/*
+	
+	Responsive Design
+
+*/
+
+@media screen and (max-width: 1350px) {
+	
+	.featured {
+		display: none;
+	}
+	
+	body {
+		overflow-x: hidden;
+	}
+	
+	.game-flex {
+		flex-direction: column;
+	}
+	
+	body main #app .content #game-page .game-info-container {
+		width: 100%;
+	}
+	
+	body main #app .content #game-page .game-image-container .game-image {
+		height: 400px !important;
+	    width: 300px !important;
+	    margin-top: 15px !important;
+    }
+	
+	
+}
