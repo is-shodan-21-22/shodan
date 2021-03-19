@@ -1,5 +1,6 @@
 package Service;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,8 +9,10 @@ import java.util.ArrayList;
 import Control.DBConnectionPool;
 import Model.Game;
 
-public class GameService {
+public class GameService implements Serializable {
 
+	private static final long serialVersionUID = -7187173329847684983L;
+	
 	private Connection db;
 	private Statement statement;
 	
@@ -28,7 +31,7 @@ public class GameService {
 		try {
 			ResultSet result = statement.executeQuery("SELECT * FROM games WHERE game_id = " + id);
 			
-			System.out.println("# GameService > Executing SELECT * FROM blog WHERE game_id = " + id);
+			System.out.println("# GameService > Executing SELECT * FROM games WHERE game_id = " + id);
 			
 			if(result.next())
 				game = new Game(

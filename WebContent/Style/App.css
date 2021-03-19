@@ -202,6 +202,7 @@ body main #app .content {
 
 body main #app .content .games {
 	display: flex;
+	min-height: 320px;
 	flex-wrap: wrap;
 	padding-bottom: 25px;
 }

@@ -1,4 +1,5 @@
 $(".blog").html("");
+$(".games").html("");
 
 $(document).ready(
 	() => {

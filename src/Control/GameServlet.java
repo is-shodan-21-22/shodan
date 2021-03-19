@@ -33,7 +33,7 @@ public class GameServlet extends HttpServlet {
 						      : 0;
 				
 				if(user_id == 0) {
-					System.out.println("# BlogServlet > GET > Nessun ID utente specificato");
+					System.out.println("# GameServlet > GET > Nessun ID utente specificato");
 					return;
 				}
 			
@@ -44,6 +44,18 @@ public class GameServlet extends HttpServlet {
 				break;
 				
 			case "game":
+				int game_id = request.getParameter("game_id") != null
+			      ? Integer.parseInt(request.getParameter("game_id"))
+			      : 0;
+	
+				if(game_id == 0) {
+					System.out.println("# GameServlet > GET > Nessun ID del gioco specificato");
+					return;
+				}
+			
+				request.getSession().setAttribute("game", new GameService().getGame(game_id));
+				
+				System.out.println("# GameServlet > GET > Pagina del gioco ID " + game_id);
 				
 				break;
 			
