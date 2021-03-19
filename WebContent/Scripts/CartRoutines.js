@@ -31,3 +31,30 @@ function addToCart(trigger) {
 						
 	return false;
 }
+
+function addToCartWithoutParsing(id, name, price) {
+	const cart = JSON.parse(localStorage.getItem("cart"));
+	let newCart = cart == null ? [] : cart;
+						
+	newCart[cart == null ? 0 : cart.length] = {
+			game_id: id,
+			game_name: name,
+			game_price: price
+	};
+
+	console.log(newCart);
+				
+	$("#add-to-cart").html("Aggiunto <strong>" + name +"</strong> al carrello!");
+						
+	setTimeout(
+		() => {
+			$("#add-to-cart").html("Aggiungi un'altra copia al carrello");	
+		},
+	4000);
+				
+	localStorage.setItem("cart", JSON.stringify(newCart));
+						
+	updateCart();
+						
+	return false;
+}

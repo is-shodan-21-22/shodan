@@ -5,7 +5,12 @@
 			${game.name}
 		</h1>
 		
-		<div class="game-flex">
+		<div 
+			data-game-id="${game.id}" 
+			data-game-name="${game.name}" 
+			data-game-price="${game.price}" 
+			class="game-flex"
+		>
 		
 			<div class="game-info-container">
 				<p class="game-price"> ${game.price}&euro; </p>
