@@ -23,7 +23,7 @@ $(document).ready(
 		else
 			closeSider();
 			
-		setTimeout(() => updateCart(), 1000);
+		setTimeout(() => refreshCart(), 1000);
 				
 		$("#nav-items>div").click(	
 			function() {

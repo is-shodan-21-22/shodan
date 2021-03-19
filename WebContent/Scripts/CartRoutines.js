@@ -1,60 +1,73 @@
-function updateCart() {
-	console.log("Updating cart...");
-	if(localStorage.getItem("cart") != null) {
-		$(".fa-clipboard").fadeOut("slow", () => {
-			$(".cart-quantity-value").html(JSON.parse(localStorage.getItem("cart")).length);
-			$(".cart-quantity-value").show(700);
-		});
+$(document).ready(
+	() => {
+		const cart = populateCart();
+		populateTable(cart);
+		
+		$("#cart-delete").click(
+			() => {
+				deleteCart();
+				$(".cart-game-row").remove();
+				$(".cart-total").text("0€");
+			}
+		);
 	}
+);
+
+function populateCart() {
+	const games = JSON.parse(localStorage.getItem("cart"));
+	const uniqueIds = [...new Set(games.map(item => item.game_id))];
+
+	let items = [];
+
+	uniqueIds.forEach((id) => {
+		let name = null;
+		let price = 0;
+		let quantity = 0;
+		let total = 0;
+		
+		games.forEach((game) => {
+			console.log("Nuovo gioco: " + game.game_id);
+			
+			if(game.game_id == id) {
+				name = game.game_name;
+				price = parseInt(game.game_price);
+				total += parseInt(game.game_price);
+				quantity += 1;
+			}
+		});
+		
+		items.push(
+			{
+				id: id,
+				name: name,
+				price: price,
+				quantity: quantity,
+				total: total
+			}
+		);
+	});
+	
+	return items;
 }
 
-function addToCart(trigger) {
-	const cart = JSON.parse(localStorage.getItem("cart"));
-	let newCart = cart == null ? [] : cart;
-						
-	newCart[cart == null ? 0 : cart.length] = {
-			game_id: trigger.parent().attr("data-game-id"),
-			game_name: trigger.parent().attr("data-game-name"),
-			game_price: trigger.parent().attr("data-game-price")
-	};
-
-	console.log(newCart);
-						
-	$(".game-confirm>span").html("Aggiunto <strong>" + trigger.parent().attr("data-game-name") +"</strong> al carrello!");
-	$(".game-confirm").show(225);
-						
-	setTimeout(() => $(".game-confirm").hide("slow"), 4000);
-						
-	localStorage.setItem("cart", JSON.stringify(newCart));
-						
-	updateCart();
-						
-	return false;
+function parseGameRow(game) {
+	let result = "";
+	
+	result += "<td><em>" + game.name + "</em></td>";
+	result += "<td>" + game.price + "€</td>";
+	result += "<td>" + game.quantity + "</td>";
+	result += "<td><strong>" + game.total + "€</strong></td>";
+	
+	return result;
 }
 
-function addToCartWithoutParsing(id, name, price) {
-	const cart = JSON.parse(localStorage.getItem("cart"));
-	let newCart = cart == null ? [] : cart;
-						
-	newCart[cart == null ? 0 : cart.length] = {
-			game_id: id,
-			game_name: name,
-			game_price: price
-	};
-
-	console.log(newCart);
-				
-	$("#add-to-cart").html("Aggiunto <strong>" + name +"</strong> al carrello!");
-						
-	setTimeout(
-		() => {
-			$("#add-to-cart").html("Aggiungi un'altra copia al carrello");	
-		},
-	4000);
-				
-	localStorage.setItem("cart", JSON.stringify(newCart));
-						
-	updateCart();
-						
-	return false;
+function populateTable(games) {
+	let total = 0;
+	
+	games.forEach((game) => {
+		total += game.total;
+		$("#cart").append("<tr class='cart-game-row'>" + parseGameRow(game) + "</tr>");
+	});
+	
+	$("#cart").append("<tr class='last-row'><td /><td /><td /><td class='cart-total'>" + total + "€</td></tr>");
 }

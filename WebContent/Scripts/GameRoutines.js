@@ -21,11 +21,19 @@ $(document).ready(
 			() => {
 				$("#add-to-cart").off().click(
 					() => {
-						addToCartWithoutParsing(
+						updateCart(
 							$(".game-flex").attr("data-game-id"),
 							$(".game-flex").attr("data-game-name"),
 							$(".game-flex").attr("data-game-price")
 						);
+											
+						$("#add-to-cart").html("Aggiunto <strong>" + name +"</strong> al carrello!");
+											
+						setTimeout(
+							() => {
+								$("#add-to-cart").html("Aggiungi un'altra copia al carrello");	
+							},
+						4000);
 					}
 				)
 			}

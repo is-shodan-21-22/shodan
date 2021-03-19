@@ -71,6 +71,14 @@ a:hover {
 	background: #ff71f7;
 }
 
+.button--danger {
+	background: #cc0000;
+}
+
+.button--danger:hover {
+	background: #ff5e5e;
+}
+
 .button--unshadow {
 	box-shadow: none !important;
 }
@@ -449,6 +457,40 @@ body main #app .content #settings-page .set-avatar .avatar {
 	border-radius: 100px;
 	margin: auto;
 	background: white;
+}
+
+/* Cart */
+
+body main #app .content #cart {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+body main #app .content .cart-buttons {
+	padding: 15px;
+}
+
+body main #app .content .cart-buttons .button--danger {
+	margin-left: 7.5px;
+}
+
+
+body main #app .content #cart .first-row,
+body main #app .content #cart .last-row {
+	font-weight: 600;
+	font-size: 18.5px;
+	background: #171717;
+}
+
+body main #app .content #cart tr {
+	border-bottom: 1px solid #171717;
+	margin-bottom: 2px;
+	background: #262626;
+}
+
+body main #app .content #cart tr td {
+	padding: 7px;
 }
 
 /* Responsive Design */
