@@ -1,3 +1,5 @@
+import { updateCart } from "./CartRoutines.js";
+
 $(".blog").html("");
 $(".games").html("");
 
@@ -56,6 +58,34 @@ $(document).ready(
 						$("#app").load("View/Game.jsp");
 					}
 				);
+				
+				$(".game-add").off().click(
+					function(event) {
+						event.stopPropagation();
+
+						const cart = JSON.parse(localStorage.getItem("cart"));
+						let newCart = cart == null ? [] : cart;
+						
+						newCart[cart == null ? 0 : cart.length] = {
+							game_id: $(this).parent().attr("data-game-id"),
+							game_name: $(this).parent().attr("data-game-name"),
+							game_price: $(this).parent().attr("data-game-price")
+						};
+
+						console.log(newCart);
+						
+						$(".game-confirm>span").html("Aggiunto <strong>" + $(this).parent().attr("data-game-name") +"</strong> al carrello!");
+						$(".game-confirm").show(225);
+						
+						setTimeout(() => $(".game-confirm").hide("slow"), 4000);
+						
+						localStorage.setItem("cart", JSON.stringify(newCart));
+						
+						updateCart();
+						
+						return false;
+					}
+				)
 			}
 		);
 		

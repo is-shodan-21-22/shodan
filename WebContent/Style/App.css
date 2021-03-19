@@ -95,6 +95,21 @@ body nav #nav-items {
 	margin-top: 20px;
 }
 
+body nav #nav-items #cart-link .cart-quantity i {
+	margin: 0;
+	margin-left: 10px;
+}
+
+body nav #nav-items #cart-link .cart-quantity {
+	padding-left: 5px;
+    padding-right: 5px;
+    float: right;
+}
+
+body nav #nav-items #cart-link .cart-quantity .cart-quantity-value {
+	display: none;
+}
+
 body nav #nav-items i {
 	margin-right: 5px;
 }
@@ -207,6 +222,15 @@ body main #app .content .games {
 	padding-bottom: 25px;
 }
 
+body main #app .content .game-confirm {
+	background: #96158d;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: none;
+    margin-left: 12px;
+}
+
 body main #app .content h1 {
 	margin-left: 10px;
 }
@@ -219,6 +243,22 @@ body main #app .content h1 i {
 
 body main #app .content .games a {
 	color: white;
+}
+
+body main #app .content .games .game-add {
+	background: #b72cae;
+    color: white;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    right: 0;
+    position: absolute;
+    margin-top: -5px;
+    z-index: 1;
+    text-align: center;
+    cursor: pointer;
+    margin-right: -5px;
 }
 
 body main #app .content .games .game-container {

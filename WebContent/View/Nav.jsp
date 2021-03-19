@@ -33,6 +33,11 @@
 	<div id="cart-link">
 		<i class="fas fa-shopping-cart"></i>
 		<span>Carrello</span>
+		
+		<span class="cart-quantity">
+			<span class="cart-quantity-value"></span>
+			<i class="far fa-clipboard"></i>
+		</span>
 	</div>
 	
 	<div id="admin-link">
@@ -46,4 +51,4 @@
 	</div>
 </div>
 
-<script src="Scripts/NavRoutines.js"></script>
+<script type="module" src="Scripts/NavRoutines.js"></script>

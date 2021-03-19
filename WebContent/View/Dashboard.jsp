@@ -32,10 +32,22 @@
 		<i class="fas fa-dice"></i>
 		Ultime uscite
 	</h1>	
+	
+	<div class="game-confirm">
+		<i class="fas fa-comments-dollar"></i>&nbsp;
+		<span></span>
+	</div>
 				
 	<div class="games">
 		<c:forEach items="${games}" var="game">
-			<div data-game-id="${game.id}" style="background-image: url('Static/GamePictures/${game.image}')" class="game-container">
+			<div 
+				data-game-id="${game.id}" 
+				data-game-name="${game.name}" 
+				data-game-price="${game.price}" 
+				style="background-image: url('Static/GamePictures/${game.image}')" 
+				class="game-container"
+			>
+				<div class="game-add">+</div>
 				<div class="game-overlay">
 					${game.name}
 				</div>
@@ -65,4 +77,4 @@
 	
 </div>
 
-<script src="Scripts/DashboardRoutines.js"></script>
+<script type="module" src="Scripts/DashboardRoutines.js"></script>

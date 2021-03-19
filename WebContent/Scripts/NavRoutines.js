@@ -1,3 +1,5 @@
+import { updateCart } from "./CartRoutines.js";
+
 function openSider() {
 	localStorage.setItem("sider", "open");
 		
@@ -22,6 +24,8 @@ $(document).ready(
 			openSider();
 		else
 			closeSider();
+			
+		setTimeout(() => updateCart(), 1000);
 				
 		$("#nav-items>div").click(	
 			function() {
