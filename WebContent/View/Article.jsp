@@ -1,19 +1,12 @@
 <div class="content">
-	<div id="blog-page"></div>
+	<div id="blog-page">
+		<h1>
+			<i class="fas fa-newspaper"></i>
+			${article.title}
+		</h1>
+		<p class="blog-short-title"> ${article.shortTitle} </p>	
+		<p class="blog-html"> ${article.html} </p>
+	</div>
 </div>
 
-<script>
-
-	$.ajax({
-	    type: "GET",
-	    url: "blogServlet",
-	    data: {
-	    	blog: new URLSearchParams(window.location.search).get("blog")
-	    },
-	    success: function (data) {                        
-	    	$("#blog-page").html(data);
-	    },
-	    error: () => location.replace("dashboard.html")
-	});
-
-</script>
+<script src="Scripts/ArticleRoutines.js"></script>

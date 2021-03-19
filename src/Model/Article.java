@@ -1,7 +1,11 @@
 package Model;
 
-public class Article {
+import java.io.Serializable;
 
+public class Article implements Serializable {
+
+	private static final long serialVersionUID = -2719650670762044594L;
+	
 	int id;
 	String title;
 	String shortTitle;

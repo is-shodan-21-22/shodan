@@ -12,7 +12,7 @@
 			<div class="article-container">
 				<div class="article">
 					<h1> ${article.title} </h1>
-					<div class="content"> ${article.shortTitle} </div>
+					<div> ${article.shortTitle} </div>
 					<span class='blog-link' data-blog-id="${article.id}">
 						<i class="fas fa-caret-square-right"></i> Leggi la notizia
 					</span>

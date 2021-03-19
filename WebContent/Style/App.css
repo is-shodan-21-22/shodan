@@ -18,6 +18,25 @@ body main {
 	margin-left: 274px;
 }
 
+.loader {
+	margin: auto;
+  	border: 8px solid #171717;
+  	border-top: 8px solid #c900d3;
+  	border-radius: 50%;
+  	width: 60px;
+  	height: 60px;
+  	animation: spin 2s linear infinite;
+}
+
+.loader-lowered {
+	margin-top: 100px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Links */
 
 a {
@@ -229,10 +248,10 @@ body main #app .content .games .game-container .game-overlay {
 /* Notizie  */
 
 body main #app .content .blog {
-	display: flex;
 	padding-bottom: 35px;
 	display: flex;
 	flex-wrap: wrap;
+	width: 100%;
 }
 
 body main #app .content .blog .article-container {
@@ -243,6 +262,7 @@ body main #app .content .blog .article-container {
 
 body main #app .content .blog .article-container .article {
 	min-width: 250px;
+	min-height: 93%;
     background: #171717;
     padding: 10px;
     box-shadow: 0px 0px 2px black;
@@ -259,6 +279,10 @@ body main #app .content .blog .article-container .article span {
 	padding-left: 15px;
 	margin-bottom: 15px;
     display: block;
+}
+
+body main #app .content .blog .article-container .article div {
+	padding: 15px;
 }
 
 body main #app .content .blog .article-container .article span i {

@@ -1,9 +1,8 @@
 package Control;
 
 import Model.Article;
-import Service.ArticleBean;
+import Service.ArticleService;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,16 +18,26 @@ public class BlogServlet extends HttpServlet {
 			HttpServletRequest request,
 			HttpServletResponse response
 	) throws ServletException, IOException {
+		System.out.println("Session: " + request.getSession().getId());
+		
 		switch(request.getParameter("action")) {
 			case "blog":
-				request.getSession().setAttribute("articles", new ArticleBean().getAllArticles());
+				int limit = request.getParameter("limit") != null 
+							? Integer.parseInt(request.getParameter("limit")) 
+							: 0;
+	
+				request.getSession().setAttribute("articles", new ArticleService().getAllArticles(limit));
 				
 				System.out.println("# BlogServlet > GET > Tutti gli articoli");
 				
 				break;
 			
 			case "article":
-				Article article = new ArticleBean().getArticle(2);
+				int blog_id = request.getParameter("blog_id") != null 
+							? Integer.parseInt(request.getParameter("blog_id")) 
+							: 0;
+				
+				Article article = new ArticleService().getArticle(blog_id);
 				
 				System.out.println("# BlogServlet > GET > " + article.toString());
 				
@@ -38,6 +47,7 @@ public class BlogServlet extends HttpServlet {
 				
 			default:
 				System.out.println("# BlogServlet > GET > Nessuna azione specificata");
+				
 				break;
 		}
 	}

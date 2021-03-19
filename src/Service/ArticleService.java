@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import Control.DBConnectionPool;
 import Model.Article;
 
-public class ArticleBean {
+public class ArticleService {
 
 	private Connection db;
 	private Statement statement;
 	
-	public ArticleBean() {
+	public ArticleService() {
 		try {
 			db = DBConnectionPool.getConnection();
 			statement = db.createStatement();
@@ -44,11 +44,14 @@ public class ArticleBean {
 		return article;
 	}
 	
-	public ArrayList<Article> getAllArticles() {
+	public ArrayList<Article> getAllArticles(int limit) {
 		ArrayList<Article> blog = new ArrayList<Article>();
+		String query = "SELECT * FROM blog" + (limit != 0 ? (" LIMIT " + limit) : "");
 		
 		try {
-			ResultSet result = statement.executeQuery("SELECT * FROM blog");
+			ResultSet result = statement.executeQuery(query);
+			
+			System.out.println("# ArticleService > Query > " + query);
 			
 			while(result.next()) {
 				blog.add(

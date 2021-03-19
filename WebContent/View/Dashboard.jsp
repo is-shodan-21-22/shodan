@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!-- Videogioco in evidenza -->
 <div class="featured">
 	<div class="featured-text-outer">
@@ -41,7 +43,20 @@
 		Notizie da Shodan
 	</h1>
 			
-	<div class="blog"></div>
+	<div class="blog">
+		<c:forEach items="${articles}" var="article">
+			<div class="article-container">
+				<div class="article">
+					<h1> ${article.title} </h1>
+					<div> ${article.shortTitle} </div>
+					<span id="blog-link" class='blog-link' data-blog-id="${article.id}">
+						<i class="fas fa-caret-square-right"></i> Leggi la notizia
+					</span>
+				</div>
+			 </div>
+		</c:forEach>
+	</div>
+	
 </div>
 
 <script src="Scripts/DashboardRoutines.js"></script>

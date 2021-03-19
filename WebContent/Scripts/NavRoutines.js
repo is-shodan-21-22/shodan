@@ -41,7 +41,7 @@ $(document).ready(
 				if($(this).attr("id").split("-")[0] == "admin")
 					window.location.replace("admin.jsp");
 					
-				$("#app").load("View/" + container);
+				$("#app").load("View/" + container).fadeIn("slow");
 			}
 		);
 	

@@ -30,11 +30,6 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 	</servlet>
 	
 	<servlet>
-	    <servlet-name>LatestBlogsServlet</servlet-name>
-	    <servlet-class>Control.LatestBlogsServlet</servlet-class>
-	</servlet>
-	
-	<servlet>
 	    <servlet-name>GameServlet</servlet-name>
 	    <servlet-class>Control.GameServlet</servlet-class>
 	</servlet>
