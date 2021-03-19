@@ -71,6 +71,10 @@ a:hover {
 	background: #ff71f7;
 }
 
+.button--unshadow {
+	box-shadow: none !important;
+}
+
 /* Navbar */
 
 body nav {
@@ -134,7 +138,7 @@ body nav #nav-close {
 
 body nav #nav-close:hover {
 	background: #212121;
-	color: white;
+	color: #FF71F7;
 }
 
 /* Sezione vuota */
@@ -168,21 +172,21 @@ body main #app .content .empty-collection i {
 
 body main #app .featured {
 	background-image: url('../Static/Assets/Featured.jpg');
-	background-size: cover;
-	background-position: -160px -220px;
-	height: 250px;
+	height: 300px;
 }
 
 body main #app .featured .featured-text-outer {
-	background: linear-gradient(to right, transparent 0%, black 50%);
+	background: linear-gradient(to right, transparent 0%, black 30%);
 	height: 100%;
 	width: 50%;
 	float: right;
 	text-align: right;
+	display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 body main #app .featured .featured-text-outer .featured-text-inner {
-	padding: 45px;
 	font-size: 15px;
 }
 

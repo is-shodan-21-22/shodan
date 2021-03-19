@@ -17,10 +17,10 @@
 			</p>
 			
 			<p>				
-				<a href="">
-					Vai alla pagina di System Shock nel negozio!&nbsp;
+				<div class="button button--submit button--unshadow">
+					Vai alla pagina di System Shock nel negozio&nbsp;
 					<i class="fas fa-arrow-alt-circle-right"></i>
-				</a>
+				</div>
 			</p>
 		</div>
 	</div>
@@ -37,9 +37,9 @@
 				
 	<div class="games">
 		<c:forEach items="${games}" var="game">
-			<div data-game-id="${game.id}" style="background-image: url('static/games/${game.image})" class="game-container">
-				<div class="overlay">
-					${game.title}
+			<div data-game-id="${game.id}" style="background-image: url('Static/GamePictures/${game.image}')" class="game-container">
+				<div class="game-overlay">
+					${game.name}
 				</div>
 			</div>
 		</c:forEach>

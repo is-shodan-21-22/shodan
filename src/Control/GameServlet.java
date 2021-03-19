@@ -1,18 +1,14 @@
 package Control;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Service.GameService;
 
-@WebServlet("/gameServlet")
+@WebServlet("/GameServlet")
 public class GameServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -8724190928795580877L;
@@ -21,10 +17,40 @@ public class GameServlet extends HttpServlet {
 			HttpServletRequest request,
 			HttpServletResponse response
 	) throws ServletException, IOException {
-		System.out.println("#GameServlet > Session: " + request.getSession().getId());
+		System.out.println("# GameServlet > Session: " + request.getSession().getId());
 		
 		switch(request.getParameter("action")) {
-		
+			case "shop":
+				request.getSession().setAttribute("games", new GameService().getAllGames(5));
+				
+				System.out.println("# GameServlet > GET > Ultimi 5 giochi del negozio");
+				
+				break;
+				
+			case "library":
+				int user_id = request.getParameter("user_id") != null
+						      ? Integer.parseInt(request.getParameter("user_id"))
+						      : 0;
+				
+				if(user_id == 0) {
+					System.out.println("# BlogServlet > GET > Nessun ID utente specificato");
+					return;
+				}
+			
+				request.getSession().setAttribute("games", new GameService().getAllGamesByUser(user_id));
+				
+				System.out.println("# GameServlet > GET > Libreria personale dell'utente" + user_id);
+				
+				break;
+				
+			case "game":
+				
+				break;
+			
+			default:
+				System.out.println("# GameServlet > GET > Nessuna azione specificata");
+				
+				break;
 		}
 	}
 	
