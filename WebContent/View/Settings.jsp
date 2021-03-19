@@ -33,14 +33,4 @@
 	</div>
 </div>
 
-<script>
-	
-	$(document).ready(
-		() => {
-			$.ajax(
-				
-			)
-		}
-	);
-	
-</script>
+<script src="Scripts/SettingsRoutines.js"></script>

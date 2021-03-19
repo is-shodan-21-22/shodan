@@ -4,3 +4,5 @@
 		Carrello
 	</h1>
 </div>
+
+<script src="Scripts/CartRoutines.js"></script>

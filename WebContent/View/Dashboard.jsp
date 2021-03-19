@@ -15,13 +15,11 @@
 				System Shock, cult del 1994, è finalmente disponibile!<br />
 				Sei pronto a combattere cyborg, mutanti e IA impazzite?
 			</p>
-			
-			<p>				
-				<div class="button button--submit button--unshadow">
-					Vai alla pagina di System Shock nel negozio&nbsp;
-					<i class="fas fa-arrow-alt-circle-right"></i>
-				</div>
-			</p>
+					
+			<div class="button button--submit button--unshadow">
+				Vai alla pagina di System Shock nel negozio&nbsp;
+				<i class="fas fa-arrow-alt-circle-right"></i>
+			</div>
 		</div>
 	</div>
 </div>
