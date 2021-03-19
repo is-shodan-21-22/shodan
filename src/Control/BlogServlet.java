@@ -18,7 +18,7 @@ public class BlogServlet extends HttpServlet {
 			HttpServletRequest request,
 			HttpServletResponse response
 	) throws ServletException, IOException {
-		System.out.println("Session: " + request.getSession().getId());
+		System.out.println("#BlogServlet > Session: " + request.getSession().getId());
 		
 		switch(request.getParameter("action")) {
 			case "blog":

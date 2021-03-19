@@ -11,7 +11,7 @@ $(document).ready(
 					blog_id: new URLSearchParams(window.location.search).get("blog")
 				},
 				beforeSend: () => {
-					$("#blog-page").html("<div class=\"loader lowered\">");
+					$("#blog-page").html("<div class=\"loader loader-lowered\">");
 				},
 				success: () => setTimeout(() => $("#blog-page").load("View/Article.jsp #blog-page"), 150)
 			}

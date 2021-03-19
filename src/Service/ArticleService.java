@@ -28,7 +28,7 @@ public class ArticleService {
 		try {
 			ResultSet result = statement.executeQuery("SELECT * FROM blog WHERE blog_id = " + id);
 			
-			System.out.println("# ArticleBean > Executing SELECT * FROM blog WHERE blog_id = " + id);
+			System.out.println("# ArticleService > Executing SELECT * FROM blog WHERE blog_id = " + id);
 			
 			if(result.next())
 				article = new Article(

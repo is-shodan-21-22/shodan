@@ -35,7 +35,15 @@
 		Ultime uscite
 	</h1>	
 				
-	<div class="games"></div>
+	<div class="games">
+		<c:forEach items="${games}" var="game">
+			<div data-game-id="${game.id}" style="background-image: url('static/games/${game.image})" class="game-container">
+				<div class="overlay">
+					${game.title}
+				</div>
+			</div>
+		</c:forEach>
+	</div>
 			
 	<!-- Ultimi 3 articoli dal blog -->
 	<h1>
