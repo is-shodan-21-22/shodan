@@ -13,7 +13,9 @@ $(document).ready(
 				beforeSend: () => {
 					$("#my-collection").html("<div class=\"loader loader-lowered\">");
 				},
-				success: () => setTimeout(() => $("#my-collection").load("View/Library.jsp #my-collection"), 250)
+				success: () => {
+					setTimeout(() => $("#my-collection").load("View/Library.jsp #my-collection"), 250)
+				}
 			}
 		);
 	}

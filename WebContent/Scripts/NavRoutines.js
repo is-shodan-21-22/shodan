@@ -1,5 +1,3 @@
-import { updateCart } from "./CartRoutines.js";
-
 function openSider() {
 	localStorage.setItem("sider", "open");
 		

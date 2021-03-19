@@ -15,5 +15,16 @@ $(document).ready(
 				success: () => setTimeout(() => $("#shop-games").load("View/Shop.jsp #shop-games"), 250)
 			}
 		);
+		
+		$(document).ajaxComplete(
+			() => {
+				$(".game-add").off().click(
+					function(event) {
+						event.stopPropagation();
+						addToCart($(this));
+					}
+				)
+			}
+		);
 	}
 );

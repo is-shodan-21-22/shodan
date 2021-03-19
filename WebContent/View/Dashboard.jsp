@@ -77,4 +77,4 @@
 	
 </div>
 
-<script type="module" src="Scripts/DashboardRoutines.js"></script>
+<script src="Scripts/DashboardRoutines.js"></script>

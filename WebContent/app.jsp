@@ -23,8 +23,9 @@
 		<!-- jQuery -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		
-		<!-- AJAX Routines -->
+		<!-- Common AJAX Routines -->
 		<script src="Scripts/AppRoutines.js"></script>
+		<script src="Scripts/CartRoutines.js"></script>
 	</head>
 	
 	<body>

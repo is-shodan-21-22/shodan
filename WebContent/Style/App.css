@@ -100,6 +100,10 @@ body nav #nav-items #cart-link .cart-quantity i {
 	margin-left: 10px;
 }
 
+body nav #nav-items #settings-link i {
+	margin-left: 2.5px;
+}
+
 body nav #nav-items #cart-link .cart-quantity {
 	padding-left: 5px;
     padding-right: 5px;
@@ -191,9 +195,9 @@ body main #app .featured {
 }
 
 body main #app .featured .featured-text-outer {
-	background: linear-gradient(to right, transparent 0%, black 30%);
+	background: linear-gradient(to right, transparent 0%, black 60%);
 	height: 100%;
-	width: 50%;
+	width: 80%;
 	float: right;
 	text-align: right;
 	display: flex;
@@ -203,6 +207,7 @@ body main #app .featured .featured-text-outer {
 
 body main #app .featured .featured-text-outer .featured-text-inner {
 	font-size: 15px;
+	margin-left: 40%;
 }
 
 body main #app .featured .featured-text-outer .featured-text-inner strong  {
@@ -334,11 +339,7 @@ body main #app .content .blog .article-container .article span i {
 	margin-right: 10px;
 }
 
-/*
-
-	Game Page
-
-*/
+/* Game Page */
 
 body main #app .content #game-page h1 i {
 	margin-right: 10px !important;
@@ -389,11 +390,7 @@ body main #app .content #game-page .game-image-container .game-image {
 	margin: auto;
 }
 
-/*
-
-	Blog Page
-
-*/
+/* Blog Page */
 
 body main #app .content #blog-page h1 i {
 	margin-right: 10px;
@@ -414,13 +411,7 @@ body main #app .content #blog-page .blog-html {
 	font-size: 16px;
 }
 
-/*
-
-	Settings Page
-
-*/
-
-
+/* Settings Page */
 
 body main #app .content #settings-page .button {
 	padding: 5px;
