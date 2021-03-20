@@ -9,10 +9,12 @@ INSERT INTO users(user_name, user_password, user_email) VALUES
 DELETE FROM games;
 INSERT INTO games(game_name, game_image, game_price) VALUES 
 	('Doom', 'Doom.png', 50),
-    ('Half Life 2', 'HalfLife2.jpg', 55),
-    ('Crash Bandicoot', 'Crash.jpg', 20),
-    ('Red Alert', 'RedAlert.jpg', 30),
-    ('Final Fantasy VII', 'FF7.jpg', 150);
+    ('Cuphead', 'Cuphead.png', 55),
+    ('Dark Souls', 'DarkSouls.png', 65),
+    ('Final Fantasy VII', 'FF7.jpg', 75),
+    ('Bioshock Infinite', 'BioShock.png', 25),
+    ('System Shock', 'SystemShock.png', 35),
+    ('Crash Bandicoot', 'Crash.jpg', 60);
 
 DELETE FROM has_game;
 INSERT INTO has_game VALUES 

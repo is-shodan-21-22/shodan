@@ -449,10 +449,16 @@ body main #app .content #settings-page input {
 	border-radius: 1px;
 }
 
-body main #app .content #settings-page .settings-routines {
+body main #app .content #settings-page .settings-routines .settings-container {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
+}
+
+body main #app .content #settings-page .settings-routines .settings-status {
+	margin-bottom: 10px;
+	display: none;
+	padding: 10px;
 }
 
 body main #app .content #settings-page .set-info {

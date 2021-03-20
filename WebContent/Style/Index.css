@@ -1,0 +1,259 @@
+html, body {
+	padding: 0;
+	font-family: 'Open Sans';
+	background: #000000;
+	color: white;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	display: flex;
+}
+
+main {
+	flex: 0.85;
+	position: relative;
+}
+
+.game-container {
+	height: 300px;
+	width: 200px;
+	box-shadow: 0px 0px 3px black;
+	opacity: 0.9;
+	background-size: cover;
+	position: relative;
+	margin: 0 15px 15px 15px;
+}
+
+.loader {
+	margin: auto;
+  	border: 8px solid #171717;
+  	border-top: 8px solid #c900d3;
+  	border-radius: 50%;
+  	width: 60px;
+  	height: 60px;
+  	animation: spin 2s linear infinite;
+}
+
+.loader-lowered {
+	margin-top: 100px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.bordered {
+	border-right: 1px solid #2B2B2B;
+}
+
+.shodan-games {
+	flex: 0.15;
+	overflow-y: auto;
+    overflow: hidden;
+}
+
+.shodan-games-container {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.loader-container {
+	display: flex;
+	align-items: center;
+	justify-items: center;
+	height: 100%;
+}
+
+.shodan-games.left {
+	border-right: 1px solid black;
+}
+
+.shodan-games.right {
+	border-left: 1px solid black;
+}
+
+.shodan-info-content i {
+	font-size: 32.5px;
+	color: #ff7ffc;
+}
+
+.shodan-info-content span {
+	font-weight: 600;
+	font-size: 18.5px;
+	color: #ff71f7;
+	display: block;
+	margin-top: 10px;
+}
+
+
+.shodan-info-content p {
+	margin-top: 8px;
+	font-size: 16px;
+}
+
+.shodan-info-content {
+	padding: 20px;
+	padding-bottom: 0;
+	text-align: center;
+}
+
+.shodan-form-container {
+	background: #2b2b2b;
+	padding: 35px;
+}
+
+.shodan-info-container {
+	background: #1c1c1c;
+	display: flex;
+	justify-content: center;
+	padding-top: 25px;
+	border-left: 2.5px solid #fb21ff;
+	border-right: 2.5px solid #fb21ff;
+	padding-bottom: 25px;
+}
+
+a {
+	color: #ff71f7;
+	font-weight: 400;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.shodan-info {
+	flex: 0.3;
+	display: flex;
+	justify-content: center;
+}
+
+.shodan-logo-container {
+	border-bottom: 5px solid black;
+}
+
+footer {
+	background: #1c1c1c;
+	min-height: 75px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-left: 2.5px solid #fb21ff;
+	border-right: 2.5px solid #fb21ff;
+}
+
+.shodan-tv h1 {
+	margin: 0;
+	padding: 0;
+	font-family: 'Monofonto';
+	letter-spacing: 0.3px;
+	color: #b72cae;
+	display: block;
+	font-size: 100px;
+}
+
+.shodan-logo {
+	background-image: url('../Static/Assets/Logo.png');
+	width: 100%;
+    height: 350px;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+    transition: 0.1s;
+    background-position: center;
+}
+
+.shodan-tv {
+	background-image: url('../Static/Assets/TV.png');
+	min-height: 350px;
+	justify-content: center;
+	align-items: center;
+	background-size: 125% 350px;
+	background-position: center;
+	display: flex;
+	position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+video {
+    height: 350px;
+    width: 100%;
+    object-fit: fill;
+}
+
+/* Forms */
+
+.shodan-form-container {
+	display: flex;
+	justify-content: center;
+}
+
+.shodan-form-container form {
+	border-radius: 5px;
+	padding: 25px;
+	margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	min-width: 300px;
+	background: #322d33;
+	box-shadow: 2px 2px #fb21ff;
+}
+
+.shodan-form-container form h1 {
+	padding: 0;
+	text-align: center;
+	padding-bottom: 20px;
+	font-weight: 600;
+	font-size: 22.5px;
+	display: block;
+	margin: 0;
+}
+
+/* Bottoni */
+
+input {
+	border: 0;
+	padding: 6px;
+	margin-bottom: 5px;
+	outline: 0;
+	color: white;
+	background: transparent;
+}
+
+input[type="submit"] {
+	margin-top: 10px;
+	padding: 7.5px 32.5px 7.5px 32.5px;
+	color: white;
+	font-weight: 600;
+	display: inline-block;
+	transition: 0.3s;
+	box-shadow: none;
+	width: 100%;
+	outline: 0;
+	border: 0;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 2px;
+	background: #b72cae;
+}
+
+input[type="submit"]:hover {
+	background: #ff71f7;
+}
+
+@media screen and (max-width: 1585px) {
+	.shodan-games {
+		display: none;
+	}
+	
+	main {
+		flex: 1;
+	}
+}

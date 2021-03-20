@@ -21,7 +21,14 @@ public class GameServlet extends HttpServlet {
 		
 		switch(request.getParameter("action")) {
 			case "shop":
-				request.getSession().setAttribute("games", new GameService().getAllGames(5));
+				int limit = (request.getParameter("limit") != null) 
+							? Integer.parseInt(request.getParameter("limit"))
+							: 0;
+				
+				if(request.getParameter("order") == null)
+					request.getSession().setAttribute("games", new GameService().getAllAscendingGames(limit));
+				else
+					request.getSession().setAttribute("desc_games", new GameService().getAllDescendingGames(limit));
 				
 				System.out.println("# GameServlet > GET > Ultimi 5 giochi del negozio");
 				

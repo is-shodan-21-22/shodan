@@ -69,6 +69,8 @@ public class UserService implements Serializable {
 			statement.executeUpdate(query);
 			
 			System.out.println("# UserService > Aggiorno l'utente ID " + user.getId());
+			
+			return true;
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}

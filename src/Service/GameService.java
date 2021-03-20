@@ -77,9 +77,39 @@ public class GameService implements Serializable {
 		return games;
 	}
 	
-	public ArrayList<Game> getAllGames(int limit) {
+	public ArrayList<Game> getAllDescendingGames(int limit) {
 		ArrayList<Game> games = new ArrayList<Game>();
-		String query = "SELECT * FROM games" + (limit != 0 ? (" LIMIT " + limit) : "");
+		String query = "SELECT * FROM games ORDER BY game_id DESC" + (limit != 0 ? (" LIMIT " + limit) : "");
+		
+		System.out.println("# GameService > Query > " + query);
+		
+		try {
+			ResultSet result = statement.executeQuery(query);
+			
+			System.out.println("# GameService > Query > " + query);
+			
+			while(result.next()) {
+				games.add(
+					new Game(
+						result.getInt("game_id"),
+						result.getInt("game_price"),
+						result.getString("game_name"),
+						result.getString("game_description"),
+						result.getString("game_image"),
+						result.getDate("game_release")
+					)
+				);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return games;
+	}
+	
+	public ArrayList<Game> getAllAscendingGames(int limit) {
+		ArrayList<Game> games = new ArrayList<Game>();
+		String query = "SELECT * FROM games ORDER BY game_id" + (limit != 0 ? (" LIMIT " + limit) : "");
 		
 		try {
 			ResultSet result = statement.executeQuery(query);
