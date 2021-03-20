@@ -63,6 +63,13 @@ a:hover {
 	box-shadow: 1px 3.5px #171717;
 }
 
+.button--status {
+	cursor: default;
+	background: #54b2ff;
+	display: none;
+	margin-top: 10px;
+}
+
 .button--submit {
 	background: #b72cae;
 }
@@ -235,7 +242,8 @@ body main #app .content .games {
 	padding-bottom: 25px;
 }
 
-body main #app .content .game-confirm {
+body main #app .content .game-confirm,
+body main #app .content .cart-status {
 	background: #96158d;
     padding: 10px;
     margin-bottom: 20px;

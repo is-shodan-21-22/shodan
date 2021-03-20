@@ -34,10 +34,8 @@ CREATE TABLE games(
 
 DROP TABLE IF EXISTS has_game;
 CREATE TABLE has_game(
-	user_id int NOT NULL AUTO_INCREMENT,
-	game_id int NOT NULL,
-    
-    PRIMARY KEY(user_id, game_id)
+	user_id int NOT NULL,
+	game_id int NOT NULL
 );
 
 DROP TABLE IF EXISTS blog;

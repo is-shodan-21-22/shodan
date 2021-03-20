@@ -1,0 +1,29 @@
+package Model;
+
+public class HasGame{
+
+	public int user_id;
+	public int game_id;
+	
+	public HasGame(int user_id, int game_id) {
+		this.user_id = user_id;
+		this.game_id = game_id;
+	}
+
+	public int getUserId() {
+		return user_id;
+	}
+
+	public int getGameId() {
+		return game_id;
+	}
+
+	public void setUserId(int user_id) {
+		this.user_id = user_id;
+	}
+
+	public void setGameId(int game_id) {
+		this.game_id = game_id;
+	}
+	
+}

@@ -28,10 +28,17 @@
 		<div class="button button--submit button--unshadow" id="cart-pay">
 			Completa l'acquisto
 		</div>
+		
 		<div class="button button--danger button--unshadow" id="cart-delete">
 			Svuota il carrello
 		</div>
 	</div>
+	
+	<div class="cart-status">
+		<i class="fas fa-comments-dollar"></i>&nbsp;
+		<span></span>
+	</div>
+	
 </div>
 
 <script src="Scripts/CartRoutines.js"></script>

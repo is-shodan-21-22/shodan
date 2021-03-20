@@ -1,17 +1,84 @@
 $(document).ready(
 	() => {
-		const cart = populateCart();
-		populateTable(cart);
+		if(getCartLength() == 0) {
+			console.log("Carrello vuoto...");
 		
-		$("#cart-delete").click(
-			() => {
-				deleteCart();
-				$(".cart-game-row").remove();
-				$(".cart-total").text("0€");
-			}
-		);
+			$("#cart-delete").hide();
+			$("#cart-pay").hide();
+		} else {
+			console.log("Carrello non vuoto...");
+		
+			const cart = populateCart();
+			populateTable(cart);
+		
+			$("#cart-delete").click(
+				() => {
+					console.log("Svuoto il carrello...");
+					
+					deleteCart();
+					
+					$(".cart-game-row").remove();
+					$(".cart-total").text("0€");
+					$("#cart-delete").hide();
+					$("#cart-pay").hide();
+				}
+			);
+		
+			$("#cart-pay").click(
+				() => {
+					const price = parseInt($(".cart-total").text().split("€")[0]);
+					console.log("Effettuo il pagamento di " + price + "€...");
+				
+					$.ajax(
+						{
+							method: "GET",
+							url: "UserServlet",
+							data: {
+								action: "purchase",
+								user_id: parseInt(localStorage.getItem("uid")),
+								price: price,
+								games: getCartIds().join("-")
+							},
+							success: (data) => {
+								console.log(data);
+								
+								if(data.includes("successo")) {
+									deleteCart();
+									refreshCart();
+								}
+												
+								$(".cart-status>span").html(data);
+								$(".cart-status").show(600);
+								
+								if(data.includes("successo")) {
+									$(".cart-game-row").remove();
+									$(".cart-total").text("0€");
+									$("#cart-delete").hide();
+									$("#cart-pay").hide();
+								}
+								
+								setTimeout(() => $(".cart-status").hide("slow"), 4000);
+							}
+						},
+						
+					);
+				}
+			);
+		}
+		
 	}
 );
+
+function getCartIds() {
+	const games = JSON.parse(localStorage.getItem("cart"));
+	return [...new Set(games.map(item => item.game_id))];
+}
+
+function getCartLength() {
+	const games = JSON.parse(localStorage.getItem("cart"));
+	
+	return (games == null) ? 0 : getCartIds();
+}
 
 function populateCart() {
 	const games = JSON.parse(localStorage.getItem("cart"));

@@ -29,7 +29,7 @@ $(document).ready(
 				url: "BlogServlet",
 				data: {
 					action: "blog",
-					limit: 3
+					limit: 5
 				},
 				beforeSend: () => {
 					$(".blog").html("<div class=\"loader\">");
