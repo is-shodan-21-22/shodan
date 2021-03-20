@@ -23,17 +23,22 @@ public class UserServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# UserServlet > Session: " + request.getSession().getId());
 		
+		User user = new UserService().getUser(
+			Integer.parseInt(
+				request.getParameter("user_id")
+			)
+		);
+		
 		switch(request.getParameter("action")) {
+			case "info":
+				System.out.println("# UserSerlvet > GET > Accesso ai dati personali...");
+					
+				request.getSession().setAttribute("user", user);
+				
+				break;
+		
 			case "purchase":
 				System.out.println("# UserSerlvet > GET > Pagamento in corso...");
-				
-				System.out.println("# UserServlet > GET > Acquisto di " + request.getParameter("games"));
-				
-				User user = new UserService().getUser(
-					Integer.parseInt(
-						request.getParameter("user_id")
-					)
-				);
 				
 				int price = Integer.parseInt(
 					request.getParameter("price")

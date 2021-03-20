@@ -59,15 +59,14 @@ $(document).ready(
 								
 								setTimeout(() => $(".cart-status").hide("slow"), 4000);
 							}
-						},
-						
+						}	
 					);
 				}
 			);
-		}
-		
+		}		
 	}
 );
+
 
 function getCartIds() {
 	const games = JSON.parse(localStorage.getItem("cart"));

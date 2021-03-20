@@ -70,6 +70,10 @@ a:hover {
 	margin-top: 10px;
 }
 
+.button--alternative {
+	background: #b72cae;
+}
+
 .button--submit {
 	background: #b72cae;
 }
@@ -445,7 +449,8 @@ body main #app .content #settings-page input {
 	border-radius: 1px;
 }
 
-body main #app .content #settings-page {
+body main #app .content #settings-page .settings-routines {
+	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -453,6 +458,14 @@ body main #app .content #settings-page {
 body main #app .content #settings-page .set-info {
 	min-width: 40%;
 	padding-right: 50px;
+}
+
+body main #app .content #settings-page .set-info .settings-money {
+    min-height: 20px;
+    display: block;
+	font-size: 15px;
+	cursor: default;
+    padding: 10px;
 }
 
 body main #app .content #settings-page .set-info .psw-form h2 {
@@ -464,7 +477,7 @@ body main #app .content #settings-page .set-avatar .avatar {
 	height: 200px;
 	border-radius: 100px;
 	margin: auto;
-	background: white;
+	background-size: cover;
 }
 
 /* Cart */
