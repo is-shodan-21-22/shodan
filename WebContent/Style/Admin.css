@@ -1,0 +1,10 @@
+body{
+	background-color: Black;
+	color:white;
+	text-shadow: 2px 2px Purple;
+	margin-left: 20%;
+	margin-right: 20%;
+	font-size: Large;
+	font-family: sans-serif;
+	text-align: center
+}

@@ -7,6 +7,10 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
+		
+		<!-- Index Stylesheet -->
+		<link rel="stylesheet" href="Style/Admin.css">
+		
 		<title>Shodan - Admin</title>
 	</head>
 	
