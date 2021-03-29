@@ -2,8 +2,10 @@
 <div id="nav-close">
 	<i class="fas fa-arrows-alt-h"></i>
 </div>
-			
-	<div class="shodan-logo"></div>
+	
+<div id="nav-logo-container">	
+	<div id="nav-logo" class="shodan-logo"></div>
+</div>
 			
 <!-- Navbar -->
 <div id="nav-items">

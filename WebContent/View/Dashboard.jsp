@@ -16,7 +16,7 @@
 				Sei pronto a combattere cyborg, mutanti e IA impazzite?
 			</p>
 					
-			<div class="button button--submit button--unshadow">
+			<div class="featured-button button button--submit button--unshadow">
 				Vai alla pagina di System Shock nel negozio&nbsp;
 				<i class="fas fa-arrow-alt-circle-right"></i>
 			</div>

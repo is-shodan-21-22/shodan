@@ -1,6 +1,7 @@
 function openSider() {
 	localStorage.setItem("sider", "open");
 		
+	$("#nav-logo").css("display", "block");
 	$("#nav-items>div>span").css("display", "inline-block");
 	$("nav").css("width", "275px");
 	$("main").css("margin-left", "274px");
@@ -10,6 +11,7 @@ function openSider() {
 function closeSider() {
 	localStorage.setItem("sider", "closed");
 		
+	$("#nav-logo").css("display", "none");
 	$("#nav-items>div>span").css("display", "none");
 	$("nav").css("width", "55px");
 	$("main").css("margin-left", "55px");
@@ -24,6 +26,11 @@ $(document).ready(
 			closeSider();
 			
 		setTimeout(() => refreshCart(), 1000);
+				
+		$("#nav-logo").click(
+			() =>
+				$("#app").load("View/Dashboard.jsp").fadeIn("slow")
+		);
 				
 		$("#nav-items>div").click(	
 			function() {

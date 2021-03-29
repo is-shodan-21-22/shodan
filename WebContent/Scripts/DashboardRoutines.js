@@ -51,6 +51,13 @@ $(document).ready(
 					}
 				);
 				
+				$(".featured-button").click(
+					function() {
+						window.history.pushState(null, null, "?game=6");
+						$("#app").load("View/Game.jsp");
+					}
+				);
+				
 				$(".game-container").click(
 					function() {
 						window.history.pushState(null, null, "?game=" + $(this).attr("data-game-id"));
