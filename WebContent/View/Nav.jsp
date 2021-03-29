@@ -3,6 +3,8 @@
 	<i class="fas fa-arrows-alt-h"></i>
 </div>
 			
+	<div class="shodan-logo"></div>
+			
 <!-- Navbar -->
 <div id="nav-items">
 	<div id="dashboard-link" class="selected">

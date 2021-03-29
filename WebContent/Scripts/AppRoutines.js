@@ -1,5 +1,3 @@
-if(!localStorage.hasOwnProperty("uid"))
-	window.location.replace('index.jsp');
 
 $(document).ready(
 	() => {

@@ -18,6 +18,18 @@ body main {
 	margin-left: 274px;
 }
 
+.shodan-logo {
+    background-image: url(../Static/Assets/Logo.png);
+    width: 100%;
+    height: 100px;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+    transition: 0.1s;
+    background-position: center;
+    background-size: 80%;
+    margin-left: -3.5px;
+}
+
 .loader {
 	margin: auto;
   	border: 8px solid #171717;
@@ -111,7 +123,6 @@ body nav .selected {
 
 body nav #nav-items {
 	padding: 10px;
-	margin-top: 20px;
 }
 
 body nav #nav-items #cart-link .cart-quantity i {
