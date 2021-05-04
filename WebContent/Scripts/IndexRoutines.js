@@ -51,8 +51,13 @@ function tryLogin(){
 				username: $("#login-username").val(),
 				password: $("#login-password").val()
 			},
-			success: window.location.replace("app.jsp"),
-			error: alert(2)
+			success: () => {
+				console.log("Login effettuato con successo");
+				window.location.replace("app.jsp");
+			},
+			error: () => {
+				console.log("Errore nel login");
+			}	
 		}
 	);
 }

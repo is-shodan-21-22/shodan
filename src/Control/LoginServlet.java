@@ -21,16 +21,17 @@ public class LoginServlet extends HttpServlet {
 			HttpServletRequest request,
 			HttpServletResponse response
 	) throws ServletException, IOException {
-	
-		UserService user = new UserService();
-		int id = user.getIdByUsername(request.getParameter("username"));
+		
+		UserService service = new UserService();
+		int id = service.getIdByUsername(request.getParameter("username"));
 		
 		if(id != -1) {
-			User user2 = user.getUser(id); 
+			User user = service.getUser(id); 
 			
-			if(user2.getPassword().equals(request.getParameter("password"))) {
-				response.addCookie(new Cookie("user",Integer.toString(user2.getId())));
+			if(user.getPassword().equals(request.getParameter("password"))) {
 				response.setStatus(200);
+				response.addCookie(new Cookie("user", Integer.toString(id)));
+				
 				return;
 			}
 		}
