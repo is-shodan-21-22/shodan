@@ -1,7 +1,5 @@
 $(document).ready(
-	() => {
-		flickering();
-		
+	() => {	
 		$.ajax(
 			{
 				method: "GET",
@@ -40,14 +38,26 @@ $(document).ready(
 				}
 			}
 		);
+						
 	}
 );
 
-function flickering() {
-	setTimeout(() => $(".shodan-logo").css("opacity", "0.85"), 1000);
-	setTimeout(() => $(".shodan-logo").css("opacity", "0.95"), 1500);
-	setTimeout(() => $(".shodan-logo").css("opacity", "0.85"), 2000);
-	setTimeout(() => $(".shodan-logo").css("opacity", "0.75"), 2500);
-	setTimeout(() => $(".shodan-logo").css("opacity", "0.85"), 3000);
-	setTimeout(() => flickering(), 4000);
+function tryLogin(){
+	$.ajax(
+		{
+			method: "POST",
+			url: "LoginServlet",
+			data: {
+				username: $("#login-username").val(),
+				password: $("#login-password").val()
+			},
+			success: window.location.replace("app.jsp"),
+			error: alert(2)
+		}
+	);
 }
+
+function trySignIn(){
+alert(6);
+}
+

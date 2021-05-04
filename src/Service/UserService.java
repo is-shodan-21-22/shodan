@@ -24,6 +24,25 @@ public class UserService implements Serializable {
 		}
 	}
 	
+	public int getIdByUsername(String username) {
+		int id=-1;
+		try {
+			String query = "SELECT user_id FROM users WHERE user_name = '" + username + "'";
+			
+			ResultSet result = statement.executeQuery(query);
+			
+			System.out.println("# UserService > Query > " + query);
+			
+			result.next();
+			id = result.getInt("user_id");
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return id;
+		}
+	
 	public User getUser(int id) {
 		User user = null;
 		
@@ -37,11 +56,11 @@ public class UserService implements Serializable {
 			if(result.next())
 				user = new User(
 					result.getInt("user_id"),
-					result.getInt("user_money"),
 					result.getString("user_name"),
 					result.getString("user_password"),
-					result.getString("user_email"),
 					result.getString("user_avatar"),
+					result.getString("user_email"),
+					result.getInt("user_money"),
 					result.getBoolean("user_admin")
 				);
 		} catch (SQLException e) {

@@ -5,11 +5,14 @@ import java.io.PrintWriter;
 import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Service.*;
+import Model.*;
 
-@WebServlet("/loginServlet")
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 5201749135928085764L;
@@ -18,30 +21,21 @@ public class LoginServlet extends HttpServlet {
 			HttpServletRequest request,
 			HttpServletResponse response
 	) throws ServletException, IOException {
-		String userid = "unknown";
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+	
+		UserService user = new UserService();
+		int id = user.getIdByUsername(request.getParameter("username"));
 		
-		String query = "SELECT * FROM users WHERE user_name = '" + username + "' AND user_password = '" + password + "'";
-		
-		try {
-			Connection con = DBConnectionPool.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet result = statement.executeQuery(query);
+		if(id != -1) {
+			User user2 = user.getUser(id); 
 			
-			result.first();
-			result.previous();
-			
-			if(result.next())
-				userid = String.valueOf(result.getInt("user_id"));
-			
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			if(user2.getPassword().equals(request.getParameter("password"))) {
+				response.addCookie(new Cookie("user",Integer.toString(user2.getId())));
+				response.setStatus(200);
+				return;
+			}
 		}
 
-		PrintWriter writer = response.getWriter();
+		response.setStatus(400);
 		
-		writer.println(userid);
 	}
 }

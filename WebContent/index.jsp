@@ -56,7 +56,7 @@
 				<div class="shodan-info bordered">
 					<div class="shodan-info-content">
 						<i class="fas fa-chess-bishop"></i>
-						<span>Nessun gioco è mai troppo datato</span>
+						<span>Old but gold</span>
 						<p>
 							Shodan ti permette di rivivere le emozioni dei giocatori di epoche passate: 
 							decenni di industria videoludica racchiusi in un'unica, grande piattaforma.
@@ -87,7 +87,7 @@
 			</div>
 			
 			<div class="shodan-form-container">
-				<form onsubmit="tryLogin(); return false">
+				<form onsubmit="tryLogin(); return false" method="POST">
 					<h1>Accesso</h1>
 		 			<div>
 		 				<input id="login-username" required placeholder="Username" type="text"></input>

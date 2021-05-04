@@ -10,7 +10,7 @@ public class User {
 	String avatar;
 	boolean admin;
 	
-	public User(int id, int money, String username, String password, String email, String avatar, boolean admin) {
+	public User(int id, String username,String password,String avatar , String email,int money , boolean admin) {
 		this.id = id;
 		this.money = money;
 		this.name = username;
