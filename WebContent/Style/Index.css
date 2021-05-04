@@ -254,6 +254,13 @@ input[type="submit"]:hover {
 	background: #ff71f7;
 }
 
+#login-fail{
+	color: red;
+	font-size:13px;
+	text-align: center;
+	display: none;
+}
+
 @media screen and (max-width: 1585px) {
 	.shodan-games {
 		display: none;

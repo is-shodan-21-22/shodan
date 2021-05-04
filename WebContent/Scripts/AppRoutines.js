@@ -1,3 +1,6 @@
+if(!document.cookie){	
+	window.location.replace("index.jsp");
+}
 
 $(document).ready(
 	() => {

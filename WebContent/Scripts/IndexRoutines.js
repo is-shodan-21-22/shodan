@@ -1,5 +1,10 @@
+if(document.cookie){		
+	window.location.replace("app.jsp");
+}
+		
 $(document).ready(
-	() => {	
+	() => {
+
 		$.ajax(
 			{
 				method: "GET",
@@ -57,6 +62,7 @@ function tryLogin(){
 			},
 			error: () => {
 				console.log("Errore nel login");
+				$("#login-fail").fadeIn("fast");
 			}	
 		}
 	);

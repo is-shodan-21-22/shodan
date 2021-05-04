@@ -98,6 +98,9 @@
 		 			<div>
 		 				<input id="login-submit" type="submit" name="login_submit"></input>
 		 			</div>
+		 			<div id="login-fail">
+		 				<em>Spiacenti, il login non &egrave; andato a buon fine</em>
+		 			</div>
 				</form>
 				<form onsubmit="trySignIn(); return false">
 					<h1>Registrazione</h1>
