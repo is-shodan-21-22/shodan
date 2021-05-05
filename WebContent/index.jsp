@@ -106,9 +106,12 @@
 					<h1>Registrazione</h1>
 		 			<input id="signin-username" required placeholder="Username" type="text">
 		 			<input id="signin-password" required placeholder="Password" type="password">
-		 			<input id="signin-password_agin" required placeholder="Ripeti la password" type="password">
+		 			<input id="signin-password-again" required placeholder="Ripeti la password" type="password">
 		 			<input id="signin-email" required placeholder="Email" type="email">
 		 			<input id="signin-submit" type="submit">
+		 			<div id="signin-success">
+		 				<em>La registrazione &egrave; avvenuta con successo</em>
+		 			</div>
 				</form>
 			</div>
 			

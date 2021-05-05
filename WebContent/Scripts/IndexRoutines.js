@@ -69,6 +69,21 @@ function tryLogin(){
 }
 
 function trySignIn(){
-alert(6);
+	$.ajax(
+		{
+			method: "POST",
+			url: "SignInServlet",
+			data: {
+				username: $("signin-username").val(),
+				password: $("signin-password").val(),
+				password2: $("signin-password-again").val(),
+				email: $("signin-email").val()
+				},
+			success: () => {
+				console.log("Registrazione avvenuta con successo")
+				$("#signin-success").fadeIn("fast");
+			}
+		}
+	);
 }
 

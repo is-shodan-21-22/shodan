@@ -97,4 +97,25 @@ public class UserService implements Serializable {
 		return false;
 	}
 	
+	public boolean insertUser(String username,String password,String email) {
+		try {
+			String query = 
+					"INSERT INTO users" 
+				+ "VALUES('" + username + "','" + password + "','" + email + "'";
+			
+			System.out.println("# UserService > Query > " + query);
+			
+			statement.executeUpdate(query);
+			
+			System.out.println("# UserService > Inserisco l'utente " + username);
+			
+			return true;
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 }
