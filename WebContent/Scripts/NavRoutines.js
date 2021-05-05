@@ -65,7 +65,8 @@ $(document).ready(
 	
 		$("#logout-link").click(
 			() => {
-				localStorage.removeItem("uid");
+				console.log(0);
+				document.cookie = "user=; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 				window.location.replace('index.jsp');
 			}
 		);
