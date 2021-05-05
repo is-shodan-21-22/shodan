@@ -62,7 +62,7 @@ function tryLogin(){
 			},
 			error: () => {
 				console.log("Errore nel login");
-				$("#login-fail").fadeIn("fast");
+				$("#login-fail").show();
 			}	
 		}
 	);
@@ -74,14 +74,22 @@ function trySignIn(){
 			method: "POST",
 			url: "SignInServlet",
 			data: {
-				username: $("signin-username").val(),
-				password: $("signin-password").val(),
-				password2: $("signin-password-again").val(),
-				email: $("signin-email").val()
-				},
-			success: () => {
-				console.log("Registrazione avvenuta con successo")
-				$("#signin-success").fadeIn("fast");
+				username: $("#signin-username").val(),
+				password: $("#signin-password").val(),
+				password2: $("#signin-password-again").val(),
+				email: $("#signin-email").val()
+			},
+			success: (data) => {
+				console.log("Registrazione avvenuta con successo: " + data);
+				$("#signin-message").html(data);
+				$("#signin-message").css("color", "green");
+				$("#signin-message").show();
+			},
+			error: (data) => {
+				console.log("Fallimento nella registrazione: " + data.responseText);
+				$("#signin-message").html(data.responseText);
+				$("#signin-message").css("color", "red");
+				$("#signin-message").show();
 			}
 		}
 	);

@@ -254,18 +254,24 @@ input[type="submit"]:hover {
 	background: #ff71f7;
 }
 
-#login-fail{
+#login-fail {
 	color: red;
 	font-size:13px;
 	text-align: center;
 	display: none;
 }
 
-#signin-success{
-	color: green;
+#signin-message {
 	font-size:13px;
 	text-align: center;
-	display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #75756A;
+  background-color: transparent;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 @media screen and (max-width: 1585px) {

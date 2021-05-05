@@ -89,15 +89,9 @@
 			<div class="shodan-form-container">
 				<form onsubmit="tryLogin(); return false" method="POST">
 					<h1>Accesso</h1>
-		 			<div>
-		 				<input id="login-username" required placeholder="Username" type="text"></input>
-		 			</div>
-		 			<div>
-		 				<input id="login-password" required placeholder="Password" type="password"></input>
-		 			</div>
-		 			<div>
-		 				<input id="login-submit" type="submit" name="login_submit"></input>
-		 			</div>
+		 			<input id="login-username" required placeholder="Username" type="text">
+		 			<input id="login-password" required placeholder="Password" type="password">
+		 			<input id="login-submit" type="submit" name="login_submit">
 		 			<div id="login-fail">
 		 				<em>Spiacenti, il login non &egrave; andato a buon fine</em>
 		 			</div>
@@ -109,9 +103,7 @@
 		 			<input id="signin-password-again" required placeholder="Ripeti la password" type="password">
 		 			<input id="signin-email" required placeholder="Email" type="email">
 		 			<input id="signin-submit" type="submit">
-		 			<div id="signin-success">
-		 				<em>La registrazione &egrave; avvenuta con successo</em>
-		 			</div>
+		 			<div id="signin-message"></div>
 				</form>
 			</div>
 			

@@ -100,8 +100,7 @@ public class UserService implements Serializable {
 	public boolean insertUser(String username,String password,String email) {
 		try {
 			String query = 
-					"INSERT INTO users" 
-				+ "VALUES('" + username + "','" + password + "','" + email + "'";
+					"INSERT INTO users(user_name, user_password, user_email) VALUES('" + username + "','" + password + "','" + email + "')";
 			
 			System.out.println("# UserService > Query > " + query);
 			
