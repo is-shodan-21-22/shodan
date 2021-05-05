@@ -23,11 +23,13 @@ public class UserServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# UserServlet > Session: " + request.getSession().getId());
 		
-		User user = new UserService().getUser(
+		/*User user = new UserService().getUser(
 			Integer.parseInt(
 				request.getParameter("user_id")
 			)
-		);
+		);*/
+		
+		User user = (User) request.getSession().getAttribute("user_metadata");
 		
 		switch(request.getParameter("action")) {
 			case "info":
@@ -69,6 +71,7 @@ public class UserServlet extends HttpServlet {
 				System.out.println("# UserServlet > GET > Pagamento concluso con successo");
 				
 				response.getWriter().println("Pagamento concluso con successo!");
+				request.getSession().setAttribute("user_metadata", user);
 				
 				break;
 			

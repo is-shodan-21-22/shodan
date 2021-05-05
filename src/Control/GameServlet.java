@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import Model.User;
 import Service.GameService;
 
 @WebServlet("/GameServlet")
@@ -35,7 +38,7 @@ public class GameServlet extends HttpServlet {
 				break;
 				
 			case "library":
-				int user_id = request.getParameter("user_id") != null
+				/*int user_id = request.getParameter("user_id") != null
 						      ? Integer.parseInt(request.getParameter("user_id"))
 						      : 0;
 				
@@ -43,10 +46,15 @@ public class GameServlet extends HttpServlet {
 					System.out.println("# GameServlet > GET > Nessun ID utente specificato");
 					return;
 				}
-			
-				request.getSession().setAttribute("games", new GameService().getAllGamesByUser(user_id));
+				*/
 				
-				System.out.println("# GameServlet > GET > Libreria personale dell'utente" + user_id);
+				User user = (User) request.getSession().getAttribute("user_metadata");
+				
+				request.getSession().setAttribute("games", new GameService().getAllGamesByUser(
+					user.getId()
+				));
+				
+				System.out.println("# GameServlet > GET > Libreria personale dell'utente" );
 				
 				break;
 				

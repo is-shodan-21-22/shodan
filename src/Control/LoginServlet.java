@@ -18,8 +18,8 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 5201749135928085764L;
 
 	protected void doPost(
-			HttpServletRequest request,
-			HttpServletResponse response
+		HttpServletRequest request,
+		HttpServletResponse response
 	) throws ServletException, IOException {
 		
 		UserService service = new UserService();
@@ -30,7 +30,10 @@ public class LoginServlet extends HttpServlet {
 			
 			if(user.getPassword().equals(request.getParameter("password"))) {
 				response.setStatus(200);
-				response.addCookie(new Cookie("user", Integer.toString(id)));
+				response.addCookie(new Cookie("user_session", request.getSession().getId()));
+				request.getSession().setAttribute("user_metadata", user);
+				
+				System.out.println("# UserSession > " + request.getSession().getAttribute("user_metadata"));
 				
 				return;
 			}

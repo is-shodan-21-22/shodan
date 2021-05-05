@@ -1,7 +1,4 @@
-if(document.cookie){		
-	window.location.replace("app.jsp");
-}
-		
+	
 $(document).ready(
 	() => {
 
