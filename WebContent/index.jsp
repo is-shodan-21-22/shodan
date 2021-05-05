@@ -92,9 +92,7 @@
 		 			<input id="login-username" required placeholder="Username" type="text">
 		 			<input id="login-password" required placeholder="Password" type="password">
 		 			<input id="login-submit" type="submit" name="login_submit">
-		 			<div id="login-fail">
-		 				<em>Spiacenti, il login non &egrave; andato a buon fine</em>
-		 			</div>
+		 			<div id="login-message"></div>
 				</form>
 				<form onsubmit="trySignIn(); return false">
 					<h1>Registrazione</h1>

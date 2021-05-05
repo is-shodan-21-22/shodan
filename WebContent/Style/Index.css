@@ -254,11 +254,10 @@ input[type="submit"]:hover {
 	background: #ff71f7;
 }
 
-#login-fail {
-	color: red;
+#login-message {
 	font-size:13px;
 	text-align: center;
-	display: none;
+	
 }
 
 #signin-message {

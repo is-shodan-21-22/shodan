@@ -53,12 +53,17 @@ function tryLogin(){
 				username: $("#login-username").val(),
 				password: $("#login-password").val()
 			},
-			success: () => {
+			success: (data) => {
 				console.log("Login effettuato con successo");
 				window.location.replace("app.jsp");
+				$("#login-message").html(data);
+				$("#login-message").css("color", "green");
+				$("#login-message").show();
 			},
-			error: () => {
+			error: (data) => {
 				console.log("Errore nel login");
+				$("#login-message").html(data.responseText);
+				$("#login-message").css("color", "red");
 				$("#login-fail").show();
 			}	
 		}

@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		
 		UserService service = new UserService();
+		PrintWriter out = response.getWriter();
 		int id = service.getIdByUsername(request.getParameter("username"));
 		
 		if(id != -1) {
@@ -34,12 +35,20 @@ public class LoginServlet extends HttpServlet {
 				request.getSession().setAttribute("user_metadata", user);
 				
 				System.out.println("# UserSession > " + request.getSession().getAttribute("user_metadata"));
-				
+				out.print("Login effettuato con successo");
+				return;
+			}else {
+				out.print("La password e' errata");
+				response.setStatus(400);
 				return;
 			}
+		}else {
+			out.print("Username errato");
+			response.setStatus(400);
+			return;
 		}
 
-		response.setStatus(400);
+		
 		
 	}
 }
