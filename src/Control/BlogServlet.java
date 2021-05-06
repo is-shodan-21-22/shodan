@@ -2,6 +2,8 @@ package Control;
 
 import Model.Article;
 import Service.ArticleService;
+import Service.GameService;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,6 +51,44 @@ public class BlogServlet extends HttpServlet {
 				System.out.println("# BlogServlet > GET > Nessuna azione specificata");
 				
 				break;
+		}
+	}
+	
+	protected void doPost(
+			HttpServletRequest request,
+			HttpServletResponse response
+	) throws ServletException, IOException {
+		System.out.println("# BlogServlet > Session: " + request.getSession().getId());
+		
+		switch(request.getParameter("action")) {
+			case "addArticle":
+			
+				new ArticleService().addArticle(request.getParameter("add-article-title"),
+						request.getParameter("article-shortTitle"), 
+						request.getParameter("article-html"));
+		
+				request.setAttribute("messageArticleAdd", "Articolo aggiunto con successo");
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
+				response.sendRedirect("admin.jsp");
+		
+				System.out.println("# BlogServlet > POST > Articolo aggiunto > " + request.getParameter("add-article-title"));
+		
+				break;
+		
+			case "deleteArticle":
+		
+				new ArticleService().deleteArticle(Integer.valueOf(request.getParameter("delete-article-id")));
+		
+				request.setAttribute("messageArticleDelete", "Articolo eliminato con successo");
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
+				response.sendRedirect("admin.jsp");
+		
+				System.out.println("# BlogServelt > POST > Articolo eliminato > " + request.getParameter("article-title"));
+		
+			default:
+				System.out.println("# BlogServelt > POST > Nessuna azione specificata");
+			
+			break;
 		}
 	}
 	

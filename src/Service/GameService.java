@@ -135,4 +135,41 @@ public class GameService implements Serializable {
 		return games;
 	}
 	
+	public boolean addGame(String gameName,String gamePng,int gamePrice){
+		try {
+			String query = 
+					"INSERT INTO games(game_name, game_image, game_price) VALUES('" + gameName + "','" + gamePng + "','" + gamePrice + "')";
+		
+			System.out.println("# GameService > Query > " + query);
+		
+			statement.executeUpdate(query);
+			
+			System.out.println("# GameService > Aggiungo il gioco " + gameName);
+		
+			return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean deleteGame(int gameId) {
+		try {
+			String query = "DELETE FROM games WHERE game_id =" + gameId ;
+			
+			System.out.println("# GameService > Query > " + query);
+			
+			statement.executeUpdate(query);
+			
+			System.out.println("# GameService > Elimino il gioco " + gameId);
+			
+			return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 }

@@ -15,7 +15,7 @@ import Service.GameService;
 public class GameServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -8724190928795580877L;
-
+	
 	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response
@@ -73,12 +73,53 @@ public class GameServlet extends HttpServlet {
 				System.out.println("# GameServlet > GET > Pagina del gioco ID " + game_id);
 				
 				break;
-			
+				
 			default:
 				System.out.println("# GameServlet > GET > Nessuna azione specificata");
 				
 				break;
+				
 		}
+	}
+	
+	protected void doPost(
+			HttpServletRequest request,
+			HttpServletResponse response
+	) throws ServletException, IOException {
+		System.out.println("# GameServlet > Session: " + request.getSession().getId());
+		
+		switch(request.getParameter("action")) {
+		
+			case "addGame":
+			
+				new GameService().addGame(request.getParameter("game-name"),
+							request.getParameter("game-image"), 
+							Integer.valueOf(request.getParameter("game-price")));
+			
+				request.setAttribute("messageGameAdd", "Gioco aggiunto con successo");
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
+				response.sendRedirect("admin.jsp");
+			
+				System.out.println("# GameServlet > POST > Gioco aggiunto > " + request.getParameter("game-name"));
+			
+				break;
+			
+			case "deleteGame":
+			
+				new GameService().deleteGame(Integer.valueOf(request.getParameter("game-id")));
+			
+				request.setAttribute("messageGameDelete", "Gioco eliminato con successo");
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
+				response.sendRedirect("admin.jsp");
+			
+				System.out.println("# GameServlet > POST > Gioco eliminato > " + request.getParameter("game-name"));
+			
+			default:
+				System.out.println("# GameServlet > POST > Nessuna azione specificata");
+				
+				break;
+		}
+		
 	}
 	
 }

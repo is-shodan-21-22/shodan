@@ -69,5 +69,42 @@ public class ArticleService {
 		
 		return blog;
 	}
+	
+	public boolean addArticle(String title,String shortTitle,String html){
+		try {
+			String query = 
+					"INSERT INTO blog(blog_title, blog_short_title, blog_html) VALUES('" + title + "','" + shortTitle + "',\"" + html + "\")";
+		
+			System.out.println("# GameService > Query > " + query);
+		
+			statement.executeUpdate(query);
+			
+			System.out.println("# GameService > Aggiungo l'articolo " + title);
+		
+			return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean deleteArticle(int articleId) {
+		try {
+			String query = "DELETE FROM blog WHERE blog_id =" + articleId ;
+			
+			System.out.println("# GameService > Query > " + query);
+			
+			statement.executeUpdate(query);
+			
+			System.out.println("# GameService > Elimino l'articolo con id " + articleId);
+			
+			return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 
 }
