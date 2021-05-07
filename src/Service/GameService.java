@@ -2,11 +2,13 @@ package Service;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import Control.DBConnectionPool;
+
+import Database.DBConnectionPool;
 import Model.Game;
 
 public class GameService implements Serializable {
@@ -14,12 +16,11 @@ public class GameService implements Serializable {
 	private static final long serialVersionUID = -7187173329847684983L;
 	
 	private Connection db;
-	private Statement statement;
+	private PreparedStatement statement;
 	
 	public GameService() {
 		try {
 			db = DBConnectionPool.getConnection();
-			statement = db.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -29,7 +30,10 @@ public class GameService implements Serializable {
 		Game game = null;
 		
 		try {
-			ResultSet result = statement.executeQuery("SELECT * FROM games WHERE game_id = " + id);
+			String query = "SELECT * FROM games WHERE game_id = " + id;
+			
+			statement = db.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# GameService > Executing SELECT * FROM games WHERE game_id = " + id);
 			
@@ -51,10 +55,12 @@ public class GameService implements Serializable {
 	
 	public ArrayList<Game> getAllGamesByUser(int user_id) {
 		ArrayList<Game> games = new ArrayList<Game>();
-		String query = "SELECT * FROM games AS G, has_game AS HG WHERE G.game_id = HG.game_id AND user_id = " + user_id;
 		
 		try {
-			ResultSet result = statement.executeQuery(query);
+			String query = "SELECT * FROM games AS G, has_game AS HG WHERE G.game_id = HG.game_id AND user_id = " + user_id;
+			
+			statement = db.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# GameService > Query > " + query);
 			
@@ -79,12 +85,14 @@ public class GameService implements Serializable {
 	
 	public ArrayList<Game> getAllDescendingGames(int limit) {
 		ArrayList<Game> games = new ArrayList<Game>();
-		String query = "SELECT * FROM games ORDER BY game_id DESC" + (limit != 0 ? (" LIMIT " + limit) : "");
-		
-		System.out.println("# GameService > Query > " + query);
 		
 		try {
-			ResultSet result = statement.executeQuery(query);
+			String query = "SELECT * FROM games ORDER BY game_id DESC" + (limit != 0 ? (" LIMIT " + limit) : "");
+			
+			System.out.println("# GameService > Query > " + query);
+			
+			statement = db.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# GameService > Query > " + query);
 			
@@ -109,10 +117,12 @@ public class GameService implements Serializable {
 	
 	public ArrayList<Game> getAllAscendingGames(int limit) {
 		ArrayList<Game> games = new ArrayList<Game>();
-		String query = "SELECT * FROM games ORDER BY game_id" + (limit != 0 ? (" LIMIT " + limit) : "");
 		
 		try {
-			ResultSet result = statement.executeQuery(query);
+			String query = "SELECT * FROM games ORDER BY game_id" + (limit != 0 ? (" LIMIT " + limit) : "");
+			
+			statement = db.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# GameService > Query > " + query);
 			
@@ -141,13 +151,14 @@ public class GameService implements Serializable {
 					"INSERT INTO games(game_name, game_image, game_price) VALUES('" + gameName + "','" + gamePng + "','" + gamePrice + "')";
 		
 			System.out.println("# GameService > Query > " + query);
-		
-			statement.executeUpdate(query);
+			
+			statement = db.prepareStatement(query);
+			statement.executeUpdate();
 			
 			System.out.println("# GameService > Aggiungo il gioco " + gameName);
 		
 			return true;
-		}catch(SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -160,12 +171,13 @@ public class GameService implements Serializable {
 			
 			System.out.println("# GameService > Query > " + query);
 			
-			statement.executeUpdate(query);
+			statement = db.prepareStatement(query);
+			statement.executeUpdate();
 			
 			System.out.println("# GameService > Elimino il gioco " + gameId);
 			
 			return true;
-		}catch(SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		

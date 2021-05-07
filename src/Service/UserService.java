@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import Control.DBConnectionPool;
+
+import Database.DBConnectionPool;
+
+import java.sql.PreparedStatement;
+
 import Model.User;
 
 public class UserService implements Serializable {
@@ -13,23 +16,24 @@ public class UserService implements Serializable {
 	private static final long serialVersionUID = -7885019384296693341L;
 	
 	private Connection db;
-	private Statement statement;
+	private PreparedStatement statement;
 	
 	public UserService() {
 		try {
 			db = DBConnectionPool.getConnection();
-			statement = db.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public int getIdByUsername(String username) {
-		int id=-1;
+		int id = -1;
+		
 		try {
 			String query = "SELECT user_id FROM users WHERE user_name = '" + username + "'";
 			
-			ResultSet result = statement.executeQuery(query);
+			statement = db.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# UserService > Query > " + query);
 			
@@ -49,7 +53,8 @@ public class UserService implements Serializable {
 		try {
 			String query = "SELECT * FROM users WHERE user_id = " + id;
 			
-			ResultSet result = statement.executeQuery(query);
+			statement = db.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# UserService > Query > " + query);
 			
@@ -82,10 +87,11 @@ public class UserService implements Serializable {
 				+ ", user_money = " + user.getMoney()
 				+ ", user_admin = " + user.isAdmin()
 				+ " WHERE user_id = " + user.getId();
-			
+		
 			System.out.println("# UserService > Query > " + query);
 			
-			statement.executeUpdate(query);
+			statement = db.prepareStatement(query);
+			statement.executeUpdate();
 			
 			System.out.println("# UserService > Aggiorno l'utente ID " + user.getId());
 			
@@ -99,12 +105,13 @@ public class UserService implements Serializable {
 	
 	public boolean insertUser(String username,String password,String email) {
 		try {
-			String query = 
-					"INSERT INTO users(user_name, user_password, user_email) VALUES('" + username + "','" + password + "','" + email + "')";
+			String query = "INSERT INTO users(user_name, user_password, user_email) VALUES('" + username + "','" + password + "','" + email + "')";
+			
 			
 			System.out.println("# UserService > Query > " + query);
 			
-			statement.executeUpdate(query);
+			statement = db.prepareStatement(query);
+			statement.executeUpdate();
 			
 			System.out.println("# UserService > Inserisco l'utente " + username);
 			
@@ -123,7 +130,8 @@ public class UserService implements Serializable {
 			
 			System.out.println("# UserService > Query > " + query);
 			
-			statement.executeUpdate(query);
+			statement = db.prepareStatement(query);
+			statement.executeUpdate();
 			
 			System.out.println("# UserService > Eliminazione dell'utente " + userId);
 			

@@ -1,22 +1,22 @@
 package Service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import Control.DBConnectionPool;
+
+import Database.DBConnectionPool;
 import Model.Article;
 
 public class ArticleService {
 
 	private Connection db;
-	private Statement statement;
+	private PreparedStatement statement;
 	
 	public ArticleService() {
 		try {
 			db = DBConnectionPool.getConnection();
-			statement = db.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -26,7 +26,10 @@ public class ArticleService {
 		Article article = null;
 		
 		try {
-			ResultSet result = statement.executeQuery("SELECT * FROM blog WHERE blog_id = " + id);
+			String query = "SELECT * FROM blog WHERE blog_id = " + id;
+			
+			statement = db.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# ArticleService > Executing SELECT * FROM blog WHERE blog_id = " + id);
 			
@@ -46,10 +49,12 @@ public class ArticleService {
 	
 	public ArrayList<Article> getAllArticles(int limit) {
 		ArrayList<Article> blog = new ArrayList<Article>();
-		String query = "SELECT * FROM blog" + (limit != 0 ? (" LIMIT " + limit) : "");
 		
 		try {
-			ResultSet result = statement.executeQuery(query);
+			String query = "SELECT * FROM blog" + (limit != 0 ? (" LIMIT " + limit) : "");
+			
+			statement = db.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# ArticleService > Query > " + query);
 			
@@ -72,17 +77,17 @@ public class ArticleService {
 	
 	public boolean addArticle(String title,String shortTitle,String html){
 		try {
-			String query = 
-					"INSERT INTO blog(blog_title, blog_short_title, blog_html) VALUES('" + title + "','" + shortTitle + "',\"" + html + "\")";
+			String query = "INSERT INTO blog(blog_title, blog_short_title, blog_html) VALUES('" + title + "','" + shortTitle + "',\"" + html + "\")";
 		
 			System.out.println("# GameService > Query > " + query);
-		
-			statement.executeUpdate(query);
+			
+			statement = db.prepareStatement(query);
+			statement.executeUpdate();
 			
 			System.out.println("# GameService > Aggiungo l'articolo " + title);
 		
 			return true;
-		}catch(SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -95,12 +100,13 @@ public class ArticleService {
 			
 			System.out.println("# GameService > Query > " + query);
 			
-			statement.executeUpdate(query);
+			statement = db.prepareStatement(query);
+			statement.executeUpdate();
 			
 			System.out.println("# GameService > Elimino l'articolo con id " + articleId);
 			
 			return true;
-		}catch(SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		

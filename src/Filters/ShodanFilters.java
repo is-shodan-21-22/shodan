@@ -32,7 +32,7 @@ public class ShodanFilters implements Filter {
 		User user = (User) hRequest.getSession().getAttribute("user_metadata");
 		String uri = hRequest.getRequestURI();
 		
-		if(uri.contains("/index.jsp")) {
+		if(uri.contains("/index.jsp") || uri.equals("/Shodan/")) {
 			if(user != null)
 				hResponse.sendRedirect("app.jsp");
 		} else if(uri.contains("/app.jsp")) {
