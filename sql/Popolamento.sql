@@ -3,8 +3,8 @@ USE shodan;
 SET SQL_SAFE_UPDATES = 0;
 
 DELETE FROM users;
-INSERT INTO users(user_name, user_password, user_email) VALUES 
-	('admin', '123', "antonio@shodan.it");
+INSERT INTO users(user_name, user_password, user_email, user_admin) VALUES 
+	('admin', '123', "antonio@shodan.it", 1);
 
 DELETE FROM games;
 INSERT INTO games(game_name, game_image, game_price) VALUES 

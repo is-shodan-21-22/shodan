@@ -63,6 +63,7 @@
 				<form action="UserServlet" method="POST">
 					<h1>Elimina utente</h1>
 					<input id="delete-user" name="user-id" type="number" placeholder="user-id" required>
+					<input type="hidden" name="action" value="removeUser">
 					<input type="submit" value="Elimina">
 					<span class="admin-message">${messageUserDelete}</span>
 					<span class="error-admin-message">${errorMessageUserDelete}</span>

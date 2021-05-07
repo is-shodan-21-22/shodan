@@ -81,32 +81,43 @@ public class UserServlet extends HttpServlet {
 		HttpServletResponse response
 	) throws ServletException, IOException {
 		
-			User user = new UserService().getUser(Integer.valueOf(request.getParameter("user-id")));
-
-			// Servlet di rimozione dell'utente
-			
-			if(user != null ) {
-				if(!user.isAdmin()) {
-				new UserService().deleteUser(Integer.valueOf(request.getParameter("user-id")));
-			
-				request.setAttribute("messageUserDelete", "Utente eliminato con successo");
-				request.getRequestDispatcher("admin.jsp").forward(request, response);
+		switch(request.getParameter("action")) {
+			case "removeUser":
+				User user = new UserService().getUser(Integer.valueOf(request.getParameter("user-id")));
+	
+				// Servlet di rimozione dell'utente
 				
-				System.out.println("# UserServlet > POST > Utente eliminato > " + user.getId());
-				}
-				else {
-					request.setAttribute("errorMessageUserDelete", "Un admin non può essere cancellato");
+				if(user != null ) {
+					if(!user.isAdmin()) {
+					new UserService().deleteUser(Integer.valueOf(request.getParameter("user-id")));
+				
+					request.setAttribute("messageUserDelete", "Utente eliminato con successo");
 					request.getRequestDispatcher("admin.jsp").forward(request, response);
 					
-					System.out.println("# UserServlet > POST > Impossibile eliminare utente > " + user.getId());
+					System.out.println("# UserServlet > POST > Utente eliminato > " + user.getId());
+					}
+					else {
+						request.setAttribute("errorMessageUserDelete", "Un admin non può essere cancellato");
+						request.getRequestDispatcher("admin.jsp").forward(request, response);
+						
+						System.out.println("# UserServlet > POST > Impossibile eliminare utente > " + user.getId());
+					}
+				}else {
+					request.setAttribute("errorMessageUserDelete", "Utente inesistente");
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
+					
+					System.out.println("# UserServlet > POST > Utente inesistente > " + Integer.valueOf(request.getParameter("user-id")));
 				}
-			}else {
-				request.setAttribute("errorMessageUserDelete", "Utente inesistente");
-				request.getRequestDispatcher("admin.jsp").forward(request, response);
-				
-				System.out.println("# UserServlet > POST > Utente inesistente > " + Integer.valueOf(request.getParameter("user-id")));
-			}
 			
+			case "logged_in_app":
+				if(request.getSession().getAttribute("user_metadata") == null)
+					response.sendRedirect("index.jsp");
+				
+			case "logged_in_index":
+				if(request.getSession().getAttribute("user_metadata") != null)
+					response.sendRedirect("app.jsp");
+			
+		}
 	}
 	
 }
