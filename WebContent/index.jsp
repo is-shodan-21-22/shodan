@@ -56,7 +56,7 @@
 				<div class="shodan-info bordered">
 					<div class="shodan-info-content">
 						<i class="fas fa-chess-bishop"></i>
-						<span>Old but gold</span>
+						<span>Nessun gioco è mai troppo datato</span>
 						<p>
 							Shodan ti permette di rivivere le emozioni dei giocatori di epoche passate: 
 							decenni di industria videoludica racchiusi in un'unica, grande piattaforma.
@@ -77,9 +77,9 @@
 				<div class="shodan-info">
 					<div class="shodan-info-content">
 						<i class="fas fa-shopping-cart"></i>
-						<span>Quando compri un gioco, è tuo</span>
+						<span>Supporta direttamente gli autori</span>
 						<p>
-							Per sempre. Puoi anche acquistare più copie dello stesso gioco, per supportare gli autori. 
+							Puoi anche acquistare più copie dello stesso gioco, per supportare le case di sviluppo.
 							D'altronde, se i videogiochi esistono è solo grazie ai loro fan più appassionati.
 						</p>
 					</div>	

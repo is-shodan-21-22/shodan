@@ -11,8 +11,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users(
 	user_id int NOT NULL AUTO_INCREMENT,
 	user_name varchar(16) NOT NULL,
-    user_password varchar(16) NOT NULL,
-    user_avatar varchar(16) NOT NULL DEFAULT "Avatar.png",
+    user_password varchar(256) NOT NULL,
     user_email varchar(32) NOT NULL,
     user_money int NOT NULL DEFAULT 500,
     user_admin boolean NOT NULL DEFAULT false,

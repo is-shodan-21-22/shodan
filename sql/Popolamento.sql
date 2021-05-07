@@ -4,7 +4,7 @@ SET SQL_SAFE_UPDATES = 0;
 
 DELETE FROM users;
 INSERT INTO users(user_name, user_password, user_email, user_admin) VALUES 
-	('admin', '123', "antonio@shodan.it", 1);
+	('admin', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', "antonio@shodan.it", 1); /* Password: 123 in SHA256 */
 
 DELETE FROM games;
 INSERT INTO games(game_name, game_image, game_price) VALUES 
@@ -28,4 +28,3 @@ INSERT INTO blog(blog_title, blog_short_title, blog_html) VALUES
     ("Un altro articolo", "Una lunga lunghissima proprio lunga descrizione", "Un testo");
 
 SELECT * FROM users;
-SELECT * FROM has_game;

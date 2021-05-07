@@ -10,6 +10,7 @@ import Database.DBConnectionPool;
 import java.sql.PreparedStatement;
 
 import Model.User;
+import Utils.PasswordHasher;
 
 public class UserService implements Serializable {
 
@@ -45,7 +46,7 @@ public class UserService implements Serializable {
 		}
 		
 		return id;
-		}
+	}
 	
 	public User getUser(int id) {
 		User user = null;
@@ -63,7 +64,6 @@ public class UserService implements Serializable {
 					result.getInt("user_id"),
 					result.getString("user_name"),
 					result.getString("user_password"),
-					result.getString("user_avatar"),
 					result.getString("user_email"),
 					result.getInt("user_money"),
 					result.getBoolean("user_admin")
@@ -82,7 +82,6 @@ public class UserService implements Serializable {
 				+ "  user_id = " + user.getId()
 				+ ", user_name = '" + user.getName() + "'"
 				+ ", user_password = '" + user.getPassword() + "'"
-				+ ", user_avatar = '" + user.getAvatar() + "'"
 				+ ", user_email = '" + user.getEmail() + "'"
 				+ ", user_money = " + user.getMoney()
 				+ ", user_admin = " + user.isAdmin()
@@ -105,7 +104,7 @@ public class UserService implements Serializable {
 	
 	public boolean insertUser(String username,String password,String email) {
 		try {
-			String query = "INSERT INTO users(user_name, user_password, user_email) VALUES('" + username + "','" + password + "','" + email + "')";
+			String query = "INSERT INTO users(user_name, user_password, user_email) VALUES('" + username + "','" + PasswordHasher.hash(password) + "','" + email + "')";
 			
 			
 			System.out.println("# UserService > Query > " + query);

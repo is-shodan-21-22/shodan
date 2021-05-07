@@ -11,16 +11,14 @@ public class User implements Serializable {
 	String name;
 	String password;
 	String email;
-	String avatar;
 	boolean admin;
 	
-	public User(int id, String username, String password, String avatar, String email, int money, boolean admin) {
+	public User(int id, String username, String password, String email, int money, boolean admin) {
 		this.id = id;
 		this.money = money;
 		this.name = username;
 		this.password = password;
 		this.email = email;
-		this.avatar = avatar;
 		this.admin = admin;
 	}
 	
@@ -42,10 +40,6 @@ public class User implements Serializable {
 	
 	public String getEmail() {
 		return email;
-	}
-	
-	public String getAvatar() {
-		return avatar;
 	}
 	
 	public boolean isAdmin() {
@@ -71,11 +65,7 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
-	
+
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}

@@ -37,16 +37,6 @@ public class GameServlet extends HttpServlet {
 				break;
 				
 			case "library":
-				/*int user_id = request.getParameter("user_id") != null
-						      ? Integer.parseInt(request.getParameter("user_id"))
-						      : 0;
-				
-				if(user_id == 0) {
-					System.out.println("# GameServlet > GET > Nessun ID utente specificato");
-					return;
-				}
-				*/
-				
 				User user = (User) request.getSession().getAttribute("user_metadata");
 				
 				request.getSession().setAttribute("games", new GameService().getAllGamesByUser(

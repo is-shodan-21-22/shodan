@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Service.*;
+import Utils.PasswordHasher;
 import Model.*;
 
 @WebServlet("/LoginServlet")
@@ -28,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 		if(id != -1) {
 			User user = service.getUser(id); 
 			
-			if(user.getPassword().equals(request.getParameter("password"))) {
+			if(user.getPassword().equals(PasswordHasher.hash((request.getParameter("password"))))) {
 				response.setStatus(200);
 				response.addCookie(new Cookie("user_session", request.getSession().getId()));
 				request.getSession().setAttribute("user_metadata", user);
@@ -37,15 +38,15 @@ public class LoginServlet extends HttpServlet {
 				System.out.println("# LoginServlet > Nuovo cookie: [user_session = " + request.getSession().getId() + "]");
 				
 				return;
-			}else {
-				out.print("La password è errata!");
+			} else {
+				out.print("La password &egrave; errata!");
 				System.out.println("# LoginServlet > Tentativo di login fallito (password errata).");
 				
 				response.setStatus(400);
 				return;
 			}
 		} else {
-			out.print("L'username è errato o inesistente!");
+			out.print("L'username &egrave; errato o inesistente!");
 			System.out.println("# LoginServlet > Tentativo di login fallito (username errato o inesistente).");
 			
 			response.setStatus(400);
