@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Service.UserService;
+import Utils.PasswordHasher;
 
 @WebServlet("/SignInServlet")
 public class SignInServlet extends HttpServlet {
@@ -24,7 +25,7 @@ public class SignInServlet extends HttpServlet {
 		
 		if(id == -1){
 			if(request.getParameter("password").equals(request.getParameter("password2"))) {
-				service.insertUser(request.getParameter("username"), request.getParameter("password"), request.getParameter("email"));
+				service.insertUser(request.getParameter("username"), PasswordHasher.hash(request.getParameter("password")), request.getParameter("email"));
 				
 				out.print("Utente creato con successo!");
 				System.out.println("# SignInServlet > Creazione utente effettuata con successo (username: " + request.getParameter("username"));
