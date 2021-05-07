@@ -65,8 +65,18 @@ $(document).ready(
 	
 		$("#logout-link").click(
 			() => {
+				console.log(0);
 				document.cookie = "user_session=; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-				window.location.replace('index.jsp');
+				$.ajax(
+					{
+						method: "POST",
+						url: "UserServlet",
+						data: {
+							action: "logout"
+						}
+					}
+				);
+				window.location.replace("index.jsp");
 			}
 		);
 	}

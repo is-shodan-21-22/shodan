@@ -89,33 +89,37 @@ public class UserServlet extends HttpServlet {
 				
 				if(user != null ) {
 					if(!user.isAdmin()) {
-					new UserService().deleteUser(Integer.valueOf(request.getParameter("user-id")));
-				
-					request.setAttribute("messageUserDelete", "Utente eliminato con successo");
-					request.getRequestDispatcher("admin.jsp").forward(request, response);
+						new UserService().deleteUser(Integer.valueOf(request.getParameter("user-id")));
 					
-					System.out.println("# UserServlet > POST > Utente eliminato > " + user.getId());
-					}
-					else {
+						request.setAttribute("messageUserDelete", "Utente eliminato con successo");
+						request.getRequestDispatcher("admin.jsp").forward(request, response);
+						
+						System.out.println("# UserServlet > POST > Utente eliminato > " + user.getId());
+					} else {
 						request.setAttribute("errorMessageUserDelete", "Un admin non può essere cancellato");
 						request.getRequestDispatcher("admin.jsp").forward(request, response);
 						
 						System.out.println("# UserServlet > POST > Impossibile eliminare utente > " + user.getId());
 					}
-				}else {
+				} else {
 					request.setAttribute("errorMessageUserDelete", "Utente inesistente");
 					request.getRequestDispatcher("admin.jsp").forward(request, response);
 					
 					System.out.println("# UserServlet > POST > Utente inesistente > " + Integer.valueOf(request.getParameter("user-id")));
 				}
-			
-			case "logged_in_app":
-				if(request.getSession().getAttribute("user_metadata") == null)
-					response.sendRedirect("index.jsp");
 				
-			case "logged_in_index":
-				if(request.getSession().getAttribute("user_metadata") != null)
-					response.sendRedirect("app.jsp");
+				break;
+			
+			case "logout":
+				System.out.println("#UserServlet > POST > Logout dell'utente");
+				
+				request.getSession().removeAttribute("user_metadata");
+				break;
+				
+			default:
+				System.out.println("#UserServlet > POST > Nessuna azione specificata");
+				
+				break;
 			
 		}
 	}
