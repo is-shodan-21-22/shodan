@@ -125,7 +125,7 @@ public class UserService implements Serializable {
 			
 			statement.executeUpdate(query);
 			
-			System.out.println("# UserService > Elimino l'utente " + userId);
+			System.out.println("# UserService > Eliminazione dell'utente " + userId);
 			
 			return true;
 		}catch(SQLException e) {

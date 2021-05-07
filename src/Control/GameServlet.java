@@ -6,8 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import Model.Game;
 import Model.User;
 import Service.GameService;
@@ -18,8 +16,8 @@ public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = -8724190928795580877L;
 	
 	protected void doGet(
-			HttpServletRequest request,
-			HttpServletResponse response
+		HttpServletRequest request,
+		HttpServletResponse response
 	) throws ServletException, IOException {
 		System.out.println("# GameServlet > Session: " + request.getSession().getId());
 		

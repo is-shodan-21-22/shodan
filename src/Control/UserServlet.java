@@ -18,35 +18,29 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = -4587622200104894945L;
 
 	protected void doGet(
-			HttpServletRequest request,
-			HttpServletResponse response
+		HttpServletRequest request,
+		HttpServletResponse response
 	) throws ServletException, IOException {
 		System.out.println("# UserServlet > Session: " + request.getSession().getId());
-		
-		/*User user = new UserService().getUser(
-			Integer.parseInt(
-				request.getParameter("user_id")
-			)
-		);*/
-		
+
 		User user = (User) request.getSession().getAttribute("user_metadata");
 		
 		switch(request.getParameter("action")) {
 			case "info":
-				System.out.println("# UserSerlvet > GET > Accesso ai dati personali...");
+				System.out.println("# UserSerlvet > GET > Accesso ai dati personali di " + user.getName());
 					
 				request.getSession().setAttribute("user", user);
 				
 				break;
 		
 			case "purchase":
-				System.out.println("# UserSerlvet > GET > Pagamento in corso...");
+				System.out.println("# UserSerlvet > GET > Pagamento in corso da " + user.getName());
 				
 				int price = Integer.parseInt(
 					request.getParameter("price")
 				);
 				
-				System.out.println("# UserServlet > Prezzo: " + price + "€ / Utente: " + user.getMoney() + "€");
+				System.out.println("# UserServlet > Transizione > Prezzo: " + price + "€ / Utente: " + user.getMoney() + "€");
 				
 				if(user.getMoney() < price) {
 					System.out.println("# UserServlet > GET > L'utente non ha abbastanza fondi per l'acquisto");		
@@ -83,12 +77,14 @@ public class UserServlet extends HttpServlet {
 	}
 	
 	protected void doPost(
-			HttpServletRequest request,
-			HttpServletResponse response
+		HttpServletRequest request,
+		HttpServletResponse response
 	) throws ServletException, IOException {
 		
 			User user = new UserService().getUser(Integer.valueOf(request.getParameter("user-id")));
 
+			// Servlet di rimozione dell'utente
+			
 			if(user != null ) {
 				if(!user.isAdmin()) {
 				new UserService().deleteUser(Integer.valueOf(request.getParameter("user-id")));

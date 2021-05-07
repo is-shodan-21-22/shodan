@@ -1,7 +1,11 @@
 package Model;
 
-public class HasGame{
+import java.io.Serializable;
 
+public class HasGame implements Serializable {
+
+	private static final long serialVersionUID = 1781620604484876503L;
+	
 	public int user_id;
 	public int game_id;
 	

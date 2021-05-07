@@ -2,8 +2,6 @@ package Control;
 
 import Model.Article;
 import Service.ArticleService;
-import Service.GameService;
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +15,8 @@ public class BlogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(
-			HttpServletRequest request,
-			HttpServletResponse response
+		HttpServletRequest request,
+		HttpServletResponse response
 	) throws ServletException, IOException {
 		System.out.println("# BlogServlet > Session: " + request.getSession().getId());
 		

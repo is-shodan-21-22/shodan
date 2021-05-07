@@ -1,9 +1,12 @@
 package Model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Game {
+public class Game implements Serializable {
 
+	private static final long serialVersionUID = -9122194956940676053L;
+	
 	public int id;
 	public int price;
 	public String name;

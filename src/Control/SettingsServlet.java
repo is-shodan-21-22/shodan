@@ -15,8 +15,8 @@ public class SettingsServlet extends HttpServlet {
 	private static final long serialVersionUID = -3000288672809209195L;
 
 	protected void doPost(
-			HttpServletRequest request,
-			HttpServletResponse response
+		HttpServletRequest request,
+		HttpServletResponse response
 	) throws ServletException, IOException {
 		System.out.println("# SettingsServlet > Session: " + request.getSession().getId());
 		

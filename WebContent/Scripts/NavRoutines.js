@@ -65,8 +65,7 @@ $(document).ready(
 	
 		$("#logout-link").click(
 			() => {
-				console.log(0);
-				document.cookie = "user=; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+				document.cookie = "user_session=; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 				window.location.replace('index.jsp');
 			}
 		);
