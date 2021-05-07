@@ -117,4 +117,22 @@ public class UserService implements Serializable {
 		return false;
 	}
 	
+	public boolean deleteUser(int userId) {
+		try {
+			String query = "DELETE FROM users WHERE user_id =" + userId ;
+			
+			System.out.println("# UserService > Query > " + query);
+			
+			statement.executeUpdate(query);
+			
+			System.out.println("# UserService > Elimino l'utente " + userId);
+			
+			return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 }

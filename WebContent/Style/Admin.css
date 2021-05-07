@@ -58,3 +58,10 @@ body{
 	font-size: 13px;
 	text-shadow: 0 0;
 }
+
+.shodan-admin-form form .error-admin-message{
+	color: red;
+	font-size: 13px;
+	text-shadow: 0 0;
+}
+

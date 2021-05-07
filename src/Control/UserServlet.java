@@ -46,7 +46,7 @@ public class UserServlet extends HttpServlet {
 					request.getParameter("price")
 				);
 				
-				System.out.println("# UserServlet > Prezzo: " + price + "â‚¬ / Utente: " + user.getMoney() + "â‚¬");
+				System.out.println("# UserServlet > Prezzo: " + price + "€ / Utente: " + user.getMoney() + "€");
 				
 				if(user.getMoney() < price) {
 					System.out.println("# UserServlet > GET > L'utente non ha abbastanza fondi per l'acquisto");		
@@ -76,10 +76,41 @@ public class UserServlet extends HttpServlet {
 				break;
 			
 			default:
-				System.out.println("# UserServlet > GET > Nessuna azione specificata");
+				System.out.println("#UserServlet > GET > Nessuna azione specificata");
 				
 				break;
 		}
+	}
+	
+	protected void doPost(
+			HttpServletRequest request,
+			HttpServletResponse response
+	) throws ServletException, IOException {
+		
+			User user = new UserService().getUser(Integer.valueOf(request.getParameter("user-id")));
+
+			if(user != null ) {
+				if(!user.isAdmin()) {
+				new UserService().deleteUser(Integer.valueOf(request.getParameter("user-id")));
+			
+				request.setAttribute("messageUserDelete", "Utente eliminato con successo");
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
+				
+				System.out.println("# UserServlet > POST > Utente eliminato > " + user.getId());
+				}
+				else {
+					request.setAttribute("errorMessageUserDelete", "Un admin non può essere cancellato");
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
+					
+					System.out.println("# UserServlet > POST > Impossibile eliminare utente > " + user.getId());
+				}
+			}else {
+				request.setAttribute("errorMessageUserDelete", "Utente inesistente");
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
+				
+				System.out.println("# UserServlet > POST > Utente inesistente > " + Integer.valueOf(request.getParameter("user-id")));
+			}
+			
 	}
 	
 }

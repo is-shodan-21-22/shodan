@@ -77,13 +77,22 @@ public class BlogServlet extends HttpServlet {
 		
 			case "deleteArticle":
 		
+				Article article = new ArticleService().getArticle(Integer.valueOf(request.getParameter("delete-article-id")));
+				
+				if(article != null) {
 				new ArticleService().deleteArticle(Integer.valueOf(request.getParameter("delete-article-id")));
 		
 				request.setAttribute("messageArticleDelete", "Articolo eliminato con successo");
 				request.getRequestDispatcher("admin.jsp").forward(request, response);
-				response.sendRedirect("admin.jsp");
-		
-				System.out.println("# BlogServelt > POST > Articolo eliminato > " + request.getParameter("article-title"));
+				
+				System.out.println("# BlogServelt > POST > Articolo eliminato > " + article.getTitle());
+				}
+				else {
+					request.setAttribute("errorMessageArticleDelete", "Articolo non presente");
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
+					
+					System.out.println("# BlogServelt > POST > Articolo insistente > " + request.getParameter("add-article-title"));
+				}
 		
 			default:
 				System.out.println("# BlogServelt > POST > Nessuna azione specificata");

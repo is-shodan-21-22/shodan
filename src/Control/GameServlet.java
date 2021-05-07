@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Model.Game;
 import Model.User;
 import Service.GameService;
 
@@ -105,14 +106,23 @@ public class GameServlet extends HttpServlet {
 				break;
 			
 			case "deleteGame":
-			
+				
+				Game game = new GameService().getGame(Integer.valueOf(request.getParameter("game-id")));
+				
+				if(game != null) {
 				new GameService().deleteGame(Integer.valueOf(request.getParameter("game-id")));
 			
 				request.setAttribute("messageGameDelete", "Gioco eliminato con successo");
 				request.getRequestDispatcher("admin.jsp").forward(request, response);
-				response.sendRedirect("admin.jsp");
-			
-				System.out.println("# GameServlet > POST > Gioco eliminato > " + request.getParameter("game-name"));
+				
+				System.out.println("# GameServlet > POST > Gioco eliminato > " + game.getName());
+				}
+				else {
+					request.setAttribute("errorMessageGameDelete", "Il gioco non è presente");
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
+					
+					System.out.println("# GameServlet > POST > Gioco insistente > " + request.getParameter("game-name"));
+				}
 			
 			default:
 				System.out.println("# GameServlet > POST > Nessuna azione specificata");

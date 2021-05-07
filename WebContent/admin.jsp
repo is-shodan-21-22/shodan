@@ -35,6 +35,7 @@
 					<input type="hidden" id="action" name="action" value="deleteGame">
 					<input type="submit" value="Elimina">
 					<span class="admin-message">${messageGameDelete}</span>
+					<span class="error-admin-message">${errorMessageGameDelete}</span>
 				</form>
 			</div>
 			<br>
@@ -54,14 +55,17 @@
 					<input type="hidden" id="action" name="action" value="deleteArticle">
 					<input type="submit" value="Elimina">
 					<span class="admin-message">${messageArticleDelete}</span>
+					<span class="error-admin-message">${errorMessageArticleDelete}</span>
 				</form>
 			</div>
 			<br>
 			<div class="shodan-admin-form">
-				<form action="BlogServlet" method="POST">
+				<form action="UserServlet" method="POST">
 					<h1>Elimina utente</h1>
-					<input id="delete-user" name="delete-user" type="text" placeholder="username" required>
+					<input id="delete-user" name="user-id" type="number" placeholder="user-id" required>
 					<input type="submit" value="Elimina">
+					<span class="admin-message">${messageUserDelete}</span>
+					<span class="error-admin-message">${errorMessageUserDelete}</span>
 				</form>
 			</div>
 		</div>
