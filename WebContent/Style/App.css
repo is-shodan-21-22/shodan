@@ -554,6 +554,21 @@ body main #app .content #cart tr td {
 	padding: 7px;
 }
 
+/* Empty View */
+
+.empty-view {
+	font-size: 40px;
+	text-align: center;
+	margin-top: 15px;
+	color: grey;
+	width: 100%;
+}
+
+.empty-view div {
+	font-size: 25px;
+	font-weight: 200;
+}
+
 /* Responsive Design */
 
 @media screen and (max-width: 1350px) {
