@@ -12,7 +12,12 @@ $(document).ready(
 				beforeSend: () => {
 					$("#shop-games").html("<div class=\"loader loader-lowered\">");
 				},
-				success: () => setTimeout(() => $("#shop-games").load("View/Shop.jsp #shop-games"), 250)
+				success: () => {
+					setTimeout(() => $("#shop-games").load("View/Shop.jsp #shop-games"), 250);
+				},
+				error: () => {
+					setTimeout(() => $("#shop-games").html(setEmptyView()), 250);
+				}
 			}
 		);
 		

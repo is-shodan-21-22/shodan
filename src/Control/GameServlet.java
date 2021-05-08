@@ -29,11 +29,23 @@ public class GameServlet extends HttpServlet {
 							? Integer.parseInt(request.getParameter("limit"))
 							: 0;
 				
-				if(request.getParameter("order") == null)
-					request.getSession().setAttribute("games", new GameService().getAllAscendingGames(limit));
-				else
-					request.getSession().setAttribute("desc_games", new GameService().getAllDescendingGames(limit));
+				ArrayList<Game> ascending = new GameService().getAllAscendingGames(limit);
+				ArrayList<Game> descending = new GameService().getAllDescendingGames(limit);
 				
+				if(request.getParameter("order") == null) {
+					if(ascending != null) {
+						request.getSession().setAttribute("games", new GameService().getAllAscendingGames(limit));
+						response.setStatus(200);
+					} else 
+						response.setStatus(400);
+				} else {
+					if(descending != null) {
+						request.getSession().setAttribute("desc_games", new GameService().getAllDescendingGames(limit));
+						response.setStatus(200);
+					} else
+						response.setStatus(400);
+				}
+					
 				System.out.println("# GameServlet > GET > Ultimi 5 giochi del negozio");
 				
 				break;
@@ -87,10 +99,9 @@ public class GameServlet extends HttpServlet {
 		switch(request.getParameter("action")) {
 		
 			case "addGame":
-			
 				new GameService().addGame(request.getParameter("game-name"),
-							request.getParameter("game-image"), 
-							Integer.valueOf(request.getParameter("game-price")));
+					request.getParameter("game-image"), 
+					Integer.valueOf(request.getParameter("game-price")));
 			
 				request.setAttribute("messageGameAdd", "Gioco aggiunto con successo");
 				request.getRequestDispatcher("admin.jsp").forward(request, response);
@@ -101,18 +112,16 @@ public class GameServlet extends HttpServlet {
 				break;
 			
 			case "deleteGame":
-				
 				Game game = new GameService().getGame(Integer.valueOf(request.getParameter("game-id")));
 				
 				if(game != null) {
-				new GameService().deleteGame(Integer.valueOf(request.getParameter("game-id")));
-			
-				request.setAttribute("messageGameDelete", "Gioco eliminato con successo");
-				request.getRequestDispatcher("admin.jsp").forward(request, response);
+					new GameService().deleteGame(Integer.valueOf(request.getParameter("game-id")));
 				
-				System.out.println("# GameServlet > POST > Gioco eliminato > " + game.getName());
-				}
-				else {
+					request.setAttribute("messageGameDelete", "Gioco eliminato con successo");
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
+					
+					System.out.println("# GameServlet > POST > Gioco eliminato > " + game.getName());
+				} else {
 					request.setAttribute("errorMessageGameDelete", "Il gioco non è presente");
 					request.getRequestDispatcher("admin.jsp").forward(request, response);
 					

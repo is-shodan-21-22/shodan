@@ -14,11 +14,13 @@ $(document).ready(
 				},
 				success: () => {
 					setTimeout(() => $(".blog").load("View/Blog.jsp .blog"), 400);
+				},
+				error: () => {
+					setTimeout(() => $(".blog").html(setEmptyView()), 400);
 				}
 			}			
 		).done(
 			() => {
-				console.log("Done");
 				$(".blog-link").click(
 					function() {
 					window.history.pushState(null, null, "?blog=" + $(this).attr("data-blog-id"));

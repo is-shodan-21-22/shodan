@@ -10,6 +10,7 @@ $(document).ready(
 				url: "GameServlet",
 				data: {
 					action: "shop",
+					order: "desc",
 					limit: 5
 				},
 				beforeSend: () => {
@@ -19,6 +20,12 @@ $(document).ready(
 					setTimeout(() => {
 						$(".games").load("View/Dashboard.jsp .game-container");
 					}, 400)
+				},
+				error: () => {
+					setTimeout(() => {
+						$(".games").html(setEmptyView());
+						$(".games").css("min-height", "0");
+					}, 400);
 				}
 			}
 		);
@@ -38,6 +45,9 @@ $(document).ready(
 					setTimeout(() => {
 						$(".blog").load("View/Dashboard.jsp .article-container");
 					}, 400)
+				},
+				error: () => {
+					setTimeout(() => $(".blog").html(setEmptyView()), 400);
 				}
 			}			
 		);

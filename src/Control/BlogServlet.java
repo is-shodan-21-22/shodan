@@ -3,6 +3,7 @@ package Control;
 import Model.Article;
 import Service.ArticleService;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,13 @@ public class BlogServlet extends HttpServlet {
 							? Integer.parseInt(request.getParameter("limit")) 
 							: 0;
 	
-				request.getSession().setAttribute("articles", new ArticleService().getAllArticles(limit));
+				ArrayList<Article> articles = new ArticleService().getAllArticles(limit);
+				
+				if(articles != null) {
+					request.getSession().setAttribute("articles", articles);
+					response.setStatus(200);
+				} else 
+					response.setStatus(400);
 				
 				System.out.println("# BlogServlet > GET > Tutti gli articoli");
 				

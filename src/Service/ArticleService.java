@@ -58,6 +58,11 @@ public class ArticleService {
 			
 			System.out.println("# ArticleService > Query > " + query);
 			
+			if(!result.next())
+				return null;
+			
+			result.beforeFirst();
+			
 			while(result.next()) {
 				blog.add(
 					new Article(
