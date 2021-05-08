@@ -1,7 +1,7 @@
 function openSider() {
 	localStorage.setItem("sider", "open");
 		
-	$("#nav-logo").css("display", "block");
+	$("#nav-logo-container").css("display", "flex");
 	$("#nav-items>div>span").css("display", "inline-block");
 	$("nav").css("width", "275px");
 	$("main").css("margin-left", "274px");
@@ -11,7 +11,7 @@ function openSider() {
 function closeSider() {
 	localStorage.setItem("sider", "closed");
 		
-	$("#nav-logo").css("display", "none");
+	$("#nav-logo-container").css("display", "none");
 	$("#nav-items>div>span").css("display", "none");
 	$("nav").css("width", "55px");
 	$("main").css("margin-left", "55px");

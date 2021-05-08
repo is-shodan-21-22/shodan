@@ -1,6 +1,8 @@
 package Control;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,9 +41,14 @@ public class GameServlet extends HttpServlet {
 			case "library":
 				User user = (User) request.getSession().getAttribute("user_metadata");
 				
-				request.getSession().setAttribute("games", new GameService().getAllGamesByUser(
-					user.getId()
-				));
+				ArrayList<Game> games = new GameService().getAllGamesByUser(user.getId());
+				
+				if(games != null) {
+					request.getSession().setAttribute("games", games);
+					response.setStatus(200);
+				} else
+					response.setStatus(400);
+					
 				
 				System.out.println("# GameServlet > GET > Libreria personale dell'utente" );
 				

@@ -27,6 +27,7 @@ function deleteCart() {
 	$(".cart-quantity-value").fadeOut("slow", () => {
 		$(".fa-clipboard").fadeIn("slow");
 	});
+	
 	localStorage.removeItem("cart");
 }
 
@@ -49,4 +50,11 @@ function updateCart(id, name, price) {
 	refreshCart();
 						
 	return false;
+}
+
+function setEmptyView() {
+	let view = "<div class=\"empty-view\"><i class=\"far fa-folder-open\"></i>"
+	view += "<div>Non c'è ancora nulla qui...</div></div>";
+	
+	return view;
 }

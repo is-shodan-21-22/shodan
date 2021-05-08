@@ -64,6 +64,11 @@ public class GameService implements Serializable {
 			
 			System.out.println("# GameService > Query > " + query);
 			
+			if(!result.next())
+				return null;
+			
+			result.beforeFirst();
+			
 			while(result.next()) {
 				games.add(
 					new Game(
