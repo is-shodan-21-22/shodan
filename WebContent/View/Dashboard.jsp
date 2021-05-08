@@ -39,7 +39,7 @@
 	</div>
 				
 	<div class="games">
-		<c:forEach items="${games}" var="game">
+		<c:forEach items="${desc_games}" var="game">
 			<div 
 				data-game-id="${game.id}" 
 				data-game-name="${game.name}" 

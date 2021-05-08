@@ -1,18 +1,27 @@
 package Control;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.AccessDeniedException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import Model.Game;
 import Model.User;
 import Service.GameService;
 
 @WebServlet("/GameServlet")
+@MultipartConfig
 public class GameServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -8724190928795580877L;
@@ -96,16 +105,36 @@ public class GameServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# GameServlet > Session: " + request.getSession().getId());
 		
+		Part filePart = request.getPart("game-image");
+		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+		
+		try {
+			InputStream fileContent = filePart.getInputStream();
+			File filePath = new File(getServletContext().getRealPath("Static/GamePictures"));
+			File file = new File(filePath, fileName);
+			
+			filePath.mkdir();
+			
+			Files.copy(fileContent, file.toPath());
+		} catch(AccessDeniedException | FileAlreadyExistsException e) {
+			e.printStackTrace();
+			
+			request.setAttribute("messageGameAdd", "Non &erave; stato possibile aggiungere il gioco.");
+			response.setStatus(400);
+		}
+		
 		switch(request.getParameter("action")) {
 		
 			case "addGame":
-				new GameService().addGame(request.getParameter("game-name"),
-					request.getParameter("game-image"), 
-					Integer.valueOf(request.getParameter("game-price")));
-			
+				new GameService().addGame(
+					request.getParameter("game-name"), 
+					fileName, 
+					Integer.valueOf(request.getParameter("game-price"))
+				);
+				
 				request.setAttribute("messageGameAdd", "Gioco aggiunto con successo");
 				request.getRequestDispatcher("admin.jsp").forward(request, response);
-				response.sendRedirect("admin.jsp");
+				response.setStatus(200);
 			
 				System.out.println("# GameServlet > POST > Gioco aggiunto > " + request.getParameter("game-name"));
 			

@@ -20,10 +20,10 @@
 		<div>
 			<h1>Benvenuto amministratore</h1>
 			<div class="shodan-admin-form">
-				<form action="GameServlet" method="POST">
+				<form enctype="multipart/form-data" action="GameServlet" method="POST">
 					<h1>Aggiungi gioco</h1>
 					<input id="game-name" name="game-name" type="text" placeholder="game-name" required>
-					<input id="game-image" name="game-image" type="text" placeholder="game-image.png" required>
+					<input id="game-image" name="game-image" type="file" required>
 					<input id="game-price" name="game-price" type="number" placeholder="game-price" required>
 					<input type="hidden" name="action" value="addGame">
 					<input type="submit" value="Aggiungi">
