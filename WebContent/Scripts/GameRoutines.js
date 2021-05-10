@@ -8,12 +8,18 @@ $(document).ready(
 				url: "GameServlet",
 				data: {
 					action: "game",
+					endpoint: "View/Game.jsp",
 					game_id: new URLSearchParams(window.location.search).get("game")
 				},
 				beforeSend: () => {
 					$("#game-page").html("<div class=\"loader loader-lowered\">");
 				},
-				success: () => setTimeout(() => $("#game-page").load("View/Game.jsp #game-page"), 150)
+				success: (data) => {
+					setTimeout(
+						() => {
+							$(".content").replaceWith(data.substring(0, data.lastIndexOf("\n")))
+						}, 150)
+				}
 			}
 		);
 		

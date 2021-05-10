@@ -17,19 +17,28 @@ public class UserServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -4587622200104894945L;
 
+	User user;
+	
 	protected void doGet(
 		HttpServletRequest request,
 		HttpServletResponse response
 	) throws ServletException, IOException {
 		System.out.println("# UserServlet > Session: " + request.getSession().getId());
 
-		User user = (User) request.getSession().getAttribute("user_metadata");
+		String endpoint = request.getParameter("endpoint");
+		
+		if(request.getParameter("cookie").equals("false")) {
+			user = new UserService().getUserBySession(request.getParameter("jsession"));
+		} else
+			user = (User) request.getSession().getAttribute("user_metadata");
 		
 		switch(request.getParameter("action")) {
 			case "info":
 				System.out.println("# UserSerlvet > GET > Accesso ai dati personali di " + user.getName());
 					
-				request.getSession().setAttribute("user", user);
+				request.setAttribute("user", user);
+				request.getRequestDispatcher(endpoint).forward(request, response);
+				response.setStatus(200);
 				
 				break;
 		
@@ -113,7 +122,13 @@ public class UserServlet extends HttpServlet {
 			case "logout":
 				System.out.println("#UserServlet > POST > Logout dell'utente");
 				
+				if(request.getParameter("cookie").equals("false")) {
+					user = new UserService().getUserBySession(request.getParameter("jsession"));
+				} else
+					user = (User) request.getSession().getAttribute("user_metadata");
+				new UserService().destroySession(user);
 				request.getSession().removeAttribute("user_metadata");
+				
 				break;
 				
 			default:

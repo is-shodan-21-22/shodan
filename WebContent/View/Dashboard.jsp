@@ -39,20 +39,7 @@
 	</div>
 				
 	<div class="games">
-		<c:forEach items="${desc_games}" var="game">
-			<div 
-				data-game-id="${game.id}" 
-				data-game-name="${game.name}" 
-				data-game-price="${game.price}" 
-				style="background-image: url('Static/GamePictures/${game.image}')" 
-				class="game-container"
-			>
-				<div class="game-add">+</div>
-				<div class="game-overlay">
-					${game.name}
-				</div>
-			</div>
-		</c:forEach>
+		<!-- View/AJAX_Components/GameList.jsp -->
 	</div>
 			
 	<!-- Ultimi 3 articoli dal blog -->
@@ -62,17 +49,7 @@
 	</h1>
 			
 	<div class="blog">
-		<c:forEach items="${articles}" var="article">
-			<div class="article-container">
-				<div class="article">
-					<h1> ${article.title} </h1>
-					<div> ${article.shortTitle} </div>
-					<span id="blog-link" class='blog-link' data-blog-id="${article.id}">
-						<i class="fas fa-caret-square-right"></i> Leggi la notizia
-					</span>
-				</div>
-			 </div>
-		</c:forEach>
+		<!-- View/AJAX_Components/BlogList.jsp -->
 	</div>
 	
 </div>

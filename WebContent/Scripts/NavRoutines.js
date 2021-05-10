@@ -18,15 +18,20 @@ function closeSider() {
 	$("nav").removeClass("open");
 }
 
+if(!navigator.cookieEnabled)
+	$("#nav-close").hide();
+
 $(document).ready(
 	() => {
-		if(localStorage.getItem("sider") == "open" || localStorage.getItem("sider") == null)
-			openSider();
-		else
-			closeSider();
+		if(navigator.cookieEnabled) {
+			if(localStorage.getItem("sider") == "open" || localStorage.getItem("sider") == null)
+				openSider();
+			else
+				closeSider();
+		}
 			
-		setTimeout(() => refreshCart(), 1000);
-				
+		//setTimeout(() => refreshCart(), 1000);
+		
 		$("#nav-logo").click(
 			() =>
 				$("#app").load("View/Dashboard.jsp").fadeIn("slow")
@@ -34,7 +39,8 @@ $(document).ready(
 				
 		$("#nav-items>div").click(	
 			function() {
-				window.history.pushState(null, null, "app.jsp");
+				let parsed_path = window.location.href.substring(0, window.location.href.indexOf("?"));
+				window.history.pushState(null, null, parsed_path);
 					
 				$("#nav-items>div").each(
 					function() {
@@ -47,8 +53,10 @@ $(document).ready(
 					
 				let container = $(this).attr("id")[0].toUpperCase() + $(this).attr("id").split("-")[0].slice(1) + ".jsp";
 				
-				if($(this).attr("id").split("-")[0] == "admin")
-					window.location.replace("admin.jsp");
+				if($(this).attr("id").split("-")[0] == "admin") {
+					let parsed_path = "admin.jsp" + window.location.href.substring(window.location.href.indexOf(";"));
+					window.location.replace(parsed_path);
+				}
 					
 				$("#app").load("View/" + container).fadeIn("slow");
 			}
@@ -56,22 +64,29 @@ $(document).ready(
 	
 		$("#nav-close").click(
 			() => {
-				if($("nav").hasClass("open"))
-					closeSider()
-				else
-					openSider()
+				if(navigator.cookieEnabled) {
+					if($("nav").hasClass("open"))
+						closeSider()
+					else
+						openSider()
+				}
 			}
 		);
 	
 		$("#logout-link").click(
 			() => {
+				console.log(0);
 				document.cookie = "user_session=; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 				$.ajax(
 					{
 						method: "POST",
 						url: "UserServlet",
 						data: {
-							action: "logout"
+							action: "logout",
+							cookie: navigator.cookieEnabled,
+							jsession: window.location.href.substring(
+								window.location.href.lastIndexOf("=") + 1
+							)
 						}
 					}
 				);

@@ -4,13 +4,9 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import Database.DBConnectionPool;
-
 import java.sql.PreparedStatement;
-
 import Model.User;
-import Utils.PasswordHasher;
 
 public class UserService implements Serializable {
 
@@ -39,8 +35,7 @@ public class UserService implements Serializable {
 			System.out.println("# UserService > Query > " + query);
 			
 			result.next();
-			id = result.getInt("user_id");
-				
+			id = result.getInt("user_id");		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -66,7 +61,8 @@ public class UserService implements Serializable {
 					result.getString("user_password"),
 					result.getString("user_email"),
 					result.getInt("user_money"),
-					result.getBoolean("user_admin")
+					result.getBoolean("user_admin"),
+					result.getString("user_session")
 				);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,6 +81,7 @@ public class UserService implements Serializable {
 				+ ", user_email = '" + user.getEmail() + "'"
 				+ ", user_money = " + user.getMoney()
 				+ ", user_admin = " + user.isAdmin()
+				+ ", user_session = '" + user.getSession() + "'"
 				+ " WHERE user_id = " + user.getId();
 		
 			System.out.println("# UserService > Query > " + query);
@@ -102,10 +99,9 @@ public class UserService implements Serializable {
 		return false;
 	}
 	
-	public boolean insertUser(String username,String password,String email) {
+	public boolean insertUser(String username, String password, String email) {
 		try {
 			String query = "INSERT INTO users(user_name, user_password, user_email) VALUES('" + username + "','" + password + "','" + email + "')";
-			
 			
 			System.out.println("# UserService > Query > " + query);
 			
@@ -123,16 +119,16 @@ public class UserService implements Serializable {
 		return false;
 	}
 	
-	public boolean deleteUser(int userId) {
+	public boolean deleteUser(int id) {
 		try {
-			String query = "DELETE FROM users WHERE user_id =" + userId ;
+			String query = "DELETE FROM users WHERE user_id =" + id ;
 			
 			System.out.println("# UserService > Query > " + query);
 			
 			statement = db.prepareStatement(query);
 			statement.executeUpdate();
 			
-			System.out.println("# UserService > Eliminazione dell'utente " + userId);
+			System.out.println("# UserService > Eliminazione dell'utente " + id);
 			
 			return true;
 		}catch(SQLException e) {
@@ -142,4 +138,52 @@ public class UserService implements Serializable {
 		return false;
 	}
 	
+	public User getUserBySession(String jsession) {
+		try {
+			String query = "SELECT user_id FROM users WHERE user_session = '" + jsession + "'";
+			
+			statement = db.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
+			
+			System.out.println("# SessionService > Query > " + query);
+			
+			if(result.next())
+				return getUser(result.getInt("user_id"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public boolean insertSession(String jsession, User user) {
+		try {
+			String query = "INSERT INTO jsessions(jsession, user_id) VALUES('" + jsession + "', " + user.getId() + ")";
+			
+			System.out.println("# SessionService > Query > " + query);
+			
+			statement = db.prepareStatement(query);
+			statement.executeUpdate();
+			
+			return true;
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public void destroySession(User user) {
+		try {
+			String query = "UPDATE users SET user_session = null WHERE user_id = " + user.getId();
+			
+			statement = db.prepareStatement(query);
+			statement.executeUpdate();
+			
+			System.out.println("# SessionService > Query > " + query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

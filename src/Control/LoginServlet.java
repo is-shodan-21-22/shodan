@@ -31,11 +31,21 @@ public class LoginServlet extends HttpServlet {
 			
 			if(user.getPassword().equals(PasswordHasher.hash((request.getParameter("password"))))) {
 				response.setStatus(200);
+				
 				response.addCookie(new Cookie("user_session", request.getSession().getId()));
 				request.getSession().setAttribute("user_metadata", user);
 				
+				System.out.println("# LoginServlet > URL Rewriting: " + response.encodeURL("index.jsp"));
+				
+				user.setSession(request.getSession().getId());
+				
+				new UserService().updateUser(user);
+				
+				if(request.getParameter("cookie").equals("false"))
+					out.print(response.encodeURL(""));
+				
 				System.out.println("# LoginServlet > Login effettuato con successo da " + user.getName());
-				System.out.println("# LoginServlet > Nuovo cookie: [user_session = " + request.getSession().getId() + "]");
+				System.out.println("# LoginServlet > Tentativo di creazione del cookie: [user_session = " + request.getSession().getId() + "]");
 				
 				return;
 			} else {

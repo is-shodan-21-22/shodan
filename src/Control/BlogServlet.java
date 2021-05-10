@@ -2,6 +2,8 @@ package Control;
 
 import Model.Article;
 import Service.ArticleService;
+import Service.GameService;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -21,6 +23,8 @@ public class BlogServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# BlogServlet > Session: " + request.getSession().getId());
 		
+		String endpoint = request.getParameter("endpoint");
+		
 		switch(request.getParameter("action")) {
 			case "blog":
 				int limit = request.getParameter("limit") != null 
@@ -30,7 +34,8 @@ public class BlogServlet extends HttpServlet {
 				ArrayList<Article> articles = new ArticleService().getAllArticles(limit);
 				
 				if(articles != null) {
-					request.getSession().setAttribute("articles", articles);
+					request.setAttribute("articles", articles);
+					request.getRequestDispatcher(endpoint).forward(request, response);
 					response.setStatus(200);
 				} else 
 					response.setStatus(400);
@@ -48,7 +53,8 @@ public class BlogServlet extends HttpServlet {
 				
 				System.out.println("# BlogServlet > GET > " + article.toString());
 				
-				request.getSession().setAttribute("article", article);
+				request.setAttribute("article", article);
+				request.getRequestDispatcher(endpoint).forward(request, response);
 				
 				break;
 				

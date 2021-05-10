@@ -5,14 +5,16 @@ $(document).ready(
 		$("nav").load("View/Nav.jsp");
 	}
 );
+
+let parsed_path = window.location.href.substring(0, window.location.href.indexOf("?"));
 	
 if(new URLSearchParams(window.location.search).has("game"))
 	if(!$("#game-page").length)
-		window.history.pushState(null, null, "app.jsp");
+		window.history.pushState(null, null, parsed_path);
 		
 if(new URLSearchParams(window.location.search).has("blog"))
 	if(!$("#blog-page").length)
-		window.history.pushState(null, null, "app.jsp");
+		window.history.pushState(null, null, parsed_path);
 		
 function refreshCart() {
 	if(localStorage.getItem("cart") != null) {

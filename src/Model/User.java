@@ -11,15 +11,17 @@ public class User implements Serializable {
 	String name;
 	String password;
 	String email;
+	String session;
 	boolean admin;
 	
-	public User(int id, String username, String password, String email, int money, boolean admin) {
+	public User(int id, String username, String password, String email, int money, boolean admin, String session) {
 		this.id = id;
 		this.money = money;
 		this.name = username;
 		this.password = password;
 		this.email = email;
 		this.admin = admin;
+		this.session = session;
 	}
 	
 	public int getId() {
@@ -46,6 +48,10 @@ public class User implements Serializable {
 		return admin;
 	}
 	
+	public String getSession() {
+		return session;
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -68,6 +74,14 @@ public class User implements Serializable {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+	
+	public void setSession(String session) {
+		this.session = session;
+	}
+	
+	public String toString() {
+		return "[" + id + "] " + name; 
 	}
 	
 }

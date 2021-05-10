@@ -21,7 +21,12 @@ public class SettingsServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# SettingsServlet > Session: " + request.getSession().getId());
 		
-		User user = (User) request.getSession().getAttribute("user_metadata");
+		User user;
+		
+		if(request.getParameter("cookie").equals("false")) {
+			user = new UserService().getUserBySession(request.getParameter("jsession"));
+		} else
+			user = (User) request.getSession().getAttribute("user_metadata");
 		
 		switch(request.getParameter("action")) {
 			case "updateEmail":

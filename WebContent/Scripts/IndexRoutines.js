@@ -8,15 +8,16 @@ $(document).ready(
 				url: "GameServlet",
 				data: {
 					action: "shop",
-					limit: 5
+					limit: 5,
+					endpoint: "View/AJAX_Components/GameSlideshow.jsp"
 				},
 				beforeSend: () => {
 					$(".left").html("<div class='loader-container'><div class=\"loader\"></div>");
 				},
-				success: () => {
+				success: (data) => {
 					setTimeout(() => {
-						$(".left").load("index.jsp .left");
-					}, 400)
+						$(".left").html(data);
+					}, 400);
 				}
 			}
 		);
@@ -28,14 +29,15 @@ $(document).ready(
 				data: {
 					action: "shop",
 					limit: 5,
-					order: "DESC"
+					order: "DESC",
+					endpoint: "View/AJAX_Components/GameSlideshow.jsp"
 				},
 				beforeSend: () => {
 					$(".right").html("<div class='loader-container'><div class=\"loader\"></div>");
 				},
-				success: () => {
+				success: (data) => {
 					setTimeout(() => {
-						$(".right").load("index.jsp .right");
+						$(".right").html(data);
 					}, 400)
 				}
 			}
@@ -51,14 +53,16 @@ function tryLogin(){
 			url: "LoginServlet",
 			data: {
 				username: $("#login-username").val(),
-				password: $("#login-password").val()
+				password: $("#login-password").val(),
+				cookie: navigator.cookieEnabled
 			},
 			success: (data) => {
-				console.log("Login effettuato con successo");
-				window.location.replace("app.jsp");
-				$("#login-message").html(data);
-				$("#login-message").css("color", "green");
-				$("#login-message").show();
+				window.history.pushState(null, null, data);
+				
+				if(data == null)
+					window.location.replace("app.jsp");
+				else
+					window.location.replace(data);
 			},
 			error: (data) => {
 				console.log("Errore nel login");

@@ -8,7 +8,6 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +18,7 @@ import javax.servlet.http.Part;
 import Model.Game;
 import Model.User;
 import Service.GameService;
+import Service.UserService;
 
 @WebServlet("/GameServlet")
 @MultipartConfig
@@ -32,6 +32,9 @@ public class GameServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# GameServlet > Session: " + request.getSession().getId());
 		
+		User user;
+		String endpoint = request.getParameter("endpoint");
+		
 		switch(request.getParameter("action")) {
 			case "shop":
 				int limit = (request.getParameter("limit") != null) 
@@ -43,13 +46,15 @@ public class GameServlet extends HttpServlet {
 				
 				if(request.getParameter("order") == null) {
 					if(ascending != null) {
-						request.getSession().setAttribute("games", new GameService().getAllAscendingGames(limit));
+						request.setAttribute("games", ascending);
+						request.getRequestDispatcher(endpoint).forward(request, response);
 						response.setStatus(200);
 					} else 
 						response.setStatus(400);
 				} else {
 					if(descending != null) {
-						request.getSession().setAttribute("desc_games", new GameService().getAllDescendingGames(limit));
+						request.setAttribute("games", descending);
+						request.getRequestDispatcher(endpoint).forward(request, response);
 						response.setStatus(200);
 					} else
 						response.setStatus(400);
@@ -60,18 +65,22 @@ public class GameServlet extends HttpServlet {
 				break;
 				
 			case "library":
-				User user = (User) request.getSession().getAttribute("user_metadata");
+				if(request.getParameter("cookie").equals("false"))
+					user = new UserService().getUserBySession(request.getParameter("jsession"));
+				else
+					user = (User) request.getSession().getAttribute("user_metadata");
 				
 				ArrayList<Game> games = new GameService().getAllGamesByUser(user.getId());
 				
 				if(games != null) {
-					request.getSession().setAttribute("games", games);
+					request.setAttribute("games", games);
+					request.getRequestDispatcher(endpoint).forward(request, response);
 					response.setStatus(200);
 				} else
 					response.setStatus(400);
 					
 				
-				System.out.println("# GameServlet > GET > Libreria personale dell'utente" );
+				System.out.println("# GameServlet > GET > Libreria personale dell'utente");
 				
 				break;
 				
@@ -85,7 +94,8 @@ public class GameServlet extends HttpServlet {
 					return;
 				}
 			
-				request.getSession().setAttribute("game", new GameService().getGame(game_id));
+				request.setAttribute("game", new GameService().getGame(game_id));
+				request.getRequestDispatcher(endpoint).forward(request, response);
 				
 				System.out.println("# GameServlet > GET > Pagina del gioco ID " + game_id);
 				

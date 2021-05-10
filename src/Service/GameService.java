@@ -1,13 +1,11 @@
 package Service;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import Database.DBConnectionPool;
 import Model.Game;
 
@@ -35,7 +33,7 @@ public class GameService implements Serializable {
 			statement = db.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
 			
-			System.out.println("# GameService > Executing SELECT * FROM games WHERE game_id = " + id);
+			System.out.println("# GameService > Query > SELECT * FROM games WHERE game_id = " + id);
 			
 			if(result.next())
 				game = new Game(
@@ -62,7 +60,7 @@ public class GameService implements Serializable {
 			statement = db.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
 			
-			System.out.println("# GameService > Query > " + query);
+			// System.out.println("# GameService > Query > " + query);
 			
 			if(!result.next())
 				return null;
@@ -93,13 +91,11 @@ public class GameService implements Serializable {
 		
 		try {
 			String query = "SELECT * FROM games ORDER BY game_id DESC" + (limit != 0 ? (" LIMIT " + limit) : "");
-			
-			System.out.println("# GameService > Query > " + query);
-			
+
 			statement = db.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
 			
-			System.out.println("# GameService > Query > " + query);
+			// System.out.println("# GameService > Query > " + query);
 			
 			if(!result.next())
 				return null;
@@ -134,7 +130,7 @@ public class GameService implements Serializable {
 			statement = db.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
 			
-			System.out.println("# GameService > Query > " + query);
+			// System.out.println("# GameService > Query > " + query);
 			
 			if(!result.next())
 				return null;

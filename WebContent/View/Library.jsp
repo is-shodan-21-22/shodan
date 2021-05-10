@@ -7,13 +7,7 @@
 	</h1>
 	
 	<div id="my-collection" class="games">
-		<c:forEach items="${games}" var="game">
-			<div data-game-id="${game.id}" style="background-image: url('Static/GamePictures/${game.image}')" class="game-container">
-				<div class="game-overlay">
-					${game.name}
-				</div>
-			</div>
-		</c:forEach>
+		<!-- View/AJAX_Components/GameList.jsp -->
 	</div>
 </div>
 

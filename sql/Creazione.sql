@@ -15,6 +15,7 @@ CREATE TABLE users(
     user_email varchar(32) NOT NULL,
     user_money int NOT NULL DEFAULT 500,
     user_admin boolean NOT NULL DEFAULT false,
+    user_session varchar(32) DEFAULT NULL,
     
     PRIMARY KEY(user_id)
 );
@@ -34,7 +35,17 @@ CREATE TABLE games(
 DROP TABLE IF EXISTS has_game;
 CREATE TABLE has_game(
 	user_id int NOT NULL,
-	game_id int NOT NULL
+	game_id int NOT NULL,
+    
+    PRIMARY KEY(user_id, game_id)
+);
+
+DROP TABLE IF EXISTS has_cart;
+CREATE TABLE has_cart(
+	user_id int NOT NULL,
+    game_id int NOT NULL,
+    
+    PRIMARY KEY(user_id, game_id)
 );
 
 DROP TABLE IF EXISTS blog;

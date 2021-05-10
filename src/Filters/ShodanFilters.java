@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Model.User;
+import Service.UserService;
 
 @WebFilter(urlPatterns = 
 	{ 
@@ -29,21 +30,39 @@ public class ShodanFilters implements Filter {
 		HttpServletRequest hRequest = (HttpServletRequest) request;
 		HttpServletResponse hResponse = (HttpServletResponse) response;
 		
-		User user = (User) hRequest.getSession().getAttribute("user_metadata");
 		String uri = hRequest.getRequestURI();
+		String encoding = "";
+		User user;
 		
-		if(uri.contains("/index.jsp") || uri.equals("/Shodan/")) {
-			if(user != null)
-				hResponse.sendRedirect("app.jsp");
-		} else if(uri.contains("/app.jsp")) {
-			if(user == null)
-				hResponse.sendRedirect("index.jsp");
-		} else if(uri.contains("/admin.jsp")) {
-			if(user == null || !user.isAdmin())
-				hResponse.sendRedirect("app.jsp");
-		}
+		System.out.println("# ShodanFilters > URI > " + uri);
+		
+		if(uri.contains("jsessionid")) {
+			String jsession = uri.substring(uri.lastIndexOf("=") + 1);
+			System.out.println("# ShodanFilters > URL Rewriting > " + jsession);
+		
+			if(new UserService().getUserBySession(jsession) != null) {
+				user = new UserService().getUserBySession(jsession);
+				
+				System.out.println("# ShodanFilters > Utente: " + user.toString());
+			} else
+				user = null;
+			
+			encoding = ";jsessionid=" + jsession;
+		} else
+			user = (User) hRequest.getSession().getAttribute("user_metadata");
 		
 		chain.doFilter(hRequest, hResponse);
+		
+		if(uri.contains("/index.jsp") || uri.contains("Shodan/;jsessionid=") || uri.equals("/Shodan/")) {
+			if(user != null)
+				hResponse.sendRedirect("app.jsp" + encoding);
+		} else if(uri.contains("/app.jsp")) {
+			if(user == null)
+				hResponse.sendRedirect("index.jsp" + encoding);
+		} else if(uri.contains("/admin.jsp")) {
+			if(user == null || !user.isAdmin())
+				hResponse.sendRedirect("app.jsp" + encoding);
+		}
 	}
 
 }

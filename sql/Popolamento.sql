@@ -6,6 +6,14 @@ DELETE FROM users;
 INSERT INTO users(user_name, user_password, user_email, user_admin) VALUES 
 	('admin', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', "antonio@shodan.it", 1); /* Password: 123 in SHA256 */
 
+DROP TABLE IF EXISTS jsessions;
+CREATE TABLE jsessions(
+	jsession varchar(32) NOT NULL,
+	user_id int NOT NULL,
+    
+    PRIMARY KEY(jsession)
+);
+
 DELETE FROM games;
 INSERT INTO games(game_name, game_image, game_price) VALUES 
 	('Doom', 'Doom.png', 50),

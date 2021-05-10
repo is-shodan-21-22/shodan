@@ -23,23 +23,7 @@
 	</head>
 	
 	<body>
-		<div class="shodan-games left">
-			<div class="shodan-games-container">
-				<c:forEach items="${games}" var="game">
-					<div 
-						data-game-id="${game.id}" 
-						data-game-name="${game.name}" 
-						data-game-price="${game.price}" 
-						style="background-image: url('Static/GamePictures/${game.image}')" 
-						class="game-container"
-					>
-						<div class="game-overlay">
-							&nbsp;
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-		</div>
+		<div class="shodan-games left"></div>
 		
 		<main>
 			<div class="shodan-logo-container">

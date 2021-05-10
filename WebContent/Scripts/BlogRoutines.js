@@ -7,13 +7,16 @@ $(document).ready(
 				method: "GET",
 				url: "BlogServlet",
 				data: {
-					action: "blog"
+					action: "blog",
+					endpoint: "View/AJAX_Components/BlogList.jsp"
 				},
 				beforeSend: () => {
 					$(".blog").html("<div class=\"loader loader-lowered\">");
 				},
-				success: () => {
-					setTimeout(() => $(".blog").load("View/Blog.jsp .blog"), 400);
+				success: (data) => {
+					setTimeout(() => {
+						$(".blog").html(data)
+					}, 400)
 				},
 				error: () => {
 					setTimeout(() => $(".blog").html(setEmptyView()), 400);
