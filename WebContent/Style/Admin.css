@@ -8,8 +8,6 @@ body{
 	background-color: black;
 	color:white;
 	text-shadow: 2px 2px Purple;
-	margin-left: 20%;
-	margin-right: 20%;
 	font-size: Large;
 	font-family: sans-serif;
 	text-align: center
@@ -25,7 +23,19 @@ body{
     background-position: center;
 }
 
+#article-html {
+	resize: none;
+}
 
+.shodan-admin-header {
+  	width: 100%;
+  	height: 100px;
+  	background-color: #322d33;
+  	border-width: 2px;
+  	border-style: solid;
+  	border-color: #fb21ff;
+  	border-radius:20px;
+}
 
 .shodan-admin-form {
 	display: flex;
@@ -35,15 +45,14 @@ body{
 .shodan-admin-form form {
 	border-radius: 5px;
 	padding: 25px;
-	margin-left: 20px;
 	display: flex;
 	flex-direction: column;
-	min-width: 300px;
+	min-width: 60%;
 	background: #322d33;
 	box-shadow: 2px 2px #fb21ff;
 }
 
-.shodan-admin-form form h1 {
+.shodan-admin-form form h2 {
 	padding: 0;
 	text-align: center;
 	padding-bottom: 20px;
@@ -63,5 +72,16 @@ body{
 	color: red;
 	font-size: 13px;
 	text-shadow: 0 0;
+}
+
+.shodan-admin-footer {
+  	width: 100%;
+  	height: 100px;
+  	overflow: hidden;
+  	background-color:#322d33;
+  	border-width: 2px;
+  	border-style: solid;
+  	border-color: #fb21ff;
+  	border-radius:20px;
 }
 
