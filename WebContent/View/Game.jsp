@@ -1,4 +1,4 @@
-<div class="content content-master">
+<div class="content">
 	<div id="game-page">
 		<h1>
 			<i class="fas fa-gamepad"></i>

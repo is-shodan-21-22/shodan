@@ -528,6 +528,31 @@ body main #app .content #cart {
 	text-align: center;
 }
 
+body main #app .content #cart-container #cart .cart-picture-col {
+	width: 25%;
+} 
+
+body main #app .content #cart-container #cart .cart-picture-col img {
+	width: 35%;
+} 
+
+body main #app .content #cart-container #cart .cart-title-col p {
+	font-size: 30px;
+	font-weight: 600;
+	margin-bottom: 5px;
+	margin-top: 0;
+} 
+
+body main #app .content #cart-container #cart .cart-title-col span {
+	font-size: 17.5px;
+} 
+
+body main #app .content #cart-container #cart .cart-price-col {
+	font-size: 27.5px;
+	font-weight: 600;
+} 
+
+
 body main #app .content .cart-buttons {
 	padding: 15px;
 }
@@ -537,11 +562,15 @@ body main #app .content .cart-buttons .button--danger {
 }
 
 
-body main #app .content #cart .first-row,
-body main #app .content #cart .last-row {
+body main #app .content #cart-container #cart .first-row,
+body main #app .content #cart-container #cart .last-row {
 	font-weight: 600;
 	font-size: 18.5px;
 	background: #171717;
+}
+
+body main #app .content #cart-container #cart .last-row {
+	font-size: 22.5px;
 }
 
 body main #app .content #cart tr {
