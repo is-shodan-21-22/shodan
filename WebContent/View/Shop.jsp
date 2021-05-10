@@ -12,20 +12,7 @@
 	</div>
 					
 	<div id="shop-games" class="games">
-		<c:forEach items="${games}" var="game">
-			<div 
-				data-game-id="${game.id}" 
-				data-game-name="${game.name}" 
-				data-game-price="${game.price}" 
-				style="background-image: url('Static/GamePictures/${game.image}')" 
-				class="game-container"
-			>
-				<div class="game-add">+</div>
-				<div class="game-overlay">
-					${game.name}
-				</div>
-			</div>
-		</c:forEach>
+		<!-- View/AJAX_Components/GameList.jsp -->
 	</div>
 </div>
 

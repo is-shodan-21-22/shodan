@@ -17,11 +17,13 @@ if(new URLSearchParams(window.location.search).has("blog"))
 		window.history.pushState(null, null, parsed_path);
 		
 function refreshCart() {
-	if(localStorage.getItem("cart") != null) {
-		$(".fa-clipboard").fadeOut("slow", () => {
-			$(".cart-quantity-value").html(JSON.parse(localStorage.getItem("cart")).length);
-			$(".cart-quantity-value").show(700);
-		});
+	if(navigator.cookieEnabled) {
+	$(".cart-quantity-value").text(localStorage.getItem("cart"));
+		if(localStorage.getItem("cart") != null) {
+			$(".fa-clipboard").fadeOut("slow", () => {
+				$(".cart-quantity-value").show(700);
+			});
+		}
 	}
 }
 
@@ -29,29 +31,15 @@ function deleteCart() {
 	$(".cart-quantity-value").fadeOut("slow", () => {
 		$(".fa-clipboard").fadeIn("slow");
 	});
-	
 	localStorage.removeItem("cart");
 }
 
-function updateCart(id, name, price) {
-	const cart = JSON.parse(localStorage.getItem("cart"));
-	let newCart = cart == null ? [] : cart;
-						
-	newCart.push(
-		{
-			game_id: id,
-			game_name: name,
-			game_price: price
-		}
-	);
-
-	console.log(newCart);
-
-	localStorage.setItem("cart", JSON.stringify(newCart));
-						
+function updateCart() {
+	if(localStorage.getItem("cart") != null)				
+		localStorage.setItem("cart", parseInt(localStorage.getItem("cart")) + 1);
+	else
+		localStorage.setItem("cart", 1);
 	refreshCart();
-						
-	return false;
 }
 
 function setEmptyView() {

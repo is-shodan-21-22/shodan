@@ -27,12 +27,29 @@ public class HasCartService implements Serializable {
 	}	
 	
 	public boolean addItem(HasCart cart) {
-		String query = "INSERT INTO has_cart VALUES ( " + cart.getUserId() + ", " + cart.getGameId() + ")";
+		String ownedGamesQuery = "SELECT * FROM has_game WHERE user_id = " + cart.getUserId() + " AND game_id = " + cart.getGameId();
 		
-		System.out.println("# HasCartService > Query > " + query);
+		System.out.println("# HasCartService > Query > " + ownedGamesQuery);
 		
 		try {
-			statement = db.prepareStatement(query);
+			statement = db.prepareStatement(ownedGamesQuery);
+			ResultSet result = statement.executeQuery();
+			
+			if(result.next())
+				return false;
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			return false;
+		}
+		
+		String addGameQuery = "INSERT INTO has_cart VALUES (" + cart.getUserId() + ", " + cart.getGameId() + ")";
+		
+		System.out.println("# HasCartService > Query > " + addGameQuery);
+		
+		try {
+			statement = db.prepareStatement(addGameQuery);
 			statement.executeUpdate();
 			
 			return true;
@@ -60,8 +77,8 @@ public class HasCartService implements Serializable {
 		return false;
 	}
 	
-	public boolean dropCart(HasCart cart) {
-		String query = "DELETE FROM has_cart WHERE user_id = " + cart.getUserId();
+	public boolean dropCart(User user) {
+		String query = "DELETE FROM has_cart WHERE user_id = " + user.getId();
 		
 		System.out.println("# HasCartService > Query > " + query);
 		

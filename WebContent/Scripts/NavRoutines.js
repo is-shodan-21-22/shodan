@@ -18,8 +18,10 @@ function closeSider() {
 	$("nav").removeClass("open");
 }
 
-if(!navigator.cookieEnabled)
+if(!navigator.cookieEnabled) {
 	$("#nav-close").hide();
+	$(".cart-quantity").hide();
+}
 
 $(document).ready(
 	() => {
@@ -28,9 +30,10 @@ $(document).ready(
 				openSider();
 			else
 				closeSider();
+			setTimeout(() => {
+				refreshCart()
+			}, 1000);
 		}
-			
-		//setTimeout(() => refreshCart(), 1000);
 		
 		$("#nav-logo").click(
 			() =>
@@ -54,7 +57,11 @@ $(document).ready(
 				let container = $(this).attr("id")[0].toUpperCase() + $(this).attr("id").split("-")[0].slice(1) + ".jsp";
 				
 				if($(this).attr("id").split("-")[0] == "admin") {
-					let parsed_path = "admin.jsp" + window.location.href.substring(window.location.href.indexOf(";"));
+					let parsed_path;
+					if(!navigator.cookieEnabled)
+						parsed_path = "admin.jsp" + window.location.href.substring(window.location.href.indexOf(";"));
+					else
+						parsed_path = "admin.jsp";
 					window.location.replace(parsed_path);
 				}
 					
@@ -75,7 +82,6 @@ $(document).ready(
 	
 		$("#logout-link").click(
 			() => {
-				console.log(0);
 				document.cookie = "user_session=; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 				$.ajax(
 					{

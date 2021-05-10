@@ -13,13 +13,13 @@
 	
 	<div id="cart-container">
 		<table id="cart">
-			<tr class="first-row">
+			<tr class="cart-item first-row">
 				<td>Copertina</td>
 				<td>Titolo</td>
 				<td>Prezzo</td>
 			</tr>
 			<c:forEach items="${games}" var="game">
-				<tr>
+				<tr class="cart-item">
 					<td class="cart-picture-col"> 
 						<img src="Static/GamePictures/${game.image}" />
 					</td>
@@ -33,9 +33,9 @@
 				</tr>
 			</c:forEach>
 			<tr class="last-row">
-				<td> &nbsp; </td>
-				<td> <strong>Totale</strong> </td>
-				<td> ${total} &euro; </td>
+				<td class="last-row-info"> &nbsp; </td>
+				<td class="last-row-tag"> <strong>Totale</strong> </td>
+				<td class="last-row-total"> ${total} &euro; </td>
 			</tr>
 		</table>
 		
