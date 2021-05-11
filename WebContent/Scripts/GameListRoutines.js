@@ -5,6 +5,9 @@ $(function() {
 			$("#app").load("View/Game.jsp");
 		}
 	);
+	
+	if($("#my-collection").length)
+		$(".game-add").hide();
 					
 	$(".game-add").off().click(
 		function(event) {
