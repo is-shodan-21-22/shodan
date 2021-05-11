@@ -83,6 +83,7 @@ $(document).ready(
 		$("#logout-link").click(
 			() => {
 				document.cookie = "user_session=; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+				
 				$.ajax(
 					{
 						method: "POST",
@@ -93,10 +94,12 @@ $(document).ready(
 							jsession: window.location.href.substring(
 								window.location.href.lastIndexOf("=") + 1
 							)
+						},
+						success: () => {
+							window.location.replace("index.jsp");
 						}
 					}
 				);
-				window.location.replace("index.jsp");
 			}
 		);
 	}

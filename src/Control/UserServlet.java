@@ -93,8 +93,6 @@ public class UserServlet extends HttpServlet {
 		switch(request.getParameter("action")) {
 			case "removeUser":
 				User user = new UserService().getUser(Integer.valueOf(request.getParameter("user-id")));
-	
-				// Servlet di rimozione dell'utente
 				
 				if(user != null ) {
 					if(!user.isAdmin()) {
@@ -120,19 +118,20 @@ public class UserServlet extends HttpServlet {
 				break;
 			
 			case "logout":
-				System.out.println("#UserServlet > POST > Logout dell'utente");
+				System.out.println("# UserServlet > POST > Logout dell'utente");
 				
 				if(request.getParameter("cookie").equals("false")) {
 					user = new UserService().getUserBySession(request.getParameter("jsession"));
 				} else
 					user = (User) request.getSession().getAttribute("user_metadata");
+				
 				new UserService().destroySession(user);
 				request.getSession().removeAttribute("user_metadata");
 				
 				break;
 				
 			default:
-				System.out.println("#UserServlet > POST > Nessuna azione specificata");
+				System.out.println("# UserServlet > POST > Nessuna azione specificata");
 				
 				break;
 			

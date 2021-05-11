@@ -53,6 +53,9 @@ public class ShodanFilters implements Filter {
 		
 		chain.doFilter(hRequest, hResponse);
 		
+		if(user != null)
+			System.out.println("# ShodanFilters > Routing di [" + user.getId() + "] " + user.getName());
+		
 		if(uri.contains("/index.jsp") || uri.contains("Shodan/;jsessionid=") || uri.equals("/Shodan/")) {
 			if(user != null)
 				hResponse.sendRedirect("app.jsp" + encoding);

@@ -8,7 +8,7 @@ $(document).ready(
 				url: "GameServlet",
 				data: {
 					action: "shop",
-					limit: 5,
+					limit: 3,
 					endpoint: "View/AJAX_Components/GameSlideshow.jsp"
 				},
 				beforeSend: () => {
@@ -28,7 +28,7 @@ $(document).ready(
 				url: "GameServlet",
 				data: {
 					action: "shop",
-					limit: 5,
+					limit: 3,
 					order: "DESC",
 					endpoint: "View/AJAX_Components/GameSlideshow.jsp"
 				},

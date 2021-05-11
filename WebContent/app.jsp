@@ -3,12 +3,9 @@
 	contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"
 %>
-
 <!DOCTYPE html>
 <html>
-
 	<head>
-	<%@ page isELIgnored="false" %>
 		<meta charset="UTF-8">
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +21,7 @@
 		<!-- jQuery -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		
-		<!-- Common AJAX & JavaScript Routines -->
+		<!-- Main AJAX & JavaScript Routines -->
 		<script src="Scripts/AppRoutines.js"></script>
 	</head>
 	
@@ -34,5 +31,4 @@
 			<div id="app"></div>	
 		</main>
 	</body>
-	
 </html>

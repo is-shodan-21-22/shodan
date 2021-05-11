@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,7 +22,9 @@
 	</head>
 	
 	<body>
-		<div class="shodan-games left"></div>
+		<div class="shodan-games left">
+			<!-- View/AJAX_Components/GameSlideshow.jsp -->
+		</div>
 		
 		<main>
 			<div class="shodan-logo-container">
@@ -47,6 +48,7 @@
 						</p>
 					</div>	
 				</div>
+				
 				<div class="shodan-info bordered">
 					<div class="shodan-info-content">
 						<i class="fas fa-gamepad"></i>
@@ -58,6 +60,7 @@
 						</p>
 					</div>	
 				</div>
+				
 				<div class="shodan-info">
 					<div class="shodan-info-content">
 						<i class="fas fa-shopping-cart"></i>
@@ -71,20 +74,25 @@
 			</div>
 			
 			<div class="shodan-form-container">
-				<form onsubmit="tryLogin(); return false" method="POST">
+				<form onsubmit="tryLogin(); return false">
 					<h1>Accesso</h1>
+					
 		 			<input id="login-username" required placeholder="Username" type="text">
 		 			<input id="login-password" required placeholder="Password" type="password">
-		 			<input id="login-submit" type="submit" name="login_submit">
+		 			<input id="login-submit" type="submit">
+		 			
 		 			<div id="login-message"></div>
 				</form>
+				
 				<form onsubmit="trySignIn(); return false">
 					<h1>Registrazione</h1>
+					
 		 			<input id="signin-username" required placeholder="Username" type="text">
 		 			<input id="signin-password" required placeholder="Password" type="password">
 		 			<input id="signin-password-again" required placeholder="Ripeti la password" type="password">
 		 			<input id="signin-email" required placeholder="Email" type="email">
 		 			<input id="signin-submit" type="submit">
+		 			
 		 			<div id="signin-message"></div>
 				</form>
 			</div>
@@ -97,21 +105,7 @@
 		</main>
 		
 		<div class="shodan-games right">
-			<div class="shodan-games-container">
-				<c:forEach items="${desc_games}" var="desc_game">
-					<div 
-						data-game-id="${desc_game.id}" 
-						data-game-name="${desc_game.name}" 
-						data-game-price="${desc_game.price}" 
-						style="background-image: url('Static/GamePictures/${desc_game.image}')" 
-						class="game-container"
-					>
-						<div class="game-overlay">
-							&nbsp;
-						</div>
-					</div>
-				</c:forEach>
-			</div>
+			<!-- View/AJAX_Components/GameSlideshow.jsp -->
 		</div>
 	</body>
 </html>
