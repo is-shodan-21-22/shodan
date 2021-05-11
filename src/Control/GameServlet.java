@@ -115,27 +115,29 @@ public class GameServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# GameServlet > Session: " + request.getSession().getId());
 		
-		Part filePart = request.getPart("game-image");
-		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-		
-		try {
-			InputStream fileContent = filePart.getInputStream();
-			File filePath = new File(getServletContext().getRealPath("Static/GamePictures"));
-			File file = new File(filePath, fileName);
-			
-			filePath.mkdir();
-			
-			Files.copy(fileContent, file.toPath());
-		} catch(AccessDeniedException | FileAlreadyExistsException e) {
-			e.printStackTrace();
-			
-			request.setAttribute("messageGameAdd", "Non &erave; stato possibile aggiungere il gioco.");
-			response.setStatus(400);
-		}
+	
 		
 		switch(request.getParameter("action")) {
 		
 			case "addGame":
+				Part filePart = request.getPart("game-image");
+				String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+				
+				try {
+					InputStream fileContent = filePart.getInputStream();
+					File filePath = new File(getServletContext().getRealPath("Static/GamePictures"));
+					File file = new File(filePath, fileName);
+					
+					filePath.mkdir();
+					
+					Files.copy(fileContent, file.toPath());
+				} catch(AccessDeniedException | FileAlreadyExistsException e) {
+					e.printStackTrace();
+					
+					request.setAttribute("messageGameAdd", "Non &erave; stato possibile aggiungere il gioco.");
+					response.setStatus(400);
+				}
+				
 				new GameService().addGame(
 					request.getParameter("game-name"), 
 					fileName, 
