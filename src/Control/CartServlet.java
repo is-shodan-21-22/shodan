@@ -76,6 +76,8 @@ public class CartServlet extends HttpServlet {
 					for(Game game : games)
 						new HasGameService().addGame(user, game);
 					
+					System.out.println("# CartServlet > Pagamento > Saldo utente: " + user.getMoney() + " - Totale: " + Integer.valueOf(request.getParameter("total")));
+					
 					user.setMoney(
 						user.getMoney() - Integer.valueOf(request.getParameter("total"))
 					);

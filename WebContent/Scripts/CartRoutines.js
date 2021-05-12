@@ -35,7 +35,7 @@ $(function() {
 	
 });
 
-$(document).on("click", "#cart-delete", 
+$(document).off().on("click", "#cart-delete", 
 	() => {
 		$(".cart-item").hide();
 		$("#cart-pay").hide();
@@ -62,7 +62,7 @@ $(document).on("click", "#cart-delete",
 	}
 );
 
-$(document).on("click", "#cart-pay", 
+$(document).off().on("click", "#cart-pay", 
 	() => {
 		$.ajax(
 			{

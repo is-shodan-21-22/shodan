@@ -37,7 +37,8 @@ $(document).off().on("click", "#add-to-cart", () => {
 				cookie: navigator.cookieEnabled,
 				game_id: $(".game-info-container").parent().attr("data-game-id"),
 				jsession: window.location.href.substring(
-					window.location.href.lastIndexOf("=") + 1
+					window.location.href.indexOf("=") + 1, window.location.href.indexOf("=") + 33
+					
 				),
 				total: $(".last-row-total").text().split(" ")[1]
 			},
