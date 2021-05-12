@@ -26,8 +26,6 @@ $(document).ready(
 );
 
 $(document).off().on("click", "#add-to-cart", () => {
-	console.log(0);
-	
 	$.ajax(
 		{
 			type: "POST",

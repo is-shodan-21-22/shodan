@@ -6,14 +6,6 @@ DELETE FROM users;
 INSERT INTO users(user_name, user_password, user_email, user_admin) VALUES 
 	('admin', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', "antonio@shodan.it", 1); /* Password: 123 in SHA256 */
 
-DROP TABLE IF EXISTS jsessions;
-CREATE TABLE jsessions(
-	jsession varchar(32) NOT NULL,
-	user_id int NOT NULL,
-    
-    PRIMARY KEY(jsession)
-);
-
 DELETE FROM games;
 INSERT INTO games(game_name, game_image, game_description, game_price, game_release) VALUES 
 	('Doom', 'Doom.png', "Doom ha avuto numerosi adattamenti: realizzato originariamente per il sistema operativo DOS, è stato convertito per Windows 95 in occasione del lancio delle DirectX di Microsoft, oltre che sulla maggior parte delle console disponibili. Diversi sono anche i seguiti, a partire da Doom II: Hell on Earth del 1994, The Ultimate Doom (1995), riedizione comprendente i primi tre episodi originali, più un quarto inedito, Thy Flesh Consumed; Final Doom del 1996, due episodi separati (intitolati The Plutonia Experiment e TNT: Evilution) non sviluppati dalla id Software; Master Levels for Doom II (1995), una raccolta di livelli aggiuntivi, e Doom 64 (1997), un remake per Nintendo 64. Il capitolo successivo, Doom 3, è stato pubblicato nel 2004 e ha abbandonato l'ormai obsoleta tecnologia dei primi capitoli, pubblicati agli inizi degli anni novanta, per abbracciare quella delle nuove generazioni di PC e console; nel 2005 è stato pubblicato uno spin-off per telefoni cellulari intitolato Doom RPG, mentre uno per iPhone, dal titolo di Doom Resurrection, è stato pubblicato nel 2009.", 50, '1998-05-11'),
