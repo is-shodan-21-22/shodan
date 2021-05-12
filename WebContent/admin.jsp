@@ -14,57 +14,78 @@
 		
 		<!-- Admin Stylesheet -->
 		<link rel="stylesheet" href="Style/Admin.css">
+		
+		<script>
+			function tryRedirect() {
+				let parsed_path;
+				if(!navigator.cookieEnabled)
+					if(window.location.href.indexOf(";") != -1)
+						parsed_path = "app.jsp" + window.location.href.substring(window.location.href.indexOf(";"));
+					else {
+						window.history.back();
+						return;	
+					}
+				else
+					parsed_path = "app.jsp";
+				console.log("Redirecting to " + parsed_path)
+				window.location.replace(parsed_path);
+			}
+		</script>
 	</head>
 	
 	<body>
 			<header class="shodan-admin-header"></header>
-			<br>
+			
+			<div onclick="tryRedirect();" id="go-back">
+				Torna indietro
+			</div>
+			
 			<div class="shodan-admin-form">
 				<form enctype="multipart/form-data" action="GameServlet" method="POST">
 					<h2>Aggiungi gioco</h2>
-					<input class="input" name="game-name" type="text" placeholder="inserisci nome del gioco" required>
+					<input class="input" name="game-name" type="text" placeholder="Inserisci il nome del gioco" required>
 					<input class="input" name="game-image" type="file" required>
-					<input class="input" name="game-price" type="number" placeholder="inserisci prezzo del gioco" required>
+					<input class="input" name="game-price" type="number" placeholder="Inserisci il prezzo del gioco" required>
 					<input type="hidden" name="action" value="addGame">
 					<input class="button" type="submit" value="Aggiungi">
 					<span class="admin-message">${messageGameAdd}</span>
 				</form>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
 				<form action="GameServlet" method="POST" >
-				<h2>Elimina gioco</h2>
-					<input class="input" name="game-id" type="number" placeholder="inserisci id del gioco" required>
+					<h2>Elimina gioco</h2>
+					<input class="input" name="game-id" type="number" placeholder="Inserisci l'ID del gioco" required>
 					<input type="hidden" name="action" value="deleteGame">
 					<input class="button" type="submit" value="Elimina">
 					<span class="admin-message">${messageGameDelete}</span>
 					<span class="error-admin-message">${errorMessageGameDelete}</span>
 				</form>
 			</div>
-			<br>
+			
 			<div class="shodan-admin-form">
 				<form action="BlogServlet" method="POST">
 					<h2>Aggiungi articolo</h2>
-					<input class="input" name="add-article-title" type="text" placeholder="inserisci titolo dell'articolo" required>
-					<input class="input" name="article-shortTitle" type="text" placeholder="inserisci sottotitolo dell'articolo" required>
+					<input class="input" name="add-article-title" type="text" placeholder="Inserisci il titolo dell'articolo" required>
+					<input class="input" name="article-shortTitle" type="text" placeholder="Inserisci il sottotitolo dell'articolo" required>
 					<textarea class="input" name="article-html" rows="4" cols="5">Inserisci il contenuto dell'articolo.</textarea>
 					<input type="hidden" name="action" value="addArticle">
 					<input class="button" type="submit" value="Aggiungi">
 					<span class="admin-message">${messageArticleAdd}</span>
 				</form>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
 				<form action="BlogServlet" method="POST">
 					<h2>Rimuovi articolo</h2>
-					<input class="input" name="delete-article-id" type="number" placeholder="inserisci l'id dell'articolo" required>
+					<input class="input" name="delete-article-id" type="number" placeholder="Inserisci l'ID dell'articolo" required>
 					<input type="hidden" name="action" value="deleteArticle">
 					<input class="button" type="submit" value="Elimina">
 					<span class="admin-message">${messageArticleDelete}</span>
 					<span class="error-admin-message">${errorMessageArticleDelete}</span>
 				</form>
 			</div>
-			<br>
+			
 			<div class="shodan-admin-form">
 				<form action="UserServlet" method="POST">
 					<h2>Elimina utente</h2>
-					<input class="input" name="user-id" type="number" placeholder="inserisci l'id dell'utente" required>
+					<input class="input" name="user-id" type="number" placeholder="Inserisci l'ID dell'utente" required>
 					<input type="hidden" name="action" value="removeUser">
 					<input class="button" type="submit" value="Elimina">
 					<span class="admin-message">${messageUserDelete}</span>
