@@ -2,8 +2,8 @@ package Model;
 
 public class HasCart {
 	
-	int user_id;
-	int game_id;
+	private int user_id;
+	private int game_id;
 	
 	public HasCart(int user_id, int game_id) {
 		this.user_id = user_id;

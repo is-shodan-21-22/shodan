@@ -6,12 +6,12 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = -3555522637968508649L;
 	
-	int id;
-	int money;
-	String name;
-	String password;
-	String email;
-	String session;
+	private int id;
+	private int money;
+	private String name;
+	private String password;
+	private String email;
+	private String session;
 	boolean admin;
 	
 	public User(int id, String username, String password, String email, int money, boolean admin, String session) {

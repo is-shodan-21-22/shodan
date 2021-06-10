@@ -6,8 +6,8 @@ public class HasGame implements Serializable {
 
 	private static final long serialVersionUID = 1781620604484876503L;
 	
-	public int user_id;
-	public int game_id;
+	private int user_id;
+	private int game_id;
 	
 	public HasGame(int user_id, int game_id) {
 		this.user_id = user_id;

@@ -7,12 +7,12 @@ public class Game implements Serializable {
 
 	private static final long serialVersionUID = -9122194956940676053L;
 	
-	public int id;
-	public int price;
-	public String name;
-	public String description;
-	public String image;
-	public Date release;
+	private int id;
+	private int price;
+	private String name;
+	private String description;
+	private String image;
+	private Date release;
 	
 	public Game(int id, int price, String name, String description, String image, Date release) {
 		this.id = id;
