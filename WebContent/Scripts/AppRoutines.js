@@ -1,4 +1,3 @@
-
 $(document).ready(
 	() => {
 		$("#app").load("View/Dashboard.jsp");
@@ -18,19 +17,23 @@ if(new URLSearchParams(window.location.search).has("blog"))
 		
 function refreshCart() {
 	if(navigator.cookieEnabled) {
-	$(".cart-quantity-value").text(localStorage.getItem("cart"));
+		$(".cart-quantity-value").text(localStorage.getItem("cart"));
 		if(localStorage.getItem("cart") != null) {
-			$(".fa-clipboard").fadeOut("slow", () => {
-				$(".cart-quantity-value").show(700);
-			});
+			$(".fa-clipboard").fadeOut("slow", 
+				() => {
+					$(".cart-quantity-value").show(700);
+				}
+			);
 		}
 	}
 }
 
 function deleteCart() {
-	$(".cart-quantity-value").fadeOut("slow", () => {
-		$(".fa-clipboard").fadeIn("slow");
-	});
+	$(".cart-quantity-value").fadeOut("slow", 
+		() => {
+			$(".fa-clipboard").fadeIn("slow");
+		}
+	);
 	localStorage.removeItem("cart");
 }
 
@@ -43,7 +46,7 @@ function updateCart() {
 }
 
 function setEmptyView() {
-	let view = "<div class=\"empty-view\"><i class=\"far fa-folder-open\"></i>"
+	let view = "<div class=\"empty-view\"><i class=\"far fa-folder-open\"></i>";
 	view += "<div>Non c'è ancora nulla qui...</div></div>";
 	
 	return view;

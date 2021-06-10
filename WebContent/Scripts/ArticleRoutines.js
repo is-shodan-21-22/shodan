@@ -15,9 +15,11 @@ $(document).ready(
 					$("#blog-page").html("<div class=\"loader loader-lowered\">");
 				},
 				success: (data) => { 
-					setTimeout(() => { 
-						$(".content").replaceWith(data.substring(0, data.lastIndexOf("\n")))
-					}, 150)
+					setTimeout(
+						() => { 
+							$(".content").replaceWith(data.substring(0, data.lastIndexOf("\n")))
+						}, 
+					150)
 				}
 			}
 		);
