@@ -65,7 +65,6 @@ function tryLogin(){
 					window.location.replace(data);
 			},
 			error: (data) => {
-				console.log("Errore nel login");
 				$("#login-message").html(data.responseText);
 				$("#login-message").css("color", "red");
 				$("#login-fail").show();
@@ -75,29 +74,38 @@ function tryLogin(){
 }
 
 function trySignIn(){
-	$.ajax(
-		{
-			method: "POST",
-			url: "SignInServlet",
-			data: {
-				username: $("#signin-username").val(),
-				password: $("#signin-password").val(),
-				password2: $("#signin-password-again").val(),
-				email: $("#signin-email").val()
-			},
-			success: (data) => {
-				console.log("Registrazione avvenuta con successo: " + data);
-				$("#signin-message").html(data);
-				$("#signin-message").css("color", "green");
-				$("#signin-message").show();
-			},
-			error: (data) => {
-				console.log("Fallimento nella registrazione: " + data.responseText);
-				$("#signin-message").html(data.responseText);
-				$("#signin-message").css("color", "red");
-				$("#signin-message").show();
+	const password_regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+	
+	if($("#signin-password").val().match(password_regex)) {
+		$.ajax(
+			{
+				method: "POST",
+				url: "SignInServlet",
+				data: {
+					username: $("#signin-username").val(),
+					password: $("#signin-password").val(),
+					password2: $("#signin-password-again").val(),
+					email: $("#signin-email").val()
+				},
+				success: (data) => {
+					$("#signin-message").html(data);
+					$("#signin-message").css("color", "green");
+					$("#signin-message").show();
+				},
+				error: (data) => {
+					$("#signin-message").html(data.responseText);
+					$("#signin-message").css("color", "red");
+					$("#signin-message").show();
+				}
 			}
-		}
-	);
+		);
+	} else {
+		$("#signin-message").css("color", "red");
+		$("#signin-message").html(
+			"La password non rispetta i criteri.<br/>" +
+			"Sono necessari almeno cinque caratteri,<br/>" +
+			"di cui per lo meno un numero e una lettera."
+		);
+	}
 }
 

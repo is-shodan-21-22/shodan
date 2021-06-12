@@ -26,9 +26,12 @@ public class HasGameService implements Serializable {
 	
 	public void addGame(User user, Game game) {
 		try {
-			String query = "INSERT INTO has_game VALUES (" + user.getId() + "," + game.getId() + ")";
+			String query = "INSERT INTO has_game VALUES (?, ?)";
 			
 			statement = db.prepareStatement(query);
+			statement.setInt(1, user.getId());
+			statement.setInt(2, game.getId());
+			
 			statement.executeUpdate();
 			
 			System.out.println("# GameService > Query > " + query);

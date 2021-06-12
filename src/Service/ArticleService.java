@@ -26,9 +26,11 @@ public class ArticleService {
 		Article article = null;
 		
 		try {
-			String query = "SELECT * FROM blog WHERE blog_id = " + id;
+			String query = "SELECT * FROM blog WHERE blog_id = ?";
 			
 			statement = db.prepareStatement(query);
+			statement.setInt(1, id);
+			
 			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# ArticleService > Executing SELECT * FROM blog WHERE blog_id = " + id);
@@ -80,13 +82,17 @@ public class ArticleService {
 		return blog;
 	}
 	
-	public boolean addArticle(String title,String shortTitle,String html){
+	public boolean addArticle(String title, String shortTitle, String html){
 		try {
-			String query = "INSERT INTO blog(blog_title, blog_short_title, blog_html) VALUES('" + title + "','" + shortTitle + "',\"" + html + "\")";
+			String query = "INSERT INTO blog(blog_title, blog_short_title, blog_html) VALUES(?, ?, ?)";
 		
 			System.out.println("# GameService > Query > " + query);
 			
 			statement = db.prepareStatement(query);
+			statement.setString(1, title);
+			statement.setString(2, shortTitle);
+			statement.setString(3, html);
+			
 			statement.executeUpdate();
 			
 			System.out.println("# GameService > Aggiungo l'articolo " + title);
@@ -99,16 +105,18 @@ public class ArticleService {
 		return false;
 	}
 	
-	public boolean deleteArticle(int articleId) {
+	public boolean deleteArticle(int id) {
 		try {
-			String query = "DELETE FROM blog WHERE blog_id =" + articleId ;
+			String query = "DELETE FROM blog WHERE blog_id = ?";
 			
 			System.out.println("# GameService > Query > " + query);
 			
 			statement = db.prepareStatement(query);
+			statement.setInt(1, id);
+			
 			statement.executeUpdate();
 			
-			System.out.println("# GameService > Elimino l'articolo con id " + articleId);
+			System.out.println("# GameService > Elimino l'articolo con id " + id);
 			
 			return true;
 		} catch(SQLException e) {

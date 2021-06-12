@@ -27,9 +27,10 @@ public class UserService implements Serializable {
 		int id = -1;
 		
 		try {
-			String query = "SELECT user_id FROM users WHERE user_name = '" + username + "'";
+			String query = "SELECT user_id FROM users WHERE user_name = ?";
 			
 			statement = db.prepareStatement(query);
+			statement.setString(1, username);
 			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# UserService > Query > " + query);
@@ -47,9 +48,11 @@ public class UserService implements Serializable {
 		User user = null;
 		
 		try {
-			String query = "SELECT * FROM users WHERE user_id = " + id;
+			String query = "SELECT * FROM users WHERE user_id = ?";
 			
 			statement = db.prepareStatement(query);
+			statement.setInt(1, id);
+			
 			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# UserService > Query > " + query);
@@ -75,18 +78,27 @@ public class UserService implements Serializable {
 		try {
 			String query = 
 				  "UPDATE users SET"
-				+ "  user_id = " + user.getId()
-				+ ", user_name = '" + user.getName() + "'"
-				+ ", user_password = '" + user.getPassword() + "'"
-				+ ", user_email = '" + user.getEmail() + "'"
-				+ ", user_money = " + user.getMoney()
-				+ ", user_admin = " + user.isAdmin()
-				+ ", user_session = '" + user.getSession() + "'"
-				+ " WHERE user_id = " + user.getId();
+				+ "  user_id = ?"
+				+ ", user_name = ?"
+				+ ", user_password = ?"
+				+ ", user_email = ?"
+				+ ", user_money = ?"
+				+ ", user_admin =  ?"
+				+ ", user_session =  ?"
+				+ " WHERE user_id = ?";
 		
 			System.out.println("# UserService > Query > " + query);
 			
 			statement = db.prepareStatement(query);
+			statement.setInt(1, user.getId());
+			statement.setString(2, user.getName());
+			statement.setString(3, user.getPassword());
+			statement.setString(4, user.getEmail());
+			statement.setInt(5, user.getMoney());
+			statement.setBoolean(6, user.isAdmin());
+			statement.setString(7, user.getSession());
+			statement.setInt(8, user.getId());
+			
 			statement.executeUpdate();
 			
 			System.out.println("# UserService > Aggiorno l'utente ID " + user.getId());
@@ -101,11 +113,15 @@ public class UserService implements Serializable {
 	
 	public boolean insertUser(String username, String password, String email) {
 		try {
-			String query = "INSERT INTO users(user_name, user_password, user_email) VALUES('" + username + "','" + password + "','" + email + "')";
+			String query = "INSERT INTO users(user_name, user_password, user_email) VALUES(?, ?, ?)";
 			
 			System.out.println("# UserService > Query > " + query);
 			
 			statement = db.prepareStatement(query);
+			statement.setString(1, username);
+			statement.setString(2, password);
+			statement.setString(3, email);
+			
 			statement.executeUpdate();
 			
 			System.out.println("# UserService > Inserisco l'utente " + username);
@@ -121,14 +137,14 @@ public class UserService implements Serializable {
 	
 	public boolean deleteUser(int id) {
 		try {
-			String query = "DELETE FROM users WHERE user_id =" + id ;
-			
-			System.out.println("# UserService > Query > " + query);
+			String query = "DELETE FROM users WHERE user_id = ?";
 			
 			statement = db.prepareStatement(query);
+			statement.setInt(1, id);
+			
 			statement.executeUpdate();
 			
-			System.out.println("# UserService > Eliminazione dell'utente " + id);
+			System.out.println("# UserService > Query > " + query);
 			
 			return true;
 		}catch(SQLException e) {
@@ -140,9 +156,11 @@ public class UserService implements Serializable {
 	
 	public User getUserBySession(String jsession) {
 		try {
-			String query = "SELECT user_id FROM users WHERE user_session = '" + jsession + "'";
+			String query = "SELECT user_id FROM users WHERE user_session = ?";
 			
 			statement = db.prepareStatement(query);
+			statement.setString(0, jsession);
+			
 			ResultSet result = statement.executeQuery();
 			
 			System.out.println("# SessionService > Query > " + query);
@@ -157,15 +175,17 @@ public class UserService implements Serializable {
 	
 	public boolean insertSession(String jsession, User user) {
 		try {
-			String query = "INSERT INTO jsessions(jsession, user_id) VALUES('" + jsession + "', " + user.getId() + ")";
-			
-			System.out.println("# SessionService > Query > " + query);
+			String query = "INSERT INTO jsessions(jsession, user_id) VALUES(?, ?)";
 			
 			statement = db.prepareStatement(query);
+			statement.setString(0, jsession);
+			statement.setInt(0, user.getId());
+			
 			statement.executeUpdate();
+					
+			System.out.println("# SessionService > Query > " + query);
 			
 			return true;
-			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -175,9 +195,11 @@ public class UserService implements Serializable {
 	
 	public void destroySession(User user) {
 		try {
-			String query = "UPDATE users SET user_session = null WHERE user_id = " + user.getId();
+			String query = "UPDATE users SET user_session = null WHERE user_id = ?";
 			
 			statement = db.prepareStatement(query);
+			statement.setInt(0, user.getId());
+			
 			statement.executeUpdate();
 			
 			System.out.println("# SessionService > Query > " + query);
