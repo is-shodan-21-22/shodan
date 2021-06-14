@@ -1,0 +1,15 @@
+# SHODAN
+# Antonio Gravino, Carmine Napolitano, Raffaele Zheng
+# Progetto di Tecnologie e Software per il Web, aa. 2020/2021, prof. Michele Risi
+
+Risorse e librerie esterne utilizzate su Shodan:
+- Icone utilizzate estensivamente sulla piattaforma fornite gratuitamente da FontAwesome (www.fontawesome.com)
+- Librerie e driver di JDBC e JSTL fornite gratuitamente da Oracle (www.oracle.com)
+- Effetto "VHS" utilizzato in index.jsp fornito gratuitamente da CinePacks (www.cinepacks.store)
+- Diagrammi della documentazione realizzati tramite Diagrams (www.diagrams.net)
+- Logo di Shodan realizzato tramite Photoshop (www.adobe.com)
+- Copertine dei giochi reperite da Google Immagini
+
+Altri link utili:
+- Presentazione Powerpoint disponibile su OneDrive: 
+  https://1drv.ms/p/s!ApavQkGLiIDZphlYObvQGz4jXrxc?e=jpw8bx
