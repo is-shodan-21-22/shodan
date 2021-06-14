@@ -44,24 +44,15 @@
 				<form enctype="multipart/form-data" action="GameServlet" method="POST">
 					<h2>Aggiungi gioco</h2>
 					<input class="input" name="game-name" type="text" placeholder="Inserisci il nome del gioco" required>
-					<input class="input" name="game-image" type="file" required>
 					<input class="input" name="game-price" type="number" placeholder="Inserisci il prezzo del gioco" required>
+					<input class="input" name="game-date" type="date" required>
+					<textarea class="input" name="game-description" rows="4" cols="5">Inserisci una descrizione del gioco</textarea>
+					<input class="input" name="game-image" type="file" required>
 					<input type="hidden" name="action" value="addGame">
 					<input class="button" type="submit" value="Aggiungi">
 					<span class="admin-message">${messageGameAdd}</span>
 				</form>
 				
-				<form action="GameServlet" method="POST" >
-					<h2>Elimina gioco</h2>
-					<input class="input" name="game-id" type="number" placeholder="Inserisci l'ID del gioco" required>
-					<input type="hidden" name="action" value="deleteGame">
-					<input class="button" type="submit" value="Elimina">
-					<span class="admin-message">${messageGameDelete}</span>
-					<span class="error-admin-message">${errorMessageGameDelete}</span>
-				</form>
-			</div>
-			
-			<div class="shodan-admin-form">
 				<form action="BlogServlet" method="POST">
 					<h2>Aggiungi articolo</h2>
 					<input class="input" name="add-article-title" type="text" placeholder="Inserisci il titolo dell'articolo" required>
@@ -70,6 +61,18 @@
 					<input type="hidden" name="action" value="addArticle">
 					<input class="button" type="submit" value="Aggiungi">
 					<span class="admin-message">${messageArticleAdd}</span>
+				</form>
+				
+			</div>
+			
+			<div class="shodan-admin-form">
+				<form action="GameServlet" method="POST" >
+					<h2>Elimina gioco</h2>
+					<input class="input" name="game-id" type="number" placeholder="Inserisci l'ID del gioco" required>
+					<input type="hidden" name="action" value="deleteGame">
+					<input class="button" type="submit" value="Elimina">
+					<span class="admin-message">${messageGameDelete}</span>
+					<span class="error-admin-message">${errorMessageGameDelete}</span>
 				</form>
 				
 				<form action="BlogServlet" method="POST">

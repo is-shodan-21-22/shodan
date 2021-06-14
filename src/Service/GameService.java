@@ -2,6 +2,7 @@ package Service;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -154,16 +155,17 @@ public class GameService implements Serializable {
 		return games;
 	}
 	
-	public boolean addGame(String game_name, String game_image, int game_price) {
+	public boolean addGame(String game_name, String game_image, int game_price, Date game_date, String game_description) {
 		try {
-			String query = "INSERT INTO games(game_name, game_image, game_price) VALUES(?, ?, ?)";
+			String query = "INSERT INTO games(game_name, game_image, game_price, game_release, game_description) VALUES(?, ?, ?, ?, ?)";
 		
 			System.out.println("# GameService > Query > " + query);
 			
 			statement = db.prepareStatement(query);
-			statement.setString(1, game_name);
 			statement.setString(2, game_image);
 			statement.setInt(3, game_price);
+			statement.setDate(4, game_date);
+			statement.setString(5, game_description);
 			
 			statement.executeUpdate();
 			

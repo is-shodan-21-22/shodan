@@ -7,6 +7,8 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -141,7 +143,9 @@ public class GameServlet extends HttpServlet {
 				new GameService().addGame(
 					request.getParameter("game-name"), 
 					fileName, 
-					Integer.valueOf(request.getParameter("game-price"))
+					Integer.valueOf(request.getParameter("game-price")),
+					Date.valueOf(request.getParameter("game-date")),
+					request.getParameter("game-description")
 				);
 				
 				request.setAttribute("messageGameAdd", "Gioco aggiunto con successo");
