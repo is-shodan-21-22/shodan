@@ -51,6 +51,7 @@
 					<input type="hidden" name="action" value="addGame">
 					<input class="button" type="submit" value="Aggiungi">
 					<span class="admin-message">${messageGameAdd}</span>
+					<span class="error-admin-message">${errorMessageGameAdd}</span>
 				</form>
 				
 				<form action="BlogServlet" method="POST">

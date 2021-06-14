@@ -52,7 +52,7 @@ $(document).ready(
 									$("#cart-pay").hide();
 									$("#cart-delete").hide();
 									
-									$(".last-row-tag").text("L'acquistato è stato effettuato con successo!");
+									$(".last-row-tag").text("L'acquisto è stato effettuato con successo!");
 									$(".last-row-total").text("");
 									deleteCart();
 								},

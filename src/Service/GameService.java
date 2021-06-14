@@ -162,6 +162,7 @@ public class GameService implements Serializable {
 			System.out.println("# GameService > Query > " + query);
 			
 			statement = db.prepareStatement(query);
+			statement.setString(1, game_name);
 			statement.setString(2, game_image);
 			statement.setInt(3, game_price);
 			statement.setDate(4, game_date);

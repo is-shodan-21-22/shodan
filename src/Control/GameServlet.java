@@ -117,36 +117,67 @@ public class GameServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# GameServlet > Session: " + request.getSession().getId());
 		
-	
-		
 		switch(request.getParameter("action")) {
-		
 			case "addGame":
-				Part filePart = request.getPart("game-image");
-				String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+				String fileName;
+				
+				Date rawDate = Date.valueOf(request.getParameter("game-date"));
+				int parsedDate = Integer.valueOf(rawDate.toString().split("-")[0]);
+				
+				int lesserYear = 1970;
+				int greaterYear = 2000;
+				
+				if(parsedDate < lesserYear || parsedDate > greaterYear) {
+					request.setAttribute("errorMessageGameAdd", "La data inserita non &egrave; valida.");
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
+					response.setStatus(400);
+					
+					return;
+				}
 				
 				try {
+					Part filePart = request.getPart("game-image");
+					fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 					InputStream fileContent = filePart.getInputStream();
 					File filePath = new File(getServletContext().getRealPath("Static/GamePictures"));
 					File file = new File(filePath, fileName);
 					
 					filePath.mkdir();
 					
-					Files.copy(fileContent, file.toPath());
-				} catch(AccessDeniedException | FileAlreadyExistsException e) {
+					if(!file.exists())
+						Files.copy(fileContent, file.toPath());
+					else {
+						request.setAttribute("errorMessageGameAdd", "Impossibile processare la richiesta.");
+						request.getRequestDispatcher("admin.jsp").forward(request, response);
+						response.setStatus(400);
+						
+						return;
+					}
+				} catch(IOException e) {
 					e.printStackTrace();
 					
-					request.setAttribute("messageGameAdd", "Non &erave; stato possibile aggiungere il gioco.");
+					request.setAttribute("errorMessageGameAdd", "Non &egrave; stato possibile aggiungere il gioco.");
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
 					response.setStatus(400);
+					
+					return;
 				}
 				
-				new GameService().addGame(
-					request.getParameter("game-name"), 
-					fileName, 
-					Integer.valueOf(request.getParameter("game-price")),
-					Date.valueOf(request.getParameter("game-date")),
-					request.getParameter("game-description")
-				);
+				try {		
+					new GameService().addGame(
+						request.getParameter("game-name"), 
+						fileName, 
+						Integer.valueOf(request.getParameter("game-price")),
+						rawDate,
+						request.getParameter("game-description")
+					);
+				} catch(IllegalArgumentException e) {
+					e.printStackTrace();
+					
+					request.setAttribute("messageGameAdd", "I dati forniti non sono validi.");
+					response.setStatus(400);
+					return;
+				}
 				
 				request.setAttribute("messageGameAdd", "Gioco aggiunto con successo");
 				request.getRequestDispatcher("admin.jsp").forward(request, response);
@@ -168,7 +199,6 @@ public class GameServlet extends HttpServlet {
 					System.out.println("# GameServlet > POST > Gioco eliminato > " + game.getName());
 				} else {
 					request.setAttribute("errorMessageGameDelete", "Il gioco non è presente");
-					request.getRequestDispatcher("admin.jsp").forward(request, response);
 					
 					System.out.println("# GameServlet > POST > Gioco insistente > " + request.getParameter("game-name"));
 				}
