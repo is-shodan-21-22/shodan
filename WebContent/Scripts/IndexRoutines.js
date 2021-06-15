@@ -57,7 +57,7 @@ function tryLogin(){
 				cookie: navigator.cookieEnabled
 			},
 			success: (data) => {
-				if(data == null)
+				if(data.length == 0)
 					window.history.pushState(null, null, "app.jsp");
 				else
 					window.history.pushState(null, null, data);
