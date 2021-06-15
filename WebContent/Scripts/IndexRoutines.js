@@ -57,13 +57,20 @@ function tryLogin(){
 				cookie: navigator.cookieEnabled
 			},
 			success: (data) => {
-				window.history.pushState(null, null, data);
+				if(data == null)
+					window.history.pushState(null, null, "app.jsp");
+				else
+					window.history.pushState(null, null, data);
 				
 				if(navigator.cookieEnabled)
 					localStorage.setItem("last-page", "Dashboard");
 				
-				window.history.pushState(null, null, "app.jsp");
-				$(document.body).load("View/AJAX_Components/Loading.jsp");
+				$(document.body).fadeOut(400, 
+					() => {
+						$(document.body).load("View/AJAX_Components/Loading.jsp");
+						$(document.body).fadeIn();
+					}
+				);
 			},
 			error: (data) => {
 				$("#login-message").html(data.responseText);
