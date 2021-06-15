@@ -66,7 +66,7 @@
 						<i class="fas fa-shopping-cart"></i>
 						<span>Supporta direttamente gli autori</span>
 						<p>
-							Puoi anche acquistare più copie dello stesso gioco, per supportare le case di sviluppo.
+							La maggior parte del ricavato raggiunge direttamente le aziende, per supportare le case di sviluppo.
 							D'altronde, se i videogiochi esistono è solo grazie ai loro fan più appassionati.
 						</p>
 					</div>	

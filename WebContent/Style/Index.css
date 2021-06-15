@@ -282,3 +282,30 @@ input:-webkit-autofill:focus {
 		flex: 1;
 	}
 }
+
+@media screen and (max-width: 830px) {
+	.shodan-info-container,
+	.shodan-form-container {
+		flex-direction: column;
+	}
+	
+	.shodan-form-container {
+		padding: 25px;
+	}
+	
+	.shodan-form-container>form {
+		margin-bottom: 17.5px;
+		margin-left: 0;
+	}
+	
+	.shodan-logo {
+		background-size: 85%;
+	}
+	
+	.shodan-vhs,
+	.shodan-tv,
+	.shodan-logo {
+		height: 250px;
+		min-height: 250px;
+	}
+}

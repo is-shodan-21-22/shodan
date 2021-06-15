@@ -9,7 +9,7 @@
 			
 <!-- Navbar -->
 <div id="nav-items">
-	<div id="dashboard-link" class="selected">
+	<div id="dashboard-link">
 		<i class="fas fa-store-alt"></i>
 		<span>Dashboard</span>
 	</div>

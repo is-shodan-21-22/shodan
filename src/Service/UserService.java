@@ -159,7 +159,7 @@ public class UserService implements Serializable {
 			String query = "SELECT user_id FROM users WHERE user_session = ?";
 			
 			statement = db.prepareStatement(query);
-			statement.setString(0, jsession);
+			statement.setString(1, jsession);
 			
 			ResultSet result = statement.executeQuery();
 			
@@ -178,8 +178,8 @@ public class UserService implements Serializable {
 			String query = "INSERT INTO jsessions(jsession, user_id) VALUES(?, ?)";
 			
 			statement = db.prepareStatement(query);
-			statement.setString(0, jsession);
-			statement.setInt(0, user.getId());
+			statement.setString(1, jsession);
+			statement.setInt(2, user.getId());
 			
 			statement.executeUpdate();
 					
@@ -198,7 +198,7 @@ public class UserService implements Serializable {
 			String query = "UPDATE users SET user_session = null WHERE user_id = ?";
 			
 			statement = db.prepareStatement(query);
-			statement.setInt(0, user.getId());
+			statement.setInt(1, user.getId());
 			
 			statement.executeUpdate();
 			

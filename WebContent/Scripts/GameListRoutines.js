@@ -3,6 +3,9 @@ $(function() {
 		function() {
 			window.history.pushState(null, null, "?game=" + $(this).attr("data-game-id"));
 			$("#app").load("View/Game.jsp");
+			
+			if(navigator.cookieEnabled)
+				localStorage.setItem("last-page", "Game");
 		}
 	);
 	

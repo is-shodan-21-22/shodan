@@ -19,6 +19,9 @@ $(document).ready(
 						() => {
 							$(".content").replaceWith(data.substring(0, data.lastIndexOf("\n")))
 						}, 150)
+				},
+				error: () => {
+					$(".content").html(setEmptyView("Questo gioco non esiste..."));
 				}
 			}
 		);
@@ -41,7 +44,7 @@ $(document).off().on("click", "#add-to-cart", () => {
 				total: $(".last-row-total").text().split(" ")[1]
 			},
 			success: () => {
-				$("#add-to-cart").html("Aggiunto <strong>" + name +"</strong> al carrello!");
+				$("#add-to-cart").html("Gioco aggiunto al carrello!");
 				updateCart();
 			},
 			error: () => {

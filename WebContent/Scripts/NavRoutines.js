@@ -30,14 +30,48 @@ $(document).ready(
 				openSider();
 			else
 				closeSider();
+			
+			if(localStorage.getItem("last-page") != null) {
+				const container = "#" + localStorage.getItem("last-page").toLowerCase().split(".")[0] + "-link";
+				
+				$("#nav-items>div").each(
+					function() {
+						if($(this).hasClass("selected"))
+							$(this).toggleClass("selected");
+					}
+				);
+				
+				console.log("# Shodan [Component: " + container + "]");
+				
+				if(container == "#game-link")				
+					$("#shop-link").addClass("selected");
+				else if(container == "#article-link")					
+					$("#blog-link").addClass("selected");
+				else			
+					$(container).addClass("selected");
+			}
+				
 			setTimeout(() => {
 				refreshCart()
 			}, 1000);
-		}
+		} else
+			$("#dashboard-link").addClass("selected");
 		
 		$("#nav-logo").click(
-			() =>
-				$("#app").load("View/Dashboard.jsp").fadeIn("slow")
+			() => {
+				$("#app").load("View/Dashboard.jsp").fadeIn("slow");
+				if(navigator.cookieEnabled)
+					localStorage.setItem("last-page", "Dashboard");
+				
+				$("#nav-items>div").each(
+					function() {
+						if($(this).hasClass("selected"))
+							$(this).toggleClass("selected");
+					}
+				);
+				
+				$("#dashboard-link").addClass("selected");
+			}
 		);
 				
 		$("#nav-items>div").click(	
@@ -64,6 +98,9 @@ $(document).ready(
 						parsed_path = "admin.jsp";
 					window.location.replace(parsed_path);
 				}
+				
+				if(navigator.cookieEnabled && $(this) && $(this).attr("id").split("-")[0] != "admin")
+					localStorage.setItem("last-page", container.split(".")[0]);
 					
 				$("#app").load("View/" + container).fadeIn("slow");
 			}

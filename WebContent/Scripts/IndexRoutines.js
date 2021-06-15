@@ -59,6 +59,9 @@ function tryLogin(){
 			success: (data) => {
 				window.history.pushState(null, null, data);
 				
+				if(navigator.cookieEnabled)
+					localStorage.setItem("last-page", "Dashboard");
+				
 				if(data == null)
 					window.location.replace("app.jsp");
 				else

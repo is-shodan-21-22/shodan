@@ -60,6 +60,9 @@ $(document).ready(
 					function() {
 						window.history.pushState(null, null, "?game=6");
 						$("#app").load("View/Game.jsp");
+						
+						if(navigator.cookieEnabled)
+							localStorage.setItem("last-page", "Game");
 					}
 				);
 				

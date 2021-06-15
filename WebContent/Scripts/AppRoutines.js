@@ -1,19 +1,24 @@
 $(document).ready(
 	() => {
-		$("#app").load("View/Dashboard.jsp");
+		if(navigator.cookieEnabled) {
+			if(localStorage.getItem("last-page") != null) {
+				if((localStorage.getItem("last-page") == "Game") && (new URLSearchParams(window.location.search).has("game")))
+					$("#app").load("View/Game.jsp");
+				else if((localStorage.getItem("last-page") == "Article") && (new URLSearchParams(window.location.search).has("blog")))
+					$("#app").load("View/Article.jsp");
+				else
+					$("#app").load("View/" + localStorage.getItem("last-page") + ".jsp");
+			} else {
+				$("#app").load("View/Dashboard.jsp");
+				localStorage.setItem("last-page", "Dashboard.jsp");
+			}
+		} else
+			$("#app").load("View/Dashboard.jsp");
 		$("nav").load("View/Nav.jsp");
 	}
 );
 
 let parsed_path = window.location.href.substring(0, window.location.href.indexOf("?"));
-	
-if(new URLSearchParams(window.location.search).has("game"))
-	if(!$("#game-page").length)
-		window.history.pushState(null, null, parsed_path);
-		
-if(new URLSearchParams(window.location.search).has("blog"))
-	if(!$("#blog-page").length)
-		window.history.pushState(null, null, parsed_path);
 		
 function refreshCart() {
 	if(navigator.cookieEnabled) {
@@ -45,9 +50,9 @@ function updateCart() {
 	refreshCart();
 }
 
-function setEmptyView() {
+function setEmptyView(error = "Non c'è ancora nulla qui...") {
 	let view = "<div class=\"empty-view\"><i class=\"far fa-folder-open\"></i>";
-	view += "<div>Non c'è ancora nulla qui...</div></div>";
+	view += "<div>" + error + "</div></div>";
 	
 	return view;
 }

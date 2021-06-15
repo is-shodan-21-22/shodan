@@ -87,19 +87,28 @@ public class GameServlet extends HttpServlet {
 				break;
 				
 			case "game":
-				int game_id = request.getParameter("game_id") != null
-			      ? Integer.parseInt(request.getParameter("game_id"))
-			      : 0;
-	
-				if(game_id == 0) {
-					System.out.println("# GameServlet > GET > Nessun ID del gioco specificato");
+				int game_id;
+				
+				try {
+					game_id = Integer.parseInt(request.getParameter("game_id"));
+				} catch(NumberFormatException e) {
+					response.setStatus(400);
 					return;
 				}
-			
-				request.setAttribute("game", new GameService().getGame(game_id));
-				request.getRequestDispatcher(endpoint).forward(request, response);
 				
-				System.out.println("# GameServlet > GET > Pagina del gioco ID " + game_id);
+				Game game = new GameService().getGame(game_id);
+				
+				if(game == null) {
+					System.out.println("# GameServlet > GET > ID non valido");
+					
+					response.setStatus(400);
+				} else {
+					System.out.println("# GameServlet > GET > Pagina del gioco ID " + game_id);
+					
+					response.setStatus(200);
+					request.setAttribute("game", game);
+					request.getRequestDispatcher(endpoint).forward(request, response);	
+				}
 				
 				break;
 				

@@ -618,9 +618,33 @@ body main #app .content #cart tr td {
 	}
 	
 	body main #app .content #game-page .game-image-container .game-image {
-		height: 400px !important;
-	    width: 300px !important;
 	    margin-top: 15px !important;
+	    
+    }
+    
+    body main #app .content #game-page .game-info-container .game-release-date {
+    	font-size: 20.5px !important;
     }
 	
+	body main #app .content #game-page .game-info-container .game-description {
+		
+	}
+	
+}
+
+@media screen and (max-width: 500px) {
+	body main #app .content #game-page .game-info-container .game-description {
+		margin-right: 10px;
+	}
+	
+	body main #app .content #game-page .game-image-container {
+	   	width: 100%;
+    }
+	
+	body main #app .content #game-page .game-image-container .game-image {
+    	height: 400px;
+    	width: auto;
+    	background-size: 100% 100%;
+    	margin-right: 15px;
+    }
 }
