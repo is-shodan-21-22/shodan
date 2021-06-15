@@ -62,10 +62,8 @@ function tryLogin(){
 				if(navigator.cookieEnabled)
 					localStorage.setItem("last-page", "Dashboard");
 				
-				if(data == null)
-					window.location.replace("app.jsp");
-				else
-					window.location.replace(data);
+				window.history.pushState(null, null, "app.jsp");
+				$(document.body).load("View/AJAX_Components/Loading.jsp");
 			},
 			error: (data) => {
 				$("#login-message").html(data.responseText);
