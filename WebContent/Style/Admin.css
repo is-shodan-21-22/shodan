@@ -138,4 +138,22 @@ body{
 	
 }
 
+@media screen and (max-width: 425px) {
+    .shodan-admin-header{
+        background-image: url('../Static/Assets/Icon.png');
+    }
 
+    .shodan-admin-form {
+    	flex-direction:column;
+    }
+
+    .shodan-admin-form form {
+    	margin-right: 5%;
+    	margin-left: 5%;
+    }
+
+    .button{
+    	width:25%;
+    }
+
+}
