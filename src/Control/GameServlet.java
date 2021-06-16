@@ -3,12 +3,10 @@ package Control;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.AccessDeniedException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,16 +23,14 @@ import Service.UserService;
 @WebServlet("/GameServlet")
 @MultipartConfig
 public class GameServlet extends HttpServlet {
-
 	private static final long serialVersionUID = -8724190928795580877L;
 	
 	protected void doGet(
 		HttpServletRequest request,
 		HttpServletResponse response
 	) throws ServletException, IOException {
-		System.out.println("# GameServlet > Session: " + request.getSession().getId());
-		
 		User user;
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
 		String endpoint = request.getParameter("endpoint");
 		
 		switch(request.getParameter("action")) {
@@ -43,8 +39,8 @@ public class GameServlet extends HttpServlet {
 							? Integer.parseInt(request.getParameter("limit"))
 							: 0;
 				
-				ArrayList<Game> ascending = new GameService().getAllAscendingGames(limit);
-				ArrayList<Game> descending = new GameService().getAllDescendingGames(limit);
+				ArrayList<Game> ascending = new GameService(db).getAllAscendingGames(limit);
+				ArrayList<Game> descending = new GameService(db).getAllDescendingGames(limit);
 				
 				if(request.getParameter("order") == null) {
 					if(ascending != null) {
@@ -68,11 +64,11 @@ public class GameServlet extends HttpServlet {
 				
 			case "library":
 				if(request.getParameter("cookie").equals("false"))
-					user = new UserService().getUserBySession(request.getParameter("jsession"));
+					user = new UserService(db).getUserBySession(request.getParameter("jsession"));
 				else
 					user = (User) request.getSession().getAttribute("user_metadata");
 				
-				ArrayList<Game> games = new GameService().getAllGamesByUser(user.getId());
+				ArrayList<Game> games = new GameService(db).getAllGamesByUser(user.getId());
 				
 				if(games != null) {
 					request.setAttribute("games", games);
@@ -96,7 +92,7 @@ public class GameServlet extends HttpServlet {
 					return;
 				}
 				
-				Game game = new GameService().getGame(game_id);
+				Game game = new GameService(db).getGame(game_id);
 				
 				if(game == null) {
 					System.out.println("# GameServlet > GET > ID non valido");
@@ -125,6 +121,8 @@ public class GameServlet extends HttpServlet {
 			HttpServletResponse response
 	) throws ServletException, IOException {
 		System.out.println("# GameServlet > Session: " + request.getSession().getId());
+		
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
 		
 		switch(request.getParameter("action")) {
 			case "addGame":
@@ -173,7 +171,7 @@ public class GameServlet extends HttpServlet {
 				}
 				
 				try {		
-					new GameService().addGame(
+					new GameService(db).addGame(
 						request.getParameter("game-name"), 
 						fileName, 
 						Integer.valueOf(request.getParameter("game-price")),
@@ -197,10 +195,10 @@ public class GameServlet extends HttpServlet {
 				break;
 			
 			case "deleteGame":
-				Game game = new GameService().getGame(Integer.valueOf(request.getParameter("game-id")));
+				Game game = new GameService(db).getGame(Integer.valueOf(request.getParameter("game-id")));
 				
 				if(game != null) {
-					new GameService().deleteGame(Integer.valueOf(request.getParameter("game-id")));
+					new GameService(db).deleteGame(Integer.valueOf(request.getParameter("game-id")));
 				
 					request.setAttribute("messageGameDelete", "Gioco eliminato con successo");
 					request.getRequestDispatcher("admin.jsp").forward(request, response);

@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Database.DBConnectionPool;
 import Model.Game;
 import Model.HasCart;
 import Model.User;
@@ -18,12 +17,8 @@ public class HasCartService implements Serializable {
 	private Connection db;
 	private PreparedStatement statement;
 	
-	public HasCartService() {
-		try {
-			db = DBConnectionPool.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public HasCartService(Connection db) {
+		this.db = db;
 	}	
 	
 	public boolean addItem(HasCart cart) {
@@ -119,7 +114,7 @@ public class HasCartService implements Serializable {
 			ResultSet result = statement.executeQuery();
 			
 			while(result.next())
-				cart.add(new GameService().getGame(result.getInt("game_id")));
+				cart.add(new GameService(db).getGame(result.getInt("game_id")));
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}

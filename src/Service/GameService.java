@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Database.DBConnectionPool;
 import Model.Game;
 
 public class GameService implements Serializable {
@@ -17,12 +16,8 @@ public class GameService implements Serializable {
 	private Connection db;
 	private PreparedStatement statement;
 	
-	public GameService() {
-		try {
-			db = DBConnectionPool.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public GameService(Connection db) {
+		this.db = db;
 	}
 	
 	public Game getGame(int id) {

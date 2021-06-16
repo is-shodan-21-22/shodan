@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import Database.DBConnectionPool;
 import Model.Article;
 
 public class ArticleService {
@@ -14,12 +12,8 @@ public class ArticleService {
 	private Connection db;
 	private PreparedStatement statement;
 	
-	public ArticleService() {
-		try {
-			db = DBConnectionPool.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public ArticleService(Connection db) {
+		this.db = db;
 	}
 	
 	public Article getArticle(int id) {

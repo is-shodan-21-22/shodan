@@ -1,7 +1,9 @@
 package Control;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -21,26 +23,27 @@ public class LoginServlet extends HttpServlet {
 		HttpServletRequest request,
 		HttpServletResponse response
 	) throws ServletException, IOException {
-		UserService service = new UserService();
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
+		UserService service = new UserService(db);
 		PrintWriter out = response.getWriter();
 		
 		int id = service.getIdByUsername(request.getParameter("username"));
-		
+			
 		if(id != -1) {
 			User user = service.getUser(id); 
-			
+				
 			if(user.getPassword().equals(PasswordHasher.hash((request.getParameter("password"))))) {
 				response.setStatus(200);
-				
+					
 				response.addCookie(new Cookie("user_session", request.getSession().getId()));
 				request.getSession().setAttribute("user_metadata", user);
-				
+					
 				System.out.println("# LoginServlet > URL Rewriting: " + response.encodeURL("index.jsp"));
-				
+					
 				user.setSession(request.getSession().getId());
-				
-				new UserService().updateUser(user);
-				
+					
+				new UserService(db).updateUser(user);
+					
 				if(request.getParameter("cookie").equals("false"))
 					out.print(response.encodeURL(""));
 				
@@ -51,14 +54,14 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				out.print("La password &egrave; errata!");
 				System.out.println("# LoginServlet > Tentativo di login fallito (password errata).");
-				
+					
 				response.setStatus(400);
 				return;
 			}
 		} else {
 			out.print("L'username &egrave; errato o inesistente!");
 			System.out.println("# LoginServlet > Tentativo di login fallito (username errato o inesistente).");
-			
+				
 			response.setStatus(400);
 			return;
 		}

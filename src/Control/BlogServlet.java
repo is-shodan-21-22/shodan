@@ -2,9 +2,8 @@ package Control;
 
 import Model.Article;
 import Service.ArticleService;
-import Service.GameService;
-
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +22,8 @@ public class BlogServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# BlogServlet > Session: " + request.getSession().getId());
 		
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
+		
 		String endpoint = request.getParameter("endpoint");
 		
 		switch(request.getParameter("action")) {
@@ -31,7 +32,7 @@ public class BlogServlet extends HttpServlet {
 							? Integer.parseInt(request.getParameter("limit")) 
 							: 0;
 	
-				ArrayList<Article> articles = new ArticleService().getAllArticles(limit);
+				ArrayList<Article> articles = new ArticleService(db).getAllArticles(limit);
 				
 				if(articles != null) {
 					request.setAttribute("articles", articles);
@@ -49,7 +50,7 @@ public class BlogServlet extends HttpServlet {
 							? Integer.parseInt(request.getParameter("blog_id")) 
 							: 0;
 				
-				Article article = new ArticleService().getArticle(blog_id);
+				Article article = new ArticleService(db).getArticle(blog_id);
 				
 				System.out.println("# BlogServlet > GET > " + article.toString());
 				
@@ -71,10 +72,12 @@ public class BlogServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# BlogServlet > Session: " + request.getSession().getId());
 		
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
+		
 		switch(request.getParameter("action")) {
 			case "addArticle":
 			
-				new ArticleService().addArticle(request.getParameter("add-article-title"),
+				new ArticleService(db).addArticle(request.getParameter("add-article-title"),
 						request.getParameter("article-shortTitle"), 
 						request.getParameter("article-html"));
 		
@@ -88,10 +91,10 @@ public class BlogServlet extends HttpServlet {
 		
 			case "deleteArticle":
 		
-				Article article = new ArticleService().getArticle(Integer.valueOf(request.getParameter("delete-article-id")));
+				Article article = new ArticleService(db).getArticle(Integer.valueOf(request.getParameter("delete-article-id")));
 				
 				if(article != null) {
-				new ArticleService().deleteArticle(Integer.valueOf(request.getParameter("delete-article-id")));
+				new ArticleService(db).deleteArticle(Integer.valueOf(request.getParameter("delete-article-id")));
 		
 				request.setAttribute("messageArticleDelete", "Articolo eliminato con successo");
 				request.getRequestDispatcher("admin.jsp").forward(request, response);

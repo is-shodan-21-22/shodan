@@ -2,6 +2,8 @@ package Control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +20,9 @@ public class SignInServlet extends HttpServlet {
 		HttpServletRequest request,
 		HttpServletResponse response
 	) throws ServletException, IOException {
-		UserService service = new UserService();
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
+		
+		UserService service = new UserService(db);
 		PrintWriter out = response.getWriter();
 		
 		int id = service.getIdByUsername(request.getParameter("username"));

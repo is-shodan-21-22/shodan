@@ -1,6 +1,7 @@
-package Filters;
+package Handler;
 
 import java.io.IOException;
+import java.sql.Connection;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -36,12 +37,14 @@ public class ShodanFilters implements Filter {
 		
 		System.out.println("# ShodanFilters > URI > " + uri);
 		
+		Connection db = (Connection) hRequest.getServletContext().getAttribute("databaseConnection");
+		
 		if(uri.contains("jsessionid")) {
 			String jsession = uri.substring(uri.lastIndexOf("=") + 1);
 			System.out.println("# ShodanFilters > URL Rewriting > " + jsession);
 		
-			if(new UserService().getUserBySession(jsession) != null) {
-				user = new UserService().getUserBySession(jsession);
+			if(new UserService(db).getUserBySession(jsession) != null) {
+				user = new UserService(db).getUserBySession(jsession);
 				
 				System.out.println("# ShodanFilters > Utente: " + user.toString());
 			} else

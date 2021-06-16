@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import Database.DBConnectionPool;
 import Model.Game;
 import Model.User;
 
@@ -16,12 +14,8 @@ public class HasGameService implements Serializable {
 	private Connection db;
 	private PreparedStatement statement;
 	
-	public HasGameService() {
-		try {
-			db = DBConnectionPool.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public HasGameService(Connection db) {
+		this.db = db;
 	}	
 	
 	public void addGame(User user, Game game) {

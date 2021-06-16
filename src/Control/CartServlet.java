@@ -1,6 +1,7 @@
 package Control;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,14 +29,16 @@ public class CartServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# CartServlet > Session: " + request.getSession().getId());
 		
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
+		
 		if(request.getParameter("cookie").equals("false")) {
-			user = new UserService().getUserBySession(request.getParameter("jsession"));
+			user = new UserService(db).getUserBySession(request.getParameter("jsession"));
 		} else
 			user = (User) request.getSession().getAttribute("user_metadata");
 		
 		endpoint = request.getParameter("endpoint");
 		
-		HasCartService service = new HasCartService();
+		HasCartService service = new HasCartService(db);
 		ArrayList<Game> cart = service.selectCart(user);
 		
 		if(!cart.isEmpty()) {
@@ -58,23 +61,25 @@ public class CartServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# CartServlet > Session: " + request.getSession().getId());
 		
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
+		
 		if(request.getParameter("cookie").equals("false")) {
-			user = new UserService().getUserBySession(request.getParameter("jsession"));
+			user = new UserService(db).getUserBySession(request.getParameter("jsession"));
 		} else
 			user = (User) request.getSession().getAttribute("user_metadata");
 		
 		switch(request.getParameter("action")) {
 			case "delete":
-				new HasCartService().dropCart(user);
+				new HasCartService(db).dropCart(user);
 				break;
 				
 			case "pay":
 				if(user.getMoney() >= Integer.valueOf(request.getParameter("total"))) {
-					HasCartService service = new HasCartService();
+					HasCartService service = new HasCartService(db);
 					ArrayList<Game> games = service.selectCart(user);
 					
 					for(Game game : games)
-						new HasGameService().addGame(user, game);
+						new HasGameService(db).addGame(user, game);
 					
 					System.out.println("# CartServlet > Pagamento > Saldo utente: " + user.getMoney() + " - Totale: " + Integer.valueOf(request.getParameter("total")));
 					
@@ -82,7 +87,7 @@ public class CartServlet extends HttpServlet {
 						user.getMoney() - Integer.valueOf(request.getParameter("total"))
 					);
 					
-					new UserService().updateUser(user);
+					new UserService(db).updateUser(user);
 					request.getSession().setAttribute("user_metadata", user);
 					
 					service.dropCart(user);
@@ -93,7 +98,7 @@ public class CartServlet extends HttpServlet {
 				break;
 			
 			case "addGame":
-				if(new HasCartService().addItem(
+				if(new HasCartService(db).addItem(
 					new HasCart(
 						user.getId(),
 						Integer.valueOf(request.getParameter("game_id"))

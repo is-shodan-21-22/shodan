@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Database.DBConnectionPool;
 import java.sql.PreparedStatement;
 import Model.User;
 
@@ -15,12 +14,8 @@ public class UserService implements Serializable {
 	private Connection db;
 	private PreparedStatement statement;
 	
-	public UserService() {
-		try {
-			db = DBConnectionPool.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public UserService(Connection db) {
+		this.db = db;
 	}
 	
 	public int getIdByUsername(String username) {
@@ -38,7 +33,7 @@ public class UserService implements Serializable {
 			result.next();
 			id = result.getInt("user_id");		
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("# UserService > Utente inesistente");
 		}
 		
 		return id;

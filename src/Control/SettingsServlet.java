@@ -1,6 +1,8 @@
 package Control;
 
 import java.io.IOException;
+import java.sql.Connection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,10 +23,12 @@ public class SettingsServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# SettingsServlet > Session: " + request.getSession().getId());
 		
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
+		
 		User user;
 		
 		if(request.getParameter("cookie").equals("false")) {
-			user = new UserService().getUserBySession(request.getParameter("jsession"));
+			user = new UserService(db).getUserBySession(request.getParameter("jsession"));
 		} else
 			user = (User) request.getSession().getAttribute("user_metadata");
 		
@@ -36,7 +40,7 @@ public class SettingsServlet extends HttpServlet {
 				
 				user.setEmail(email);
 				
-				if(new UserService().updateUser(user)) {
+				if(new UserService(db).updateUser(user)) {
 					response.getWriter().println("Email modificata con successo!");
 					request.getSession().setAttribute("user_metadata", user);
 				} else
@@ -63,7 +67,7 @@ public class SettingsServlet extends HttpServlet {
 				
 				user.setPassword(PasswordHasher.hash(new_password));
 				
-				if(new UserService().updateUser(user)) {
+				if(new UserService(db).updateUser(user)) {
 					response.getWriter().println("Password modificata con successo!");
 					request.getSession().setAttribute("user_metadata", user);
 				} else

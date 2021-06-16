@@ -1,6 +1,8 @@
 package Control;
 
 import java.io.IOException;
+import java.sql.Connection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +20,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = -4587622200104894945L;
 
 	User user;
+	Connection db;
 	
 	protected void doGet(
 		HttpServletRequest request,
@@ -25,10 +28,11 @@ public class UserServlet extends HttpServlet {
 	) throws ServletException, IOException {
 		System.out.println("# UserServlet > Session: " + request.getSession().getId());
 
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
 		String endpoint = request.getParameter("endpoint");
 		
 		if(request.getParameter("cookie").equals("false")) {
-			user = new UserService().getUserBySession(request.getParameter("jsession"));
+			user = new UserService(db).getUserBySession(request.getParameter("jsession"));
 		} else
 			user = (User) request.getSession().getAttribute("user_metadata");
 		
@@ -60,8 +64,8 @@ public class UserServlet extends HttpServlet {
 				String[] gameIds = request.getParameter("games").split("-");
 				
 				for(String gameId : gameIds) {
-					Game game = new GameService().getGame(Integer.parseInt(gameId));
-					new HasGameService().addGame(
+					Game game = new GameService(db).getGame(Integer.parseInt(gameId));
+					new HasGameService(db).addGame(
 						user,
 						game
 					);
@@ -69,7 +73,7 @@ public class UserServlet extends HttpServlet {
 				
 				user.setMoney(user.getMoney() - price);
 				
-				new UserService().updateUser(user);
+				new UserService(db).updateUser(user);
 				
 				System.out.println("# UserServlet > GET > Pagamento concluso con successo");
 				
@@ -89,14 +93,15 @@ public class UserServlet extends HttpServlet {
 		HttpServletRequest request,
 		HttpServletResponse response
 	) throws ServletException, IOException {
+		Connection db = (Connection) request.getServletContext().getAttribute("databaseConnection");
 		
 		switch(request.getParameter("action")) {
 			case "removeUser":
-				User user = new UserService().getUser(Integer.valueOf(request.getParameter("user-id")));
+				User user = new UserService(db).getUser(Integer.valueOf(request.getParameter("user-id")));
 				
 				if(user != null ) {
 					if(!user.isAdmin()) {
-						new UserService().deleteUser(Integer.valueOf(request.getParameter("user-id")));
+						new UserService(db).deleteUser(Integer.valueOf(request.getParameter("user-id")));
 					
 						request.setAttribute("messageUserDelete", "Utente eliminato con successo");
 						request.getRequestDispatcher("admin.jsp").forward(request, response);
@@ -121,11 +126,11 @@ public class UserServlet extends HttpServlet {
 				System.out.println("# UserServlet > POST > Logout dell'utente");
 				
 				if(request.getParameter("cookie").equals("false")) {
-					user = new UserService().getUserBySession(request.getParameter("jsession"));
+					user = new UserService(db).getUserBySession(request.getParameter("jsession"));
 				} else
 					user = (User) request.getSession().getAttribute("user_metadata");
 				
-				new UserService().destroySession(user);
+				new UserService(db).destroySession(user);
 				request.getSession().removeAttribute("user_metadata");
 				
 				break;
