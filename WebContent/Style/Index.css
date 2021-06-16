@@ -273,6 +273,51 @@ input:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+#loading-container {
+	min-height: 200px;
+}
+	
+#loading-logo {
+	background-image: url('/Shodan/Static/Assets/Logo.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 125px;
+	width: 100%;
+	display: none;
+}
+			
+#loading-wrap {
+	margin: auto;
+	width: 375px;
+	height: 3px;
+	background: #000;
+}
+	
+#loading-main {
+	display: none;
+}
+			
+#loading-line {
+	background: #F806E9;
+	width: 0px;
+	height: 3px;
+}
+
+#loading-text {
+	color: gray;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	text-align: center;
+	margin-top: 10px;
+    font-size: 14px;
+}
+
+#loading-text>span {
+	font-weight: 100;
+	color: darkgrey;
+}
+
 @media screen and (max-width: 1585px) {
 	.shodan-games {
 		display: none;

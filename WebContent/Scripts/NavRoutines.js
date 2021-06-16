@@ -59,7 +59,7 @@ $(document).ready(
 		
 		$("#nav-logo").click(
 			() => {
-				$("#app").load("View/Dashboard.jsp").fadeIn("slow");
+				$("#app").load("View/Dashboard.jsp");
 				if(navigator.cookieEnabled)
 					localStorage.setItem("last-page", "Dashboard");
 				

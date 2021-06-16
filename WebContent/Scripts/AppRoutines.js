@@ -1,5 +1,7 @@
 $(document).ready(
 	() => {
+		console.log("# Shodan [Container: App]");
+		
 		if(navigator.cookieEnabled) {
 			if(localStorage.getItem("last-page") != null) {
 				if((localStorage.getItem("last-page") == "Game") && (new URLSearchParams(window.location.search).has("game")))
