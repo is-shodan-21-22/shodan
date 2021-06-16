@@ -1,7 +1,6 @@
 package Control;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import javax.servlet.ServletException;
