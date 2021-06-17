@@ -83,7 +83,6 @@ public class BlogServlet extends HttpServlet {
 		
 				request.setAttribute("messageArticleAdd", "Articolo aggiunto con successo");
 				request.getRequestDispatcher("admin.jsp").forward(request, response);
-				response.sendRedirect("admin.jsp");
 		
 				System.out.println("# BlogServlet > POST > Articolo aggiunto > " + request.getParameter("add-article-title"));
 		
