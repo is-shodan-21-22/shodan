@@ -201,7 +201,6 @@ public class GameServlet extends HttpServlet {
 					new GameService(db).deleteGame(Integer.valueOf(request.getParameter("game-id")));
 				
 					request.setAttribute("messageGameDelete", "Gioco eliminato con successo");
-					request.getRequestDispatcher("admin.jsp").forward(request, response);
 					
 					System.out.println("# GameServlet > POST > Gioco eliminato > " + game.getName());
 				} else {
@@ -209,6 +208,9 @@ public class GameServlet extends HttpServlet {
 					
 					System.out.println("# GameServlet > POST > Gioco insistente > " + request.getParameter("game-name"));
 				}
+				
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
+				break;
 			
 			default:
 				System.out.println("# GameServlet > POST > Nessuna azione specificata");

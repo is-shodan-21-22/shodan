@@ -94,14 +94,13 @@ public class BlogServlet extends HttpServlet {
 				Article article = new ArticleService(db).getArticle(Integer.valueOf(request.getParameter("delete-article-id")));
 				
 				if(article != null) {
-				new ArticleService(db).deleteArticle(Integer.valueOf(request.getParameter("delete-article-id")));
-		
-				request.setAttribute("messageArticleDelete", "Articolo eliminato con successo");
-				request.getRequestDispatcher("admin.jsp").forward(request, response);
-				
-				System.out.println("# BlogServelt > POST > Articolo eliminato > " + article.getTitle());
-				}
-				else {
+					new ArticleService(db).deleteArticle(Integer.valueOf(request.getParameter("delete-article-id")));
+			
+					request.setAttribute("messageArticleDelete", "Articolo eliminato con successo");
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
+					
+					System.out.println("# BlogServelt > POST > Articolo eliminato > " + article.getTitle());
+				} else {
 					request.setAttribute("errorMessageArticleDelete", "Articolo non presente");
 					request.getRequestDispatcher("admin.jsp").forward(request, response);
 					
