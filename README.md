@@ -1,5 +1,5 @@
-# Shodan
-## Steam/Epic Games/GOG-like platform for buying videogames
-This repository contains the full source code of a university project.
+# Shodan — [/shodan-infopoint/](https://is-shodan-21-22.github.io/shodan-infopoint/)
 
-![Preview](https://i.gyazo.com/c447496b79cf98cdfef300f0ca22eeb3.jpg)
+Questa repository contiene codice deprecato della versione obsoleta di Shodan sviluppata tramite Eclipse. 
+
+La versione di Shodan mantenuta e aggiornata con Maven è situata in [/shodan-maven/](https://github.com/is-shodan-21-22/shodan-maven).
